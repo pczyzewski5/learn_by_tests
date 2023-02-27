@@ -9,5 +9,6 @@ class AnswerDTO
     public ?string $id = null;
     public ?string $questionId = null;
     public ?string $answer = null;
+    public ?bool $isValid = null;
     public ?\DateTimeImmutable $createdAt = null;
 }
