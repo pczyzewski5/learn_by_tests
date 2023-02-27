@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+
+imports:
+    - { resource: 'infrastructure/services.yaml' }
+    - { resource: 'repositories.yaml' }
+    - { resource: 'controllers.yaml' }
+    - { resource: 'persisters.yaml' }
+    - { resource: 'commands.yaml' }
+    - { resource: 'queries.yaml' }

@@ -1,0 +1,14 @@
+services:
+  DND\Infrastructure\Tactician\QueryBus:
+    class: DND\Infrastructure\Tactician\QueryBus
+    arguments:
+      - '@tactician.commandbus.query'
+
+  DND\Infrastructure\Tactician\CommandBus:
+    class: DND\Infrastructure\Tactician\CommandBus
+    arguments:
+      - '@tactician.commandbus.command'
+
+imports:
+  - { resource: 'repositories.yaml' }
+  - { resource: 'persisters.yaml' }
