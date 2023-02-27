@@ -60,7 +60,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/App",
-            "DND\\": "src/LearnByTests"
+            "LearnByTests\\": "src/LearnByTests"
         }
     },
     "autoload-dev": {
