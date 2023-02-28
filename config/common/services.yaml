@@ -16,3 +16,4 @@ imports:
     - { resource: 'persisters.yaml' }
     - { resource: 'commands.yaml' }
     - { resource: 'queries.yaml' }
+    - { resource: 'forms.yaml' }

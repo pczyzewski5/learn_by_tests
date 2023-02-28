@@ -1,0 +1,6 @@
+services:
+#  App\Form\CreateCharacter\CharacterClass:
+#    class: App\Form\CreateCharacter\CharacterClass
+#    arguments:
+#      - '@DND\Domain\CharacterClass\Repository'
+#    tags: [ 'form.type' ]
