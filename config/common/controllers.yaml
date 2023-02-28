@@ -1,1 +1,9 @@
 services:
+  App\Controller\Index:
+    class: App\Controller\Index
+    arguments:
+      - '@App\QueryBus\QueryBus'
+      - '@App\CommandBus\CommandBus'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
+    tags: [ 'controller.service_arguments' ]
