@@ -1,0 +1,30 @@
+doctrine:
+    dbal:
+        driver: 'pdo_mysql'
+        host: '%learn_by_tests.mysql_host%'
+        port: '%learn_by_tests.mysql_port%'
+        dbname: '%learn_by_tests.mysql_database%'
+        user: '%learn_by_tests.mysql_user%'
+        password: '%learn_by_tests.mysql_password%'
+        charset: 'UTF8'
+        server_version: '8.0'
+        options:
+          {1002: "SET NAMES utf8mb4;"}
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        auto_mapping: false
+        mappings:
+            Answer:
+                type: xml
+                prefix: LearnByTests\Infrastructure\Answer
+                dir: '%kernel.project_dir%/config/common/orm/Answer'
+                is_bundle: false
+                alias: Answer
+
+            Question:
+                type: xml
+                prefix: LearnByTests\Infrastructure\Question
+                dir: '%kernel.project_dir%/config/common/orm/Question'
+                is_bundle: false
+                alias: Question

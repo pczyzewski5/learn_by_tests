@@ -1,0 +1,14 @@
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="LearnByTests\Infrastructure\Answer\Answer" table="answers">
+        <id name="id" type="string" column="id"/>
+        <field name="questionId" type="string" column="question_id"/>
+        <field name="answer" type="string" column="answer"/>
+        <field name="isValid" type="boolean" column="is_valid"/>
+        <field name="createdAt" type="datetime" column="created_at"/>
+    </entity>
+
+</doctrine-mapping>
