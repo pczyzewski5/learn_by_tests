@@ -1,11 +1,11 @@
 services:
-  DND\Infrastructure\Tactician\QueryBus:
-    class: DND\Infrastructure\Tactician\QueryBus
+  LearnByTests\Infrastructure\Tactician\QueryBus:
+    class: LearnByTests\Infrastructure\Tactician\QueryBus
     arguments:
       - '@tactician.commandbus.query'
 
-  DND\Infrastructure\Tactician\CommandBus:
-    class: DND\Infrastructure\Tactician\CommandBus
+  LearnByTests\Infrastructure\Tactician\CommandBus:
+    class: LearnByTests\Infrastructure\Tactician\CommandBus
     arguments:
       - '@tactician.commandbus.command'
 

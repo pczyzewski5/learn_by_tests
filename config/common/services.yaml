@@ -3,6 +3,12 @@ services:
         autowire: false
         autoconfigure: false
 
+    App\QueryBus\QueryBus:
+        alias: LearnByTests\Infrastructure\Tactician\QueryBus
+
+    App\CommandBus\CommandBus:
+        alias: LearnByTests\Infrastructure\Tactician\CommandBus
+
 imports:
     - { resource: 'infrastructure/services.yaml' }
     - { resource: 'repositories.yaml' }

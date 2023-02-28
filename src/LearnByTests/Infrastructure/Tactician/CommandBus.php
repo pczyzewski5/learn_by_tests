@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DND\Infrastructure\Tactician;
+namespace LearnByTests\Infrastructure\Tactician;
 
 use App\CommandBus\CommandBus as CommandBusInterface;
 use League\Tactician\CommandBus as TacticianCommandBus;

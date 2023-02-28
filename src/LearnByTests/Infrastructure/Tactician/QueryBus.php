@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DND\Infrastructure\Tactician;
+namespace LearnByTests\Infrastructure\Tactician;
 
 use App\QueryBus\QueryBus as QueryBusInterface;
 use League\Tactician\CommandBus as TacticianCommandBus;
