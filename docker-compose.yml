@@ -5,10 +5,11 @@ services:
     expose:
       - 9000
     volumes:
-      - ./:/var/www:delegated
+      - ./:/data/application:delegated
       - ~/.composer:/root/.composer
     links:
       - mysql
+    working_dir: /data/application
 
   nginx:
     image: nginx
@@ -19,7 +20,7 @@ services:
     links:
       - php-upstream
     volumes:
-      - ./public:/var/www/public:delegated
+      - ./public:/data/application/public:delegated
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
 
   mysql:
