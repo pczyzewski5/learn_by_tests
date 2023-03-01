@@ -1,21 +1,35 @@
-version: '3'
-
+version: '3.7'
 services:
-###> doctrine/doctrine-bundle ###
-  database:
-    image: postgres:${POSTGRES_VERSION:-14}-alpine
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
+  php-upstream:
+    image: php:8.2-fpm
+    expose:
+      - 9000
     volumes:
-      - db-data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
+      - ./:/var/www:delegated
+      - ~/.composer:/root/.composer
+    links:
+      - mysql
 
-volumes:
-###> doctrine/doctrine-bundle ###
-  db-data:
-###< doctrine/doctrine-bundle ###
+  nginx:
+    image: nginx
+    depends_on:
+      - php-upstream
+    ports:
+      - '8080:80'
+    links:
+      - php-upstream
+    volumes:
+      - ./public:/var/www/public:delegated
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+
+  mysql:
+    image: mysql:8.0
+    expose:
+      - 3306
+    ports:
+      - 31779:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: learn_by_tests
+      MYSQL_USER: learn_by_tests
+      MYSQL_PASSWORD: password123
