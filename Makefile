@@ -52,8 +52,8 @@ init-db:
 	sleep 20 # wait for mysql container
 	docker-compose exec -T mysql mysql -u root -proot123 -e 'SET GLOBAL general_log_file = "$(MYSQL_LOG_FILE)";'
 	docker-compose exec -T mysql mysql -u root -proot123 -e 'SET GLOBAL general_log = "ON";'
-	$(PHPCLI) ./bin/console doctrine:cache:clear-metadata
-	$(PHPCLI) ./bin/console doctrine:schema:create
+	$(PHPCLI) php ./bin/console doctrine:cache:clear-metadata
+	$(PHPCLI) php ./bin/console doctrine:schema:create
 
 cli-mysql:
 	docker-compose -f docker-compose.yml exec mysql mysql -u learn_by_tests -D learn_by_tests --password=password123
