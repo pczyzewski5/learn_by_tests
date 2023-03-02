@@ -1,4 +1,9 @@
 index:
     path: /
-    controller: App\Controller\Index::index
+    controller: App\Controller\IndexController::index
     methods: [ GET ]
+
+add_question:
+    path: /question/add
+    controller: App\Controller\QuestionController::add
+    methods: [ GET, POST ]

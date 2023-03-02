@@ -1,1 +1,10 @@
 services:
+  LearnByTests\Infrastructure\Question\QuestionPersister:
+    class: LearnByTests\Infrastructure\Question\QuestionPersister
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      -
+  LearnByTests\Infrastructure\Answer\AnswerPersister:
+    class: LearnByTests\Infrastructure\Answer\AnswerPersister
+    arguments:
+      - '@doctrine.orm.entity_manager'

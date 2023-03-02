@@ -1,6 +1,4 @@
 services:
-#  App\Form\CreateCharacter\CharacterClass:
-#    class: App\Form\CreateCharacter\CharacterClass
-#    arguments:
-#      - '@DND\Domain\CharacterClass\Repository'
-#    tags: [ 'form.type' ]
+  App\Form\Question\AddQuestionForm:
+    class: App\Form\Question\AddQuestionForm
+    tags: [ 'form.type' ]

@@ -8,7 +8,7 @@ use App\CommandBus\CommandBus;
 use App\QueryBus\QueryBus;
 use Symfony\Component\HttpFoundation\Response;
 
-class Index extends BaseController
+class IndexController extends BaseController
 {
     private QueryBus $queryBus;
     private CommandBus $commandBus;
@@ -22,7 +22,7 @@ class Index extends BaseController
     public function index(): Response
     {
         return $this->renderForm('index/index.html.twig', [
-            'message' => 'all fine!'
+            'php_info' => phpinfo()
         ]);
     }
 }

@@ -1,1 +1,9 @@
 services:
+  LearnByTests\Domain\Command\AddQuestionHandler:
+    class: LearnByTests\Domain\Command\AddQuestionHandler
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@LearnByTests\Domain\Question\QuestionPersister'
+      - '@LearnByTests\Domain\Answer\AnswerPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\AddQuestion, bus: command }

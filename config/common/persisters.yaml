@@ -1,1 +1,6 @@
 services:
+  LearnByTests\Domain\Question\QuestionPersister:
+    alias: LearnByTests\Infrastructure\Question\QuestionPersister
+
+  LearnByTests\Domain\Answer\AnswerPersister:
+    alias: LearnByTests\Infrastructure\Answer\AnswerPersister

@@ -1,6 +1,15 @@
 services:
-  App\Controller\Index:
-    class: App\Controller\Index
+  App\Controller\IndexController:
+    class: App\Controller\IndexController
+    arguments:
+      - '@App\QueryBus\QueryBus'
+      - '@App\CommandBus\CommandBus'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
+    tags: [ 'controller.service_arguments' ]
+
+  App\Controller\QuestionController:
+    class: App\Controller\QuestionController
     arguments:
       - '@App\QueryBus\QueryBus'
       - '@App\CommandBus\CommandBus'
