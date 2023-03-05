@@ -1,1 +1,8 @@
 services:
+  LearnByTests\Domain\Query\GetQuestionWithAnswersHandler:
+    class: LearnByTests\Domain\Query\GetQuestionWithAnswersHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+      - '@LearnByTests\Domain\Answer\AnswerRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetQuestionWithAnswers, bus: query }
