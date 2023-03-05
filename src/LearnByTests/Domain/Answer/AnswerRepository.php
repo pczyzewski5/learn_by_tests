@@ -17,4 +17,9 @@ interface AnswerRepository
      * @return Answer[]
      */
     public function findAll(): array;
+
+    /**
+     * @return Answer[]
+     */
+    public function findForQuestion(string $questionId): array;
 }

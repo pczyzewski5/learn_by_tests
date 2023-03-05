@@ -1,1 +1,3 @@
 services:
+  LearnByTests\Domain\Answer\AnswerRepository:
+    alias: LearnByTests\Infrastructure\Answer\AnswerRepository

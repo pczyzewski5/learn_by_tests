@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use LearnByTests\Domain\Answer\Exception\AnswerNotFoundException;
 use LearnByTests\Domain\Answer\Answer as DomainAnswer;
 use LearnByTests\Domain\Answer\AnswerRepository as DomainRepository;
-use LearnByTests\Domain\Answer\Answer;
 
 class AnswerRepository implements DomainRepository
 {
@@ -38,5 +37,17 @@ class AnswerRepository implements DomainRepository
         return AnswerMapper::mapArrayToDomain(
             $this->entityManager->getRepository(Answer::class)->findAll()
         );
+    }
+
+    /**
+     * @return Answer[]
+     */
+    public function findForQuestion(string $questionId): array
+    {
+        $answers = $this->entityManager->getRepository(Answer::class)->findBy([
+            'questionId' => $questionId
+        ]);
+
+        return AnswerMapper::mapArrayToDomain($answers);
     }
 }
