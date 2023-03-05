@@ -1,0 +1,11 @@
+.selected-answer {
+    background-color: rgba(6, 131, 6, 0.5);
+    cursor: default;
+    border-color: green;
+}
+.green-hover:hover {
+    background-color: rgba(6, 131, 6, 0.5);
+    cursor: default;
+    transition-duration: 0.5s;
+    border-color: green;
+}

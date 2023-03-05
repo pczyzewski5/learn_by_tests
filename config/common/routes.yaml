@@ -7,3 +7,8 @@ add_question:
     path: /question/add
     controller: App\Controller\QuestionController::add
     methods: [ GET, POST ]
+
+select_valid_answer:
+    path: /question/{questionId}/valid_answer
+    controller: App\Controller\QuestionController::selectValidAnswer
+    methods: [ GET, POST ]

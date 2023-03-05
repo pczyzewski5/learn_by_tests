@@ -18,7 +18,7 @@ class ValidAnswerForm extends AbstractType
     {
         $this->addValidAnswer($builder, $options['data']);
 
-        $builder->add('save', SubmitType::class);
+        $builder->add('save', SubmitType::class, ['disabled' => true]);
     }
 
     protected function addValidAnswer(FormBuilderInterface $builder, array $answers): void
@@ -33,7 +33,10 @@ class ValidAnswerForm extends AbstractType
         $builder->add(
             self::VALID_ANSWER,
             ChoiceType::class,
-            ['choices' => $choices]
+            [
+                'choices' => $choices,
+                'required' => true
+            ]
         );
     }
 }

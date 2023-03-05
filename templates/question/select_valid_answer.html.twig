@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p class="text-start mt-2">{{ question.getQuestion() }}</p>
+    <p class="text-start">Select valid answer:</p>
+
+    {% for answer in answers %}
+        <div class="border rounded m-2 p-2 green-hover answer" answer-id="{{ answer.getId() }}">
+            <p class="text-start">{{ answer.getAnswer() }}</p>
+        </div>
+    {% endfor %}
+    {{ form(valid_answer) }}
+{% endblock %}
