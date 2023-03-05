@@ -2,3 +2,7 @@ services:
   App\Form\Question\AddQuestionForm:
     class: App\Form\Question\AddQuestionForm
     tags: [ 'form.type' ]
+
+  App\Form\Question\ValidAnswerForm:
+    class: App\Form\Question\ValidAnswerForm
+    tags: [ 'form.type' ]
