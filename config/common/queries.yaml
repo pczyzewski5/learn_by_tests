@@ -6,3 +6,10 @@ services:
       - '@LearnByTests\Domain\Answer\AnswerRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetQuestionWithAnswers, bus: query }
+
+  LearnByTests\Domain\Query\GetQuestionsHandler:
+    class: LearnByTests\Domain\Query\GetQuestionsHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetQuestions, bus: query }

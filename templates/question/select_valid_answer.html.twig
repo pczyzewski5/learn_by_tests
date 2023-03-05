@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p class="text-start mt-2">{{ question.getQuestion() }}</p>
+    <p class="text-start">{{ question.getQuestion() }}</p>
     <p class="text-start">Select valid answer:</p>
 
     {% for answer in answers %}

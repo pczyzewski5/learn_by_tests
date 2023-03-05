@@ -11,6 +11,7 @@ use App\Form\Question\ValidAnswerForm;
 use App\QueryBus\QueryBus;
 use LearnByTests\Domain\Command\AddQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsValid;
+use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,16 @@ class QuestionController extends BaseController
         $this->commandBus = $commandBus;
     }
 
-    public function add(Request $request): Response
+    public function questionList(): Response
+    {
+        return $this->renderForm('question/question_list.html.twig', [
+            'questions' => $this->queryBus->handle(
+                new GetQuestions()
+            )
+        ]);
+    }
+
+    public function addQuestion(Request $request): Response
     {
         $form = $this->createForm(AddQuestionForm::class);
         $form->handleRequest($request);
@@ -45,7 +55,7 @@ class QuestionController extends BaseController
             );
         }
 
-        return $this->renderForm('question/add.html.twig', [
+        return $this->renderForm('question/add_question.html.twig', [
             'add_question' => $form,
         ]);
     }

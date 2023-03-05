@@ -3,9 +3,14 @@ index:
     controller: App\Controller\IndexController::index
     methods: [ GET ]
 
+questions:
+    path: /questions
+    controller: App\Controller\QuestionController::questionList
+    methods: [ GET ]
+
 add_question:
     path: /question/add
-    controller: App\Controller\QuestionController::add
+    controller: App\Controller\QuestionController::addQuestion
     methods: [ GET, POST ]
 
 select_valid_answer:
