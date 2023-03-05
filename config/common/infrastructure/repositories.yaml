@@ -1,4 +1,9 @@
 services:
+  LearnByTests\Infrastructure\Question\QuestionRepository:
+    class: LearnByTests\Infrastructure\Question\QuestionRepository
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
   LearnByTests\Infrastructure\Answer\AnswerRepository:
     class: LearnByTests\Infrastructure\Answer\AnswerRepository
     arguments:

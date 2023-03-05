@@ -1,3 +1,6 @@
 services:
+  LearnByTests\Domain\Question\QuestionRepository:
+    alias: LearnByTests\Infrastructure\Question\QuestionRepository
+
   LearnByTests\Domain\Answer\AnswerRepository:
     alias: LearnByTests\Infrastructure\Answer\AnswerRepository

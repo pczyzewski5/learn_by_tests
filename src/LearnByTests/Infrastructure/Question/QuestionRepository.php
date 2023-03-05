@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use LearnByTests\Domain\Question\Exception\QuestionNotFoundException;
 use LearnByTests\Domain\Question\Question as DomainQuestion;
 use LearnByTests\Domain\Question\QuestionRepository as DomainRepository;
-use LearnByTests\Domain\Question\Question;
 
 class QuestionRepository implements DomainRepository
 {
