@@ -3,15 +3,20 @@ index:
     controller: App\Controller\IndexController::index
     methods: [ GET ]
 
+question_add:
+    path: /question/add
+    controller: App\Controller\QuestionController::addQuestion
+    methods: [ GET, POST ]
+
+question_details:
+    path: /question/{questionId}
+    controller: App\Controller\QuestionController::questionDetails
+    methods: [ GET ]
+
 question_list:
     path: /questions
     controller: App\Controller\QuestionController::questionList
     methods: [ GET ]
-
-add_question:
-    path: /question/add
-    controller: App\Controller\QuestionController::addQuestion
-    methods: [ GET, POST ]
 
 select_valid_answer:
     path: /question/{questionId}/valid_answer

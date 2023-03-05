@@ -9,3 +9,6 @@
     transition-duration: 0.5s;
     border-color: green;
 }
+.question:hover {
+    cursor: default;
+}

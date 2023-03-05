@@ -13,6 +13,7 @@ use LearnByTests\Domain\Command\AddQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsValid;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,6 +26,11 @@ class QuestionController extends BaseController
     {
         $this->queryBus = $queryBus;
         $this->commandBus = $commandBus;
+    }
+
+    public function questionDetails(): JsonResponse
+    {
+        return new JsonResponse('fasd');
     }
 
     public function questionList(): Response

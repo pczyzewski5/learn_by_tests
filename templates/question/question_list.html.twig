@@ -3,13 +3,14 @@
 {% block body %}
     <ul class="list-group">
         {% for question in questions %}
-            <li class="list-group-item d-flex">
+            <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question.getId() }}">
                 <div class="flex-grow-1 d-flex align-items-center">
-                    {{ question.getQuestion()|slice(0, 100) }}
+                    {{ question.getQuestion()|slice(0, 85) }}
                 </div>
                 <div>
+                    <button type="button" class="btn btn-primary">details</button>
+                    <button type="button" class="btn btn-warning">edit</button>
                     <button type="button" class="btn btn-danger">delete</button>
-                    <button type="button" class="btn btn-primary">edit</button>
                 </div>
             </li>
         {% endfor %}
