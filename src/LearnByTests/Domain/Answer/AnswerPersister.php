@@ -14,5 +14,10 @@ interface AnswerPersister
     /**
      * @throws PersisterException
      */
+    public function update(Answer $answer): void;
+
+    /**
+     * @throws PersisterException
+     */
     public function delete(string $id): void;
 }

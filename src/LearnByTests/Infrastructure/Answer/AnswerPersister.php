@@ -33,6 +33,24 @@ class AnswerPersister implements DomainPersister
         }
     }
 
+    public function update(Answer $answer): void
+    {
+        try {
+            $sql = 'UPDATE answers
+                  SET answer = :answer, is_valid = :isValid
+                  WHERE id = :id;';
+
+            $stmt = $this->entityManager->getConnection()->prepare($sql);
+            $stmt->executeStatement([
+                'id' => $answer->getId(),
+                'answer' => $answer->getAnswer(),
+                'isValid' => (int)$answer->isValid()
+            ]);
+        } catch (\Throwable $exception) {
+            throw PersisterException::fromThrowable($exception);
+        }
+    }
+
     /**
      * @throws PersisterException
      */

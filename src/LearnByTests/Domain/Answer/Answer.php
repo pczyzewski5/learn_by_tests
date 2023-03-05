@@ -31,11 +31,11 @@ class Answer
 
     private function validate(): void
     {
-        if (isset($this->id) && UuidV1::isValid($this->id)) {
+        if (!isset($this->id) && UuidV1::isValid($this->id)) {
             throw AnswerValidationException::missingProperty('id');
         }
 
-        if (isset($this->questionId) && UuidV1::isValid($this->questionId)) {
+        if (!isset($this->questionId) && UuidV1::isValid($this->questionId)) {
             throw AnswerValidationException::missingProperty('question_id');
         }
 

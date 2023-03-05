@@ -75,10 +75,10 @@ class QuestionController extends BaseController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->commandBus->handle(
-                new SetAnswerAsValid(
-                    $form->getData()[ValidAnswerForm::VALID_ANSWER]
-                )
+                new SetAnswerAsValid($form->getData()[ValidAnswerForm::VALID_ANSWER])
             );
+
+            return $this->redirectToRoute('question_list', ['id' => $request->get('id')]);
         }
 
         return $this->renderForm('question/select_valid_answer.html.twig', [

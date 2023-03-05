@@ -3,7 +3,7 @@ index:
     controller: App\Controller\IndexController::index
     methods: [ GET ]
 
-questions:
+question_list:
     path: /questions
     controller: App\Controller\QuestionController::questionList
     methods: [ GET ]

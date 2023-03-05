@@ -7,3 +7,11 @@ services:
       - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\AddQuestion, bus: command }
+
+  LearnByTests\Domain\Command\SetAnswerAsValidHandler:
+    class: LearnByTests\Domain\Command\SetAnswerAsValidHandler
+    arguments:
+      - '@LearnByTests\Domain\Answer\AnswerRepository'
+      - '@LearnByTests\Domain\Answer\AnswerPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\SetAnswerAsValid, bus: command }
