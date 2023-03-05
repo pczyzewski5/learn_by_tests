@@ -46,7 +46,6 @@ class AddQuestionHandler
                 $this->answerPersister->save($entity);
             }
         } catch (PersisterException $e) {
-            var_dump($e->getMessage());exit;
             $this->entityManager->rollback();
         }
 
