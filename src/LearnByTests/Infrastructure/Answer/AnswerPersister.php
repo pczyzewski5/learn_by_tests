@@ -41,12 +41,19 @@ class AnswerPersister implements DomainPersister
                   SET answer = :answer, is_correct = :isCorrect
                   WHERE id = :id;';
 
-            $stmt = $this->entityManager->getConnection()->prepare($sql);
-            $stmt->executeStatement([
-                'id' => $answer->getId(),
-                'answer' => $answer->getAnswer(),
-                'isCorrect' => (int)$answer->isCorrect()
-            ]);
+            $this->entityManager->getConnection()->executeQuery(
+                $sql,
+                [
+                    'id' => $answer->getId(),
+                    'answer' => $answer->getAnswer(),
+                    'isCorrect' => (int)$answer->isCorrect()
+                ],
+                [
+                    'id' => Types::STRING,
+                    'answer' => Types::STRING,
+                    'isCorrect' => Types::BOOLEAN
+                ]
+            );
         } catch (\Throwable $exception) {
             throw PersisterException::fromThrowable($exception);
         }

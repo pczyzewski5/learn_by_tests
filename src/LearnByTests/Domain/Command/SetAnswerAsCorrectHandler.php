@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LearnByTests\Domain\Command;
 
+use LearnByTests\Domain\Answer\AnswerDTO;
 use LearnByTests\Domain\Answer\AnswerPersister;
 use LearnByTests\Domain\Answer\AnswerRepository;
 
@@ -22,9 +23,31 @@ class SetAnswerAsCorrectHandler
 
     public function handle(SetAnswerAsCorrect $command): void
     {
-        $answer = $this->answerRepository->getOneById(
-            $command->getAnswerId()
-        );
+        $this->setAllAnswersAsIncorrect($command->getQuestionId());
+        $this->setAnswerAsCorrect($command->getAnswerId());
+    }
+
+    private function setAllAnswersAsIncorrect(string $questionId): void
+    {
+        $answers = $this->answerRepository->findForQuestion($questionId);
+
+        foreach ($answers as $answer) {
+            $dto = new AnswerDTO();
+            $dto->isCorrect = false;
+
+            $answer->update($dto);
+
+            $this->answerPersister->update($answer);
+        }
+    }
+
+    public function setAnswerAsCorrect(string $answerId): void
+    {
+        $dto = new AnswerDTO();
+        $dto->isCorrect = true;
+
+        $answer = $this->answerRepository->getOneById($answerId);
+        $answer->update($dto);
 
         $this->answerPersister->update($answer);
     }

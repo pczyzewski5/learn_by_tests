@@ -115,9 +115,10 @@ class QuestionController extends BaseController
 
     public function questionSelectCorrectAnswer(Request $request): Response
     {
+        $questionId = $request->get('questionId');
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
+            new GetQuestionWithAnswers($questionId)
         );
         $form = $this->createForm(
             CorrectAnswerForm::class,
@@ -129,6 +130,7 @@ class QuestionController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->commandBus->handle(
                 new SetAnswerAsCorrect(
+                    $questionId,
                     $form->getData()[CorrectAnswerForm::IS_CORRECT_ANSWER_FIELD]
                 )
             );
@@ -141,6 +143,18 @@ class QuestionController extends BaseController
             'question' => $dto->getQuestion(),
             'answers' => $dto->getAnswers()
         ]);
+    }
+
+    public function setAnswerAsCorrect(Request $request): Response
+    {
+        $this->commandBus->handle(
+            new SetAnswerAsCorrect(
+                $request->get('questionId'),
+                $request->get('answerId')
+            )
+        );
+
+        return $this->redirectToRoute('question_details', ['questionId' => $request->get('questionId')]);
     }
 
     public function deleteQuestion(Request $request): Response
