@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <h5 class="card-header">Question</h5>
+        <div class="card-body">
+            <p class="card-text">{{ question.getQuestion() }}</p>
+        </div>
+    </div>
+    {% set letters = ['A', 'B', 'C', 'D'] %}
+    {% for key, answer in answers %}
+        <div class="card mt-1 {{ answer.isCorrect() ? 'bg-success text-white' }}">
+            <div class="card-body d-flex p-0">
+                <div class="d-flex align-items-center justify-content-center"
+                     style="width: 5%; border-right: 1px solid rgba(0, 0, 0, 0.1) !important;"
+                >
+                    <h5 class="m-0">{{ letters[key] }}</h5>
+                </div>
+                <div class="p-3" style="width: 95%;">
+                    <p class="card-text">{{ answer.getAnswer() }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {{ form(add_question_answers) }}
+{% endblock %}

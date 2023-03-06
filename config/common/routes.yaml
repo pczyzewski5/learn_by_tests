@@ -8,17 +8,22 @@ question_add:
     controller: App\Controller\QuestionController::addQuestion
     methods: [ GET, POST ]
 
-question_details:
-    path: /question/{questionId}
-    controller: App\Controller\QuestionController::questionDetails
-    methods: [ GET ]
+question_add_answer:
+    path: /question/{questionId}/answer/add
+    controller: App\Controller\QuestionController::addQuestionAnswer
+    methods: [ GET, POST ]
+
+question_select_correct_answer:
+    path: /question/{questionId}/answers/select_correct
+    controller: App\Controller\QuestionController::questionSelectCorrectAnswer
+    methods: [ GET, POST ]
 
 question_list:
     path: /questions
     controller: App\Controller\QuestionController::questionList
     methods: [ GET ]
 
-select_valid_answer:
-    path: /question/{questionId}/valid_answer
-    controller: App\Controller\QuestionController::selectValidAnswer
-    methods: [ GET, POST ]
+question_details:
+    path: /question/{questionId}
+    controller: App\Controller\QuestionController::questionDetails
+    methods: [ GET ]

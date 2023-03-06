@@ -1,3 +1,7 @@
+textarea {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
 .selected-answer {
     background-color: rgba(6, 131, 6, 0.5);
     cursor: default;

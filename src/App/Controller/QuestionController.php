@@ -6,14 +6,15 @@ namespace App\Controller;
 
 use App\CommandBus\CommandBus;
 use App\DTO\QuestionWithAnswersDTO;
-use App\Form\Question\AddQuestionForm;
-use App\Form\Question\ValidAnswerForm;
+use App\Form\Question\QuestionForm;
+use App\Form\Question\AnswerForm;
+use App\Form\Question\CorrectAnswerForm;
 use App\QueryBus\QueryBus;
 use LearnByTests\Domain\Command\AddQuestion;
-use LearnByTests\Domain\Command\SetAnswerAsValid;
+use LearnByTests\Domain\Command\AddAnswer;
+use LearnByTests\Domain\Command\SetAnswerAsCorrect;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,11 +29,6 @@ class QuestionController extends BaseController
         $this->commandBus = $commandBus;
     }
 
-    public function questionDetails(): JsonResponse
-    {
-        return new JsonResponse('fasd');
-    }
-
     public function questionList(): Response
     {
         return $this->renderForm('question/question_list.html.twig', [
@@ -42,22 +38,27 @@ class QuestionController extends BaseController
         ]);
     }
 
+    public function questionDetails(): Response
+    {
+        return new Response();
+    }
+
+
     public function addQuestion(Request $request): Response
     {
-        $form = $this->createForm(AddQuestionForm::class);
+        $form = $this->createForm(QuestionForm::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            $this->commandBus->handle(
+            $questionId = $this->commandBus->handle(
                 new AddQuestion(
-                    $data[AddQuestionForm::QUESTION_FILED],
-                    $data[AddQuestionForm::ANSWER_A],
-                    $data[AddQuestionForm::ANSWER_B],
-                    $data[AddQuestionForm::ANSWER_C],
-                    $data[AddQuestionForm::ANSWER_D],
+                    $form->getData()[QuestionForm::QUESTION_FIELD]
                 )
+            );
+
+            return $this->redirectToRoute(
+                'question_add_answer',
+                ['questionId' => $questionId]
             );
         }
 
@@ -66,14 +67,51 @@ class QuestionController extends BaseController
         ]);
     }
 
-    public function selectValidAnswer(Request $request): Response
+    public function addQuestionAnswer(Request $request): Response
+    {
+        $questionId = $request->get('questionId');
+        /** @var QuestionWithAnswersDTO $questionWithAnswersDTO */
+        $questionWithAnswersDTO = $this->queryBus->handle(
+            new GetQuestionWithAnswers($questionId)
+        );
+        $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
+        if ($hasAllAnswers) {
+            $this->redirectToRoute(
+                'question_add_answer',
+                ['questionId' => $questionId]
+            );
+        }
+        $form = $this->createForm(AnswerForm::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new AddAnswer(
+                    $questionId,
+                    $form->getData()[AnswerForm::ADD_NEXT_ANSWER_FIELD],
+                )
+            );
+
+            return $hasAllAnswers
+                ? $this->redirectToRoute('question_select_correct_answer', ['questionId' => $questionId])
+                : $this->redirectToRoute('question_add_answer', ['questionId' => $questionId]);
+        }
+
+        return $this->renderForm('question/add_question_answer.html.twig', [
+            'add_question_answers' => $form,
+            'question' => $questionWithAnswersDTO->getQuestion(),
+            'answers' => $questionWithAnswersDTO->getAnswers()
+        ]);
+    }
+
+    public function questionSelectCorrectAnswer(Request $request): Response
     {
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
             new GetQuestionWithAnswers($request->get('questionId'))
         );
         $form = $this->createForm(
-            ValidAnswerForm::class,
+            CorrectAnswerForm::class,
             null,
             ['data' => $dto->getAnswers()]
         );
@@ -81,14 +119,16 @@ class QuestionController extends BaseController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->commandBus->handle(
-                new SetAnswerAsValid($form->getData()[ValidAnswerForm::VALID_ANSWER])
+                new SetAnswerAsCorrect(
+                    $form->getData()[CorrectAnswerForm::IS_CORRECT_ANSWER_FIELD]
+                )
             );
 
-            return $this->redirectToRoute('question_list', ['id' => $request->get('id')]);
+            return $this->redirectToRoute('question_list');
         }
 
-        return $this->renderForm('question/select_valid_answer.html.twig', [
-            'valid_answer' => $form,
+        return $this->renderForm('question/select_correct_answer.html.twig', [
+            'correct_answer' => $form,
             'question' => $dto->getQuestion(),
             'answers' => $dto->getAnswers()
         ]);

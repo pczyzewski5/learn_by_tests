@@ -1,8 +1,12 @@
+new Quill('textarea', {
+    theme: 'snow'
+});
+
 $('.answer').click(function() {
     $('.answer').removeClass('selected-answer');
     $(this).addClass('selected-answer');
-    $('#valid_answer_form_valid_answer').val(
+    $('#correct_answer_form_is_correct_answer_field').val(
         $(this).attr('answer-id')
     );
-    $('#valid_answer_form_save').removeAttr('disabled');
+    $('#correct_answer_form_save').removeAttr('disabled');
 });
