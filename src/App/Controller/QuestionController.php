@@ -12,6 +12,7 @@ use App\Form\Question\CorrectAnswerForm;
 use App\QueryBus\QueryBus;
 use LearnByTests\Domain\Command\AddQuestion;
 use LearnByTests\Domain\Command\AddAnswer;
+use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
@@ -131,5 +132,14 @@ class QuestionController extends BaseController
             'question' => $dto->getQuestion(),
             'answers' => $dto->getAnswers()
         ]);
+    }
+
+    public function deleteQuestion(Request $request): Response
+    {
+        $this->commandBus->handle(
+            new DeleteQuestion($request->get('questionId'))
+        );
+
+        return $this->redirectToRoute('question_list');
     }
 }

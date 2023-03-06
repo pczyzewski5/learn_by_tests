@@ -21,3 +21,10 @@ services:
       - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\SetAnswerAsCorrect, bus: command }
+
+  LearnByTests\Domain\Command\DeleteQuestionHandler:
+    class: LearnByTests\Domain\Command\DeleteQuestionHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteQuestion, bus: command }

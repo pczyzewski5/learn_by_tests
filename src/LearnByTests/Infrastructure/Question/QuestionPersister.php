@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LearnByTests\Infrastructure\Question;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use LearnByTests\Domain\Question\QuestionPersister as DomainPersister;
 use LearnByTests\Domain\Question\Question;
@@ -38,6 +39,14 @@ class QuestionPersister implements DomainPersister
      */
     public function delete(string $id): void
     {
-
+        try {
+            $this->entityManager->getConnection()->executeQuery(
+                'DELETE FROM questions WHERE id = ?',
+                [$id],
+                [Types::STRING]
+            );
+        } catch (\Throwable $exception) {
+            throw PersisterException::fromThrowable($exception);
+        }
     }
 }
