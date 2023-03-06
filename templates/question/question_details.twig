@@ -31,4 +31,7 @@
             <a class="btn btn-outline-danger btn-sm" href="{{ path('question_delete_answer', {'questionId': question.getId(), 'answerId': answer.getId()}) }}">delete</a>
         </div>
     {% endfor %}
+    {% if answers|length < 4 %}
+        <a class="btn btn-outline-secondary btn-sm" href="{{ path('question_add_answer', {'questionId': question.getId()}) }}">Add answer</a>
+    {% endif %}
 {% endblock %}

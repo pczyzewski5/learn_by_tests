@@ -135,7 +135,7 @@ class QuestionController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('question_list');
+            return $this->redirectToRoute('question_details', ['questionId' => $questionId]);
         }
 
         return $this->renderForm('question/select_correct_answer.html.twig', [

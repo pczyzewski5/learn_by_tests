@@ -18,6 +18,7 @@ textarea {
 }
 .edit-buttons .btn {
     border-radius: 0 0 4px 4px;
+    border-top: none;
 }
 .card.answer, .card.question {
     border-bottom-right-radius: 0;
