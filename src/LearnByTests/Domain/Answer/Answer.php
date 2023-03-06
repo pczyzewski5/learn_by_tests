@@ -15,7 +15,7 @@ class Answer
     private string $id;
     private string $questionId;
     private string $answer;
-    private bool $isValid;
+    private bool $isCorrect;
     private \DateTimeImmutable $createdAt;
 
     public function __construct(AnswerDTO $dto)
@@ -43,7 +43,7 @@ class Answer
             throw AnswerValidationException::missingProperty('answer');
         }
 
-        if (!\is_bool($this->isValid)) {
+        if (!\is_bool($this->isCorrect)) {
             throw AnswerValidationException::missingProperty('is_valid');
         }
 
@@ -67,9 +67,9 @@ class Answer
         return $this->answer;
     }
 
-    public function isValid(): bool
+    public function isCorrect(): bool
     {
-        return $this->isValid;
+        return $this->isCorrect;
     }
 
     public function getCreatedAt(): \DateTimeImmutable

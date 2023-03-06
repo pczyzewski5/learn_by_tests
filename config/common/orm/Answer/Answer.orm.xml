@@ -7,7 +7,7 @@
         <id name="id" type="string" column="id"/>
         <field name="questionId" type="string" column="question_id"/>
         <field name="answer" type="string" column="answer"/>
-        <field name="isValid" type="boolean" column="is_valid"/>
+        <field name="isCorrect" type="boolean" column="is_correct"/>
         <field name="createdAt" type="datetime" column="created_at"/>
     </entity>
 

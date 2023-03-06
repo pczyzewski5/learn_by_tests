@@ -9,6 +9,6 @@ class Answer
     public ?string $id;
     public ?string $questionId;
     public ?string $answer;
-    public ?bool $isValid;
+    public ?bool $isCorrect;
     public ?\DateTime $createdAt;
 }

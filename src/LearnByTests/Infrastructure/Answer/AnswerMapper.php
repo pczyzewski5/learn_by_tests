@@ -17,7 +17,7 @@ class AnswerMapper
         $dto->id = $entity->id;
         $dto->questionId = $entity->questionId;
         $dto->answer = $entity->answer;
-        $dto->isValid = $entity->isValid;
+        $dto->isCorrect = $entity->isCorrect;
         $dto->createdAt = DateTimeNormalizer::normalizeToImmutable(
             $entity->createdAt
         );
@@ -32,7 +32,7 @@ class AnswerMapper
         $entity->id = $character->getId();
         $entity->questionId = $character->getQuestionId();
         $entity->answer = $character->getAnswer();
-        $entity->isValid = $character->isValid();
+        $entity->isCorrect = $character->isCorrect();
         $entity->createdAt = DateTime::createFromImmutable(
             $character->getCreatedAt()
         );
