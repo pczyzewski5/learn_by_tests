@@ -39,9 +39,17 @@ class QuestionController extends BaseController
         ]);
     }
 
-    public function questionDetails(): Response
+    public function questionDetails(Request $request): Response
     {
-        return new Response();
+        /** @var QuestionWithAnswersDTO $dto */
+        $dto = $this->queryBus->handle(
+            new GetQuestionWithAnswers($request->get('questionId'))
+        );
+
+        return $this->renderForm('question/question_details.twig', [
+            'question' => $dto->getQuestion(),
+            'answers' => $dto->getAnswers()
+        ]);
     }
 
 

@@ -13,6 +13,12 @@ textarea {
     transition-duration: 0.5s;
     border-color: green;
 }
-.question:hover {
+.question:hover, .answer:hover {
     cursor: default;
+}
+.edit-buttons .btn {
+    border-radius: 0 0 4px 4px;
+}
+.card.answer, .card.question {
+    border-bottom-right-radius: 0;
 }
