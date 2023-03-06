@@ -8,7 +8,7 @@
                     {{ question.getQuestion()|slice(0, 85) }}
                 </div>
                 <div>
-                    <button type="button" class="btn btn-primary">details</button>
+                    <a class="btn btn-outline-primary" href="{{ path('question_details', {'questionId': question.getId()}) }}">details</a>
                     <a class="btn btn-outline-danger" href="{{ path('question_delete', {'questionId': question.getId()}) }}">delete</a>
                 </div>
             </li>

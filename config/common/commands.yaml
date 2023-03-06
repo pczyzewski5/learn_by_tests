@@ -26,5 +26,6 @@ services:
     class: LearnByTests\Domain\Command\DeleteQuestionHandler
     arguments:
       - '@LearnByTests\Domain\Question\QuestionPersister'
+      - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteQuestion, bus: command }

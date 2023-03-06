@@ -24,7 +24,7 @@ question_list:
     methods: [ GET ]
 
 question_details:
-    path: /question/{questionId}
+    path: /question/{questionId}/details
     controller: App\Controller\QuestionController::questionDetails
     methods: [ GET ]
 

@@ -20,4 +20,9 @@ interface AnswerPersister
      * @throws PersisterException
      */
     public function delete(string $id): void;
+
+    /**
+     * @throws PersisterException
+     */
+    public function deleteAnswersForQuestion(string $questionId): void;
 }
