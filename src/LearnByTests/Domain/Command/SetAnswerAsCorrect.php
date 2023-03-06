@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LearnByTests\Domain\Command;
 
-class SetAnswerAsValid
+class SetAnswerAsCorrect
 {
     private string $answerId;
 

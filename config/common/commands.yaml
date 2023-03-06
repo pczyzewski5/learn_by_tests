@@ -2,16 +2,22 @@ services:
   LearnByTests\Domain\Command\AddQuestionHandler:
     class: LearnByTests\Domain\Command\AddQuestionHandler
     arguments:
-      - '@doctrine.orm.entity_manager'
       - '@LearnByTests\Domain\Question\QuestionPersister'
-      - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\AddQuestion, bus: command }
 
-  LearnByTests\Domain\Command\SetAnswerAsValidHandler:
-    class: LearnByTests\Domain\Command\SetAnswerAsValidHandler
+  LearnByTests\Domain\Command\AddAnswerHandler:
+    class: LearnByTests\Domain\Command\AddAnswerHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+      - '@LearnByTests\Domain\Answer\AnswerPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\AddAnswer, bus: command }
+
+  LearnByTests\Domain\Command\SetAnswerAsCorrectHandler:
+    class: LearnByTests\Domain\Command\SetAnswerAsCorrectHandler
     arguments:
       - '@LearnByTests\Domain\Answer\AnswerRepository'
       - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
-      - { name: tactician.handler, command: LearnByTests\Domain\Command\SetAnswerAsValid, bus: command }
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\SetAnswerAsCorrect, bus: command }

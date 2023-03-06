@@ -7,7 +7,7 @@ namespace LearnByTests\Domain\Command;
 use LearnByTests\Domain\Answer\AnswerPersister;
 use LearnByTests\Domain\Answer\AnswerRepository;
 
-class SetAnswerAsValidHandler
+class SetAnswerAsCorrectHandler
 {
     private AnswerRepository $answerRepository;
     private AnswerPersister $answerPersister;
@@ -20,7 +20,7 @@ class SetAnswerAsValidHandler
         $this->answerPersister = $answerPersister;
     }
 
-    public function handle(SetAnswerAsValid $command): void
+    public function handle(SetAnswerAsCorrect $command): void
     {
         $answer = $this->answerRepository->getOneById(
             $command->getAnswerId()
