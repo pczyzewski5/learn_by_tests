@@ -50,4 +50,9 @@ class AnswerRepository implements DomainRepository
 
         return AnswerMapper::mapArrayToDomain($answers);
     }
+
+    public function getAnswerCountForQuestion(string $questionId): int
+    {
+        return \count($this->findForQuestion($questionId));
+    }
 }

@@ -22,4 +22,6 @@ interface AnswerRepository
      * @return Answer[]
      */
     public function findForQuestion(string $questionId): array;
+
+    public function getAnswerCountForQuestion(string $questionId): int;
 }
