@@ -55,9 +55,17 @@ class AnswerPersister implements DomainPersister
     /**
      * @throws PersisterException
      */
-    public function delete(string $id): void
+    public function delete(string $answerId): void
     {
-
+        try {
+            $this->entityManager->getConnection()->executeQuery(
+                'DELETE FROM answers WHERE id = ?',
+                [$answerId],
+                [Types::STRING]
+            );
+        } catch (\Throwable $exception) {
+            throw PersisterException::fromThrowable($exception);
+        }
     }
 
     public function deleteAnswersForQuestion(string $questionId): void

@@ -32,3 +32,8 @@ question_delete:
     path: /question/{questionId}/delete
     controller: App\Controller\QuestionController::deleteQuestion
     methods: [ GET ]
+
+question_delete_answer:
+    path: /question/{questionId}/answer/{answerId}/delete
+    controller: App\Controller\QuestionController::deleteQuestionAnswer
+    methods: [ GET ]

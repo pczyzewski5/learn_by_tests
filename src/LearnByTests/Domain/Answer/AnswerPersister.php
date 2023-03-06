@@ -19,7 +19,7 @@ interface AnswerPersister
     /**
      * @throws PersisterException
      */
-    public function delete(string $id): void;
+    public function delete(string $answerId): void;
 
     /**
      * @throws PersisterException

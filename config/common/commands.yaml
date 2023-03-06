@@ -29,3 +29,10 @@ services:
       - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteQuestion, bus: command }
+
+  LearnByTests\Domain\Command\DeleteAnswerHandler:
+    class: LearnByTests\Domain\Command\DeleteAnswerHandler
+    arguments:
+      - '@LearnByTests\Domain\Answer\AnswerPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteAnswer, bus: command }
