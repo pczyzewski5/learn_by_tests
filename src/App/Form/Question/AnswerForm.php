@@ -22,6 +22,14 @@ class AnswerForm extends AbstractType
 
     protected function addAnswer(FormBuilderInterface $builder): void
     {
-        $builder->add(self::ADD_NEXT_ANSWER_FIELD, TextareaType::class);
+        $builder->add(
+            self::ADD_NEXT_ANSWER_FIELD,
+            TextareaType::class,
+            [
+                'label_attr' => [
+                    'hidden' => true
+                ]
+            ]
+        );
     }
 }

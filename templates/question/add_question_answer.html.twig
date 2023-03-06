@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h5 class="text-center">Add answer</h5>
     <div class="card">
-        <h5 class="card-header">Question</h5>
         <div class="card-body">
             <p class="card-text">{{ question.getQuestion() }}</p>
         </div>
@@ -22,5 +22,7 @@
             </div>
         </div>
     {% endfor %}
-    {{ form(add_question_answers) }}
+    <div class="mt-4">
+        {{ form(add_question_answers) }}
+    </div>
 {% endblock %}

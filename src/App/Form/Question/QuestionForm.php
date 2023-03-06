@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class QuestionForm extends AbstractType
 {
-    public const QUESTION_FIELD = 'question';
+    public const ADD_QUESTION_FIELD = 'add_question';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -22,6 +22,14 @@ class QuestionForm extends AbstractType
 
     protected function addQuestion(FormBuilderInterface $builder): void
     {
-        $builder->add(self::QUESTION_FIELD, TextareaType::class);
+        $builder->add(
+            self::ADD_QUESTION_FIELD,
+            TextareaType::class,
+            [
+                'label_attr' => [
+                    'hidden' => true
+                ]
+            ]
+        );
     }
 }

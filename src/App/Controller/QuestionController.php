@@ -52,7 +52,7 @@ class QuestionController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $questionId = $this->commandBus->handle(
                 new AddQuestion(
-                    $form->getData()[QuestionForm::QUESTION_FIELD]
+                    $form->getData()[QuestionForm::ADD_QUESTION_FIELD]
                 )
             );
 
@@ -76,10 +76,7 @@ class QuestionController extends BaseController
         );
         $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
         if ($hasAllAnswers) {
-            $this->redirectToRoute(
-                'question_add_answer',
-                ['questionId' => $questionId]
-            );
+            return $this->redirectToRoute('question_select_correct_answer', ['questionId' => $questionId]);
         }
         $form = $this->createForm(AnswerForm::class);
         $form->handleRequest($request);
@@ -92,9 +89,11 @@ class QuestionController extends BaseController
                 )
             );
 
-            return $hasAllAnswers
+            $redirectTo = $hasAllAnswers
                 ? $this->redirectToRoute('question_select_correct_answer', ['questionId' => $questionId])
                 : $this->redirectToRoute('question_add_answer', ['questionId' => $questionId]);
+
+            return $redirectTo;
         }
 
         return $this->renderForm('question/add_question_answer.html.twig', [
