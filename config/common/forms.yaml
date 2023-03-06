@@ -1,8 +1,12 @@
 services:
-  App\Form\Question\AddQuestionForm:
-    class: App\Form\Question\AddQuestionForm
+  App\Form\Question\QuestionForm:
+    class: App\Form\Question\QuestionForm
     tags: [ 'form.type' ]
 
-  App\Form\Question\ValidAnswerForm:
-    class: App\Form\Question\ValidAnswerForm
+  App\Form\Question\AnswerForm:
+    class: App\Form\Question\AnswerForm
+    tags: [ 'form.type' ]
+
+  App\Form\Question\CorrectAnswerForm:
+    class: App\Form\Question\CorrectAnswerForm
     tags: [ 'form.type' ]

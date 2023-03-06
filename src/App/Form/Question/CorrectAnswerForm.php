@@ -10,18 +10,18 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ValidAnswerForm extends AbstractType
+class CorrectAnswerForm extends AbstractType
 {
-    public const VALID_ANSWER = 'valid_answer';
+    public const IS_CORRECT_ANSWER_FIELD = 'is_correct_answer_field';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $this->addValidAnswer($builder, $options['data']);
+        $this->addIsCorrectAnswer($builder, $options['data']);
 
         $builder->add('save', SubmitType::class, ['disabled' => true]);
     }
 
-    protected function addValidAnswer(FormBuilderInterface $builder, array $answers): void
+    protected function addIsCorrectAnswer(FormBuilderInterface $builder, array $answers): void
     {
         $choices = [];
 
@@ -31,11 +31,17 @@ class ValidAnswerForm extends AbstractType
         }
 
         $builder->add(
-            self::VALID_ANSWER,
+            self::IS_CORRECT_ANSWER_FIELD,
             ChoiceType::class,
             [
                 'choices' => $choices,
-                'required' => true
+                'required' => true,
+                'attr' => [
+                    'hidden' => true
+                ],
+                'label_attr' => [
+                    'hidden' => true
+                ]
             ]
         );
     }
