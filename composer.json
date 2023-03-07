@@ -6,6 +6,7 @@
     "require": {
         "php": ">=8.1",
         "doctrine/doctrine-bundle": "^2.8",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
         "league/tactician-bundle": "^1.4",
         "nadar/quill-delta-parser": "^3.2",
