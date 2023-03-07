@@ -8,6 +8,7 @@
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/orm": "^2.14",
         "league/tactician-bundle": "^1.4",
+        "nadar/quill-delta-parser": "^3.2",
         "symfony/asset": "^5.4",
         "symfony/form": "^5.4",
         "symfony/framework-bundle": "^5.4",

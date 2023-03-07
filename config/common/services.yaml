@@ -9,6 +9,12 @@ services:
     App\CommandBus\CommandBus:
         alias: LearnByTests\Infrastructure\Tactician\CommandBus
 
+    App\Twig\QuillDeltaParser:
+        class: App\Twig\QuillDeltaParser
+        arguments:
+            - '@twig'
+        tags: [ 'twig.extension' ]
+
 imports:
     - { resource: 'infrastructure/services.yaml' }
     - { resource: 'repositories.yaml' }
