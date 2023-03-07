@@ -26,10 +26,15 @@ class QuillDeltaParser extends AbstractExtension
         ];
     }
 
-    public function parseQuillDelta(string $quillDelta): Markup
+    public function parseQuillDelta(string $quillDelta, bool $stripTags = false): Markup
     {
         $lexer = new Lexer($quillDelta);
+        $data = $lexer->render();
 
-        return new Markup($lexer->render(), $this->twigEnv->getCharset());
+        if ($stripTags) {
+            $data = \strip_tags($data);
+        }
+
+        return new Markup($data, $this->twigEnv->getCharset());
     }
 }

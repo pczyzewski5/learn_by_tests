@@ -5,7 +5,7 @@
         {% for question in questions %}
             <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question.getId() }}">
                 <div class="flex-grow-1 d-flex align-items-center">
-                    {{ question.getQuestion()|slice(0, 85) }}
+                    {{ question.getQuestion()|quill(true)|slice(0, 85) }}
                 </div>
                 <div>
                     <a class="btn btn-outline-primary" href="{{ path('question_details', {'questionId': question.getId()}) }}">details</a>
