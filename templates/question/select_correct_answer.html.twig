@@ -4,7 +4,7 @@
     <h5 class="text-center">Select correct answer</h5>
     <div class="card">
         <div class="card-body">
-            <p class="card-text">{{ question.getQuestion() }}</p>
+            <p class="card-text">{{ question.getQuestion()|quill }}</p>
         </div>
     </div>
     {% set letters = ['A', 'B', 'C', 'D'] %}
@@ -17,7 +17,7 @@
                     <h5 class="m-0">{{ letters[key] }}</h5>
                 </div>
                 <div class="p-3" style="width: 95%;">
-                    <p class="card-text">{{ answer.getAnswer() }}</p>
+                    <p class="card-text">{{ answer.getAnswer()|quill }}</p>
                 </div>
             </div>
         </div>

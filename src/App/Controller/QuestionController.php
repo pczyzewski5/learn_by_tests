@@ -96,7 +96,7 @@ class QuestionController extends BaseController
             $this->commandBus->handle(
                 new AddAnswer(
                     $questionId,
-                    $form->getData()[AnswerForm::ADD_NEXT_ANSWER_FIELD],
+                    $form->getData()[AnswerForm::ANSWER_FIELD],
                 )
             );
 
