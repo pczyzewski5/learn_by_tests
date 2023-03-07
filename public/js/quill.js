@@ -16,6 +16,6 @@ if ($container.length != 0 && $dataContainer.length != 0) {
     });
 
     if ($dataContainer.val().length != 0) {
-        $quill.setContents(JSON.parse($quillData.val()));
+        $quill.setContents(JSON.parse($dataContainer.val()));
     }
 }
