@@ -34,6 +34,29 @@ class QuestionPersister implements DomainPersister
         }
     }
 
+    public function update(Question $question): void
+    {
+        try {
+            $sql = 'UPDATE questions
+                  SET question = :question
+                  WHERE id = :id;';
+
+            $this->entityManager->getConnection()->executeQuery(
+                $sql,
+                [
+                    'id' => $question->getId(),
+                    'question' => $question->getQuestion(),
+                ],
+                [
+                    'id' => Types::STRING,
+                    'question' => Types::STRING,
+                ]
+            );
+        } catch (\Throwable $exception) {
+            throw PersisterException::fromThrowable($exception);
+        }
+    }
+
     /**
      * @throws PersisterException
      */

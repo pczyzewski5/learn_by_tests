@@ -29,7 +29,7 @@ class Question
 
     private function validate(): void
     {
-        if (isset($this->id) && UuidV1::isValid($this->id)) {
+        if (!isset($this->id) && UuidV1::isValid($this->id)) {
             throw AnswerValidationException::missingProperty('id');
         }
         

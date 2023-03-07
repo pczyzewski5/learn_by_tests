@@ -15,6 +15,7 @@ use LearnByTests\Domain\Command\AddAnswer;
 use LearnByTests\Domain\Command\DeleteAnswer;
 use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
+use LearnByTests\Domain\Command\UpdateQuestion;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,7 +63,7 @@ class QuestionController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $questionId = $this->commandBus->handle(
                 new AddQuestion(
-                    $form->getData()[QuestionForm::ADD_QUESTION_FIELD]
+                    $form->getData()[QuestionForm::QUESTION_FIELD]
                 )
             );
 
@@ -166,12 +167,44 @@ class QuestionController extends BaseController
         return $this->redirectToRoute('question_list');
     }
 
-    public function deleteQuestionAnswer(Request $request)
+    public function deleteQuestionAnswer(Request $request): Response
     {
         $this->commandBus->handle(
             new DeleteAnswer($request->get('answerId'))
         );
 
         return $this->redirectToRoute('question_details', ['questionId' => $request->get('questionId')]);
+    }
+
+    public function editQuestion(Request $request): Response
+    {
+        /** @var QuestionWithAnswersDTO $dto */
+        $dto = $this->queryBus->handle(
+            new GetQuestionWithAnswers($request->get('questionId'))
+        );
+        $question = $dto->getQuestion();
+
+        $form = $this->createForm(
+            QuestionForm::class,
+            [QuestionForm::QUESTION_FIELD => $question->getQuestion()]
+        );
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new UpdateQuestion(
+                    $question->getId(),
+                    $form->getData()[QuestionForm::QUESTION_FIELD]
+                )
+            );
+
+            return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
+        }
+
+        return $this->renderForm('question/edit_question.twig', [
+            'edit_question_form' => $form,
+            'question' => $question,
+            'answers' => $dto->getAnswers()
+        ]);
     }
 }

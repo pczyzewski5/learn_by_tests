@@ -36,3 +36,11 @@ services:
       - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteAnswer, bus: command }
+
+  LearnByTests\Domain\Command\UpdateQuestionHandler:
+    class: LearnByTests\Domain\Command\UpdateQuestionHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+      - '@LearnByTests\Domain\Question\QuestionPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\UpdateQuestion, bus: command }
