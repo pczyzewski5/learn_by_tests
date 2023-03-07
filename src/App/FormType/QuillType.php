@@ -28,22 +28,9 @@ class QuillType extends AbstractType
         $builder->addModelTransformer(
             new CallbackTransformer(
                 function ($data) use ($builder) {
-//                    var_dump($data);exit;
-                    return $data;
+                    return [$builder->getName() => $data] ?? null;
                 },
-                function ($data) use ($builder) {
-//                    var_dump($data);exit;
-                    return $data;
-                }
-            )
-        );
-
-        $builder->addViewTransformer(
-            new CallbackTransformer(
-                function ($data) use ($builder) {
-                    return $data;
-                },
-                function ($data) use ($builder) {
+                function ($data) {
                     return $data;
                 }
             )
