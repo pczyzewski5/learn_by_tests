@@ -35,6 +35,8 @@ class QuillDeltaParser extends AbstractExtension
             $data = \strip_tags($data);
         }
 
+        $data = \str_replace(['<p>', '</p>'], '', $data);
+
         return new Markup($data, $this->twigEnv->getCharset());
     }
 }
