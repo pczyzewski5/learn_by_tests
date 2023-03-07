@@ -1,0 +1,13 @@
+{% block quill_type_label %}{% endblock %}
+{% block quill_type_errors %}{% endblock %}
+{% block quill_type_widget %}
+    <div id="quill-editor-container"></div>
+    <input id="quill-data-container"
+           type="text"
+           name="{{ parent_name }}[{{ name }}]"
+            {% if data[name] is defined %}
+                value="{{ data[name] }}"
+            {% endif %}
+           class="form-control"
+    >
+{% endblock %}
