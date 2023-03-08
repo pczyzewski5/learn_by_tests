@@ -59,6 +59,9 @@ init-db:
 generate-migration:
 	$(PHPCLI) php ./bin/console doctrine:migrations:generate
 
+migration:
+	$(PHPCLI) php ./bin/console doctrine:migrations:migrate
+
 cli-mysql:
 	docker-compose -f docker-compose.yml exec mysql mysql -u learn_by_tests -D learn_by_tests --password=password123
 
