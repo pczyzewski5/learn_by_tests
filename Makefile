@@ -56,6 +56,9 @@ init-db:
 	$(PHPCLI) php ./bin/console doctrine:cache:clear-metadata
 	$(PHPCLI) php ./bin/console doctrine:migrations:migrate
 
+generate-migration:
+	$(PHPCLI) php ./bin/console doctrine:migrations:generate
+
 cli-mysql:
 	docker-compose -f docker-compose.yml exec mysql mysql -u learn_by_tests -D learn_by_tests --password=password123
 
