@@ -3,7 +3,7 @@ let $attr = $answer.attr('answer-id');
 
 if (typeof $attr !== 'undefined' && $attr !== false) {
     $answer.click(function () {
-        $(this).removeClass('selected-answer');
+        $('.answer').removeClass('selected-answer');
         $(this).addClass('selected-answer');
         $('#correct_answer_form_is_correct_answer_field').val(
             $(this).attr('answer-id')

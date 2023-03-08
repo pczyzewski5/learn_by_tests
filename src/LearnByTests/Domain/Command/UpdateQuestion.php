@@ -8,13 +8,16 @@ class UpdateQuestion
 {
     private string $questionId;
     private string $question;
+    private string $category;
 
     public function __construct(
         string $questionId,
-        string $question
+        string $question,
+        string $category
     ) {
         $this->questionId = $questionId;
         $this->question = $question;
+        $this->category = $category;
     }
 
     public function getQuestionId():string
@@ -25,5 +28,10 @@ class UpdateQuestion
     public function getQuestion(): string
     {
         return $this->question;
+    }
+
+    public function getCategory(): string
+    {
+        return $this->category;
     }
 }

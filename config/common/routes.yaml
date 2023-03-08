@@ -52,3 +52,9 @@ question_answer_edit:
     path: /question/{questionId}/answer/{answerId}/edit
     controller: App\Controller\QuestionController::editQuestionAnswer
     methods: [ GET, POST ]
+
+question_select_category:
+    path: /question/{questionId}/select_category
+    controller: App\Controller\QuestionController::selectQuestionCategory
+    methods: [ GET, POST ]
+

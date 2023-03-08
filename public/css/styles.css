@@ -2,7 +2,7 @@ textarea {
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
 }
-.selected-answer {
+.selected-answer, .selected-category {
     background-color: rgba(6, 131, 6, 0.5);
     cursor: default;
     border-color: green;
@@ -22,4 +22,11 @@ textarea {
 }
 .card.answer, .card.question {
     border-bottom-right-radius: 0;
+}
+.question-category {
+    border-bottom-right-radius: 0 !important;
+    cursor: default;
+}
+.question-category:hover .card-title, .question-category.selected-category .card-title {
+    color: rgb(33, 37, 41);
 }

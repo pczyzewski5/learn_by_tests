@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\CommandBus\CommandBus;
 use App\DTO\QuestionWithAnswersDTO;
+use App\Form\Question\QuestionCategoryForm;
 use App\Form\Question\QuestionForm;
 use App\Form\Question\AnswerForm;
 use App\Form\Question\CorrectAnswerForm;
@@ -19,6 +20,7 @@ use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
+use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -137,7 +139,7 @@ class QuestionController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('question_details', ['questionId' => $questionId]);
+            return $this->redirectToRoute('question_select_category', ['questionId' => $questionId]);
         }
 
         return $this->renderForm('question/select_correct_answer.html.twig', [
@@ -242,6 +244,39 @@ class QuestionController extends BaseController
             'question' => $question,
             'answerId' => $answer->getId(),
             'answers' => $dto->getAnswers()
+        ]);
+    }
+
+    public function selectQuestionCategory(Request $request): Response
+    {
+        /** @var QuestionWithAnswersDTO $dto */
+        $dto = $this->queryBus->handle(
+            new GetQuestionWithAnswers($request->get('questionId'))
+        );
+        $question = $dto->getQuestion();
+
+        $form = $this->createForm(
+            QuestionCategoryForm::class
+        );
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new UpdateQuestion(
+                    $question->getId(),
+                    $question->getQuestion(),
+                    $form->getData()[QuestionCategoryForm::QUESTION_CATEGORY_FIELD]
+                )
+            );
+
+            return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
+        }
+
+        return $this->renderForm('question/select_question_category.twig', [
+            'select_question_category_form' => $form,
+            'question' => $question,
+            'answers' => $dto->getAnswers(),
+            'question_categories' => QuestionCategoryEnum::toArray()
         ]);
     }
 }
