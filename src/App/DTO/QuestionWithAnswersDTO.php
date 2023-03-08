@@ -24,6 +24,20 @@ class QuestionWithAnswersDTO extends AbstractType
         return $this->question;
     }
 
+    public function findAnswer(string $answerId): ?Answer
+    {
+        $result = null;
+
+        /** @var Answer $answer */
+        foreach ($this->answers as $answer) {
+            if ($answer->getId() === $answerId) {
+                $result = $answer;
+            }
+        }
+
+        return $result;
+    }
+
     /**
      * @return Answer[]
      */

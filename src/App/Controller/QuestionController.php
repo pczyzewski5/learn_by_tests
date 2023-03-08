@@ -15,6 +15,7 @@ use LearnByTests\Domain\Command\AddAnswer;
 use LearnByTests\Domain\Command\DeleteAnswer;
 use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
+use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
@@ -204,6 +205,42 @@ class QuestionController extends BaseController
         return $this->renderForm('question/edit_question.twig', [
             'edit_question_form' => $form,
             'question' => $question,
+            'answers' => $dto->getAnswers()
+        ]);
+    }
+
+    public function editQuestionAnswer(Request $request): Response
+    {
+        /** @var QuestionWithAnswersDTO $dto */
+        $dto = $this->queryBus->handle(
+            new GetQuestionWithAnswers($request->get('questionId'))
+        );
+        $question = $dto->getQuestion();
+        $answer = $dto->findAnswer(
+            $request->get('answerId')
+        );
+
+        $form = $this->createForm(
+            AnswerForm::class,
+            [AnswerForm::ANSWER_FIELD => $answer->getAnswer()]
+        );
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new UpdateAnswer(
+                    $answer->getId(),
+                    $form->getData()[AnswerForm::ANSWER_FIELD]
+                )
+            );
+
+            return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
+        }
+
+        return $this->renderForm('question/edit_question_answer.twig', [
+            'edit_answer_form' => $form,
+            'question' => $question,
+            'answerId' => $answer->getId(),
             'answers' => $dto->getAnswers()
         ]);
     }
