@@ -6,6 +6,13 @@ if ($container.length != 0 && $dataContainer.length != 0) {
         theme: 'snow'
     });
 
+    $quill.clipboard.addMatcher(Node.ELEMENT_NODE, function(node) {
+        var Delta = Quill.import('delta');
+        var plaintext = $(node).text ();
+        console.log(plaintext);
+        return new Delta().insert(plaintext);
+    });
+
     $quill.on('text-change', function($delta, $oldDelta, $source) {
         if ($source == 'api') {
             console.log("An API call triggered this change.");
