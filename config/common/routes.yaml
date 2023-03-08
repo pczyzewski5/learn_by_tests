@@ -23,6 +23,11 @@ question_list:
     controller: App\Controller\QuestionController::questionList
     methods: [ GET ]
 
+question_category_list:
+    path: /questions/category/{category}
+    controller: App\Controller\QuestionController::questionList
+    methods: [ GET ]
+
 question_details:
     path: /question/{questionId}/details
     controller: App\Controller\QuestionController::questionDetails

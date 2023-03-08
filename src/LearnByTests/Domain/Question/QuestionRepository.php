@@ -17,4 +17,9 @@ interface QuestionRepository
      * @return Question[]
      */
     public function findAll(): array;
+
+    /**
+     * @return Question[]
+     */
+    public function findAllByCategory(string $category): array;
 }

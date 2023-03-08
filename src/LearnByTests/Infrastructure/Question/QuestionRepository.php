@@ -38,4 +38,16 @@ class QuestionRepository implements DomainRepository
             $this->entityManager->getRepository(Question::class)->findAll()
         );
     }
+
+    /**
+     * @return DomainQuestion[]
+     */
+    public function findAllByCategory(string $category): array
+    {
+        return QuestionMapper::mapArrayToDomain(
+            $this->entityManager->getRepository(Question::class)->findBy([
+                'category' => $category
+            ])
+        );
+    }
 }

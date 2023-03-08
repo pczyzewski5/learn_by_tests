@@ -18,6 +18,8 @@ class GetQuestionsHandler
 
     public function __invoke(GetQuestions $query): array
     {
-        return $this->questionRepository->findAll();
+        return null === $query->getCategory()
+            ? $this->questionRepository->findAll()
+            : $this->questionRepository->findAllByCategory($query->getCategory());
     }
 }

@@ -35,12 +35,16 @@ class QuestionController extends BaseController
         $this->commandBus = $commandBus;
     }
 
-    public function questionList(): Response
+    public function questionList(Request $request): Response
     {
+        $activeQuestionCategory = $request->get('category');
+        $questions = $this->queryBus->handle(new GetQuestions($activeQuestionCategory));
+        $categories = QuestionCategoryEnum::toArray();
+
         return $this->renderForm('question/question_list.html.twig', [
-            'questions' => $this->queryBus->handle(
-                new GetQuestions()
-            )
+            'active_question_category' => $activeQuestionCategory,
+            'questions' => $questions,
+            'question_categories' => $categories
         ]);
     }
 

@@ -2,9 +2,9 @@
 
 {% block body %}
     <h5 class="text-center">Select question category</h5>
-    <div class="d-flex mb-3 mt-3 justify-content-between">
+    <div class="d-flex mt-3 justify-content-between">
         {% for category in question_categories %}
-            <div class="card green-hover question-category" question-category="{{ category }}" style="max-width: 10rem;">
+            <div class="card green-hover question-category mb-2" question-category="{{ category }}" style="max-width: 10rem;">
                 <div class="card-body text-secondary">
                     <h5 class="card-title text-center">{{ category }}</h5>
                 </div>
