@@ -7,9 +7,9 @@ if ($container.length != 0 && $dataContainer.length != 0) {
     });
 
     $quill.clipboard.addMatcher(Node.ELEMENT_NODE, function(node) {
-        var Delta = Quill.import('delta');
-        var plaintext = $(node).text ();
-        console.log(plaintext);
+        let Delta = Quill.import('delta');
+        let plaintext = $(node).text ();
+        
         return new Delta().insert(plaintext);
     });
 
