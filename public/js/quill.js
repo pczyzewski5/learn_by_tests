@@ -3,13 +3,22 @@ let $dataContainer = $('#quill-data-container');
 
 if ($container.length != 0 && $dataContainer.length != 0) {
     $quill = new Quill($container.get(0), {
-        theme: 'snow'
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline'],
+                ['link', 'image'],
+                [{ 'align': [] }, { 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'color': [] }, { 'background': [] }],
+                ['clean']
+            ]
+        }
     });
 
     $quill.clipboard.addMatcher(Node.ELEMENT_NODE, function(node) {
         let Delta = Quill.import('delta');
         let plaintext = $(node).text ();
-        
+
         return new Delta().insert(plaintext);
     });
 
