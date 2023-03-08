@@ -8,6 +8,7 @@ use DateTime;
 use LearnByTests\Domain\Question\Question as DomainQuestion;
 use LearnByTests\Domain\Question\QuestionDTO;
 use App\DateTimeNormalizer;
+use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
 
 class QuestionMapper
 {
@@ -16,6 +17,7 @@ class QuestionMapper
         $dto = new QuestionDTO();
         $dto->id = $entity->id;
         $dto->question = $entity->question;
+        $dto->category = QuestionCategoryEnum::from($entity->category);
         $dto->createdAt = DateTimeNormalizer::normalizeToImmutable(
             $entity->createdAt
         );
@@ -24,13 +26,14 @@ class QuestionMapper
     }
 
     public static function fromDomain(
-        DomainQuestion $character
+        DomainQuestion $domainEntity
     ): Question {
         $entity = new Question();
-        $entity->id = $character->getId();
-        $entity->question = $character->getQuestion();
+        $entity->id = $domainEntity->getId();
+        $entity->question = $domainEntity->getQuestion();
+        $entity->category = $domainEntity->getCategory()->getValue();
         $entity->createdAt = DateTime::createFromImmutable(
-            $character->getCreatedAt()
+            $domainEntity->getCreatedAt()
         );
 
         return $entity;

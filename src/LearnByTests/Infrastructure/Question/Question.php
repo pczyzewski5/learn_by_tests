@@ -8,5 +8,6 @@ class Question
 {
     public ?string $id;
     public ?string $question;
+    public ?string $category;
     public ?\DateTime $createdAt;
 }

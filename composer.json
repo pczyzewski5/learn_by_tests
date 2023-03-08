@@ -9,6 +9,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
         "league/tactician-bundle": "^1.4",
+        "myclabs/php-enum": "^1.8",
         "nadar/quill-delta-parser": "^3.2",
         "symfony/asset": "^5.4",
         "symfony/form": "^5.4",
