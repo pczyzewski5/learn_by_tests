@@ -2,6 +2,13 @@
 
 {% block body %}
     <h5 class="text-center">Question details</h5>
+    <div class="mb-3 mt-3">
+            <div class="card question-category selected-category" style="max-width: 10rem;">
+                <div class="card-body text-secondary">
+                    <h5 class="card-title text-center">{{ question.getCategory().getValue() }}</h5>
+                </div>
+            </div>
+    </div>
     <div class="card question">
         <div class="card-body">
             <p class="card-text">{{ question.getQuestion()|quill }}</p>
