@@ -14,7 +14,7 @@ final class Version20230308012806 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'change_column_answer_type';
+        return 'change column answer type';
     }
 
     public function up(Schema $schema): void

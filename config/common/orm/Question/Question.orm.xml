@@ -6,6 +6,7 @@
     <entity name="LearnByTests\Infrastructure\Question\Question" table="questions">
         <id name="id" type="string" column="id"/>
         <field name="question" type="string" column="question"/>
+        <field name="category" type="string" column="category"/>
         <field name="createdAt" type="datetime" column="created_at"/>
     </entity>
 
