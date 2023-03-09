@@ -35,20 +35,6 @@ class QuestionController extends BaseController
         $this->commandBus = $commandBus;
     }
 
-    public function questionDetails(Request $request): Response
-    {
-        /** @var QuestionWithAnswersDTO $dto */
-        $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
-        );
-
-        return $this->renderForm('question/question_details.twig', [
-            'question' => $dto->getQuestion(),
-            'answers' => $dto->getAnswers()
-        ]);
-    }
-
-
     public function addQuestion(Request $request): Response
     {
         $form = $this->createForm(QuestionForm::class);
@@ -150,15 +136,6 @@ class QuestionController extends BaseController
         );
 
         return $this->redirectToRoute('question_details', ['questionId' => $request->get('questionId')]);
-    }
-
-    public function deleteQuestion(Request $request): Response
-    {
-        $this->commandBus->handle(
-            new DeleteQuestion($request->get('questionId'))
-        );
-
-        return $this->redirectToRoute('question_list');
     }
 
     public function deleteQuestionAnswer(Request $request): Response

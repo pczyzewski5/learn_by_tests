@@ -8,6 +8,21 @@ question_list:
     path: /admin/question/list
     controller: App\Controller\AdminController::questionList
     methods: [ GET ]
+
+question_category_list:
+    path: /admin/question/category/{category}/list
+    controller: App\Controller\AdminController::questionList
+    methods: [ GET ]
+
+question_details:
+    path: /admin/question/{questionId}/details
+    controller: App\Controller\AdminController::questionDetails
+    methods: [ GET ]
+
+question_delete:
+    path: /admin/question/{questionId}/delete
+    controller: App\Controller\AdminController::deleteQuestion
+    methods: [ GET ]
 # end of AdminController
 
 question_add:
@@ -24,21 +39,6 @@ question_select_correct_answer:
     path: /question/{questionId}/answers/select_correct
     controller: App\Controller\QuestionController::questionSelectCorrectAnswer
     methods: [ GET, POST ]
-
-question_category_list:
-    path: /questions/category/{category}
-    controller: App\Controller\QuestionController::questionList
-    methods: [ GET ]
-
-question_details:
-    path: /question/{questionId}/details
-    controller: App\Controller\QuestionController::questionDetails
-    methods: [ GET ]
-
-question_delete:
-    path: /question/{questionId}/delete
-    controller: App\Controller\QuestionController::deleteQuestion
-    methods: [ GET ]
 
 question_delete_answer:
     path: /question/{questionId}/answer/{answerId}/delete

@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\CommandBus\CommandBus;
+use App\DTO\QuestionWithAnswersDTO;
 use App\QueryBus\QueryBus;
+use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Query\GetQuestions;
+use LearnByTests\Domain\Query\GetQuestionWithAnswers;
 use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,5 +36,27 @@ class AdminController extends BaseController
             'questions' => $questions,
             'question_categories' => $categories
         ]);
+    }
+
+    public function questionDetails(Request $request): Response
+    {
+        /** @var QuestionWithAnswersDTO $dto */
+        $dto = $this->queryBus->handle(
+            new GetQuestionWithAnswers($request->get('questionId'))
+        );
+
+        return $this->renderForm('admin/question_details.twig', [
+            'question' => $dto->getQuestion(),
+            'answers' => $dto->getAnswers()
+        ]);
+    }
+
+    public function deleteQuestion(Request $request): Response
+    {
+        $this->commandBus->handle(
+            new DeleteQuestion($request->get('questionId'))
+        );
+
+        return $this->redirectToRoute('question_list');
     }
 }
