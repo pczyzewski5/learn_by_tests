@@ -24,11 +24,10 @@ class UserRepository extends EntityRepository implements DomainRepository
         return UserMapper::toDomain($entity) ?? null;
     }
 
-    public function findActiveUserByEmail(string $username): ?DomainUser
+    public function findUserByEmail(string $username): ?DomainUser
     {
         $entity = $this->getEntityManager()->getRepository(User::class)->findOneBy([
-            'email' => $username,
-            'isActive' => true
+            'email' => $username
         ]);
 
         return null === $entity ? null : UserMapper::toDomain($entity);

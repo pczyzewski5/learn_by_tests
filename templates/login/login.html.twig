@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h5 class="text-center">Login</h5>
     <form action="{{ path('login') }}" method="post">
         <div class="mb-3">
-            <label for="username" class="form-label required">Email:</label>
+            <label for="username" class="form-label required">Email</label>
             <input type="text" id="username" name="_username"  class="form-control" value="{{ last_username }}">
         </div>
 
         <div class="mb-3">
-            <label for="password" class="form-label required">Password:</label>
+            <label for="password" class="form-label required">Password</label>
             <input type="password" id="password" name="_password"  class="form-control">
         </div>
 
@@ -16,7 +17,7 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         <div class="mb-3">
-            <button type="submit" class="btn-primary btn">login</button>
+            <button type="submit" class="btn-primary btn">Submit</button>
         </div>
     </form>
 

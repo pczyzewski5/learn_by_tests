@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use LearnByTests\Domain\User\Exception\UserException;
 use LearnByTests\Domain\User\User;
 use LearnByTests\Domain\User\UserRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -21,10 +22,13 @@ class UserProvider implements UserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        $user = $this->userRepository->findActiveUserByEmail($identifier);
+        $user = $this->userRepository->findUserByEmail($identifier);
 
         if (null === $user) {
             throw new UserNotFoundException();
+        }
+        if ($user->isActive() === false) {
+            throw UserException::notActive();
         }
 
         return $user;
@@ -32,7 +36,7 @@ class UserProvider implements UserProviderInterface
 
     public function loadUserByUsername(string $username): UserInterface
     {
-        $user = $this->userRepository->findActiveUserByEmail($username);
+        $user = $this->userRepository->findUserByEmail($username);
 
         if (null === $user) {
             throw new UserNotFoundException();
