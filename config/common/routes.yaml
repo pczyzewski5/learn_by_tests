@@ -33,12 +33,17 @@ create_answer:
     path: /admin/question/{questionId}/answer/create
     controller: App\Controller\AdminController::createAnswer
     methods: [ GET, POST ]
-# end of AdminController
 
-question_select_correct_answer:
-    path: /question/{questionId}/answers/select_correct
-    controller: App\Controller\QuestionController::questionSelectCorrectAnswer
+select_correct_answer:
+    path: /admin/question/{questionId}/answers/select_correct
+    controller: App\Controller\AdminController::selectCorrectAnswer
     methods: [ GET, POST ]
+
+select_category:
+    path: /admin/question/{questionId}/category/select
+    controller: App\Controller\AdminController::selectCategory
+    methods: [ GET, POST ]
+# end of AdminController
 
 question_delete_answer:
     path: /question/{questionId}/answer/{answerId}/delete
@@ -58,11 +63,6 @@ question_edit:
 question_answer_edit:
     path: /question/{questionId}/answer/{answerId}/edit
     controller: App\Controller\QuestionController::editQuestionAnswer
-    methods: [ GET, POST ]
-
-question_select_category:
-    path: /question/{questionId}/select_category
-    controller: App\Controller\QuestionController::selectQuestionCategory
     methods: [ GET, POST ]
 
 login:

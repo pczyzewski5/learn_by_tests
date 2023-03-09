@@ -7,11 +7,15 @@ namespace App\Controller;
 use App\CommandBus\CommandBus;
 use App\DTO\QuestionWithAnswersDTO;
 use App\Form\Question\AnswerForm;
+use App\Form\Question\CorrectAnswerForm;
+use App\Form\Question\QuestionCategoryForm;
 use App\Form\Question\QuestionForm;
 use App\QueryBus\QueryBus;
 use LearnByTests\Domain\Command\AddAnswer;
 use LearnByTests\Domain\Command\AddQuestion;
 use LearnByTests\Domain\Command\DeleteQuestion;
+use LearnByTests\Domain\Command\SetAnswerAsCorrect;
+use LearnByTests\Domain\Command\UpdateQuestion;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
 use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
@@ -96,7 +100,7 @@ class AdminController extends BaseController
         );
         $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
         if ($hasAllAnswers) {
-            return $this->redirectToRoute('question_select_correct_answer', ['questionId' => $questionId]);
+            return $this->redirectToRoute('select_correct_answer', ['questionId' => $questionId]);
         }
         $form = $this->createForm(AnswerForm::class);
         $form->handleRequest($request);
@@ -110,7 +114,7 @@ class AdminController extends BaseController
             );
 
             $redirectTo = $hasAllAnswers
-                ? $this->redirectToRoute('question_select_correct_answer', ['questionId' => $questionId])
+                ? $this->redirectToRoute('select_correct_answer', ['questionId' => $questionId])
                 : $this->redirectToRoute('create_answer', ['questionId' => $questionId]);
 
             return $redirectTo;
@@ -121,4 +125,72 @@ class AdminController extends BaseController
             'question' => $questionWithAnswersDTO->getQuestion(),
             'answers' => $questionWithAnswersDTO->getAnswers()
         ]);
-    }}
+    }
+
+    public function selectCorrectAnswer(Request $request): Response
+    {
+        $questionId = $request->get('questionId');
+        /** @var QuestionWithAnswersDTO $dto */
+        $dto = $this->queryBus->handle(
+            new GetQuestionWithAnswers($questionId)
+        );
+        $form = $this->createForm(
+            CorrectAnswerForm::class,
+            null,
+            ['data' => $dto->getAnswers()]
+        );
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new SetAnswerAsCorrect(
+                    $questionId,
+                    $form->getData()[CorrectAnswerForm::IS_CORRECT_ANSWER_FIELD]
+                )
+            );
+
+            return $this->redirectToRoute('select_category', ['questionId' => $questionId]);
+        }
+
+        return $this->renderForm('admin/select_correct_answer.html.twig', [
+            'correct_answer' => $form,
+            'question' => $dto->getQuestion(),
+            'answers' => $dto->getAnswers()
+        ]);
+    }
+
+    public function selectCategory(Request $request): Response
+    {
+        /** @var QuestionWithAnswersDTO $dto */
+        $dto = $this->queryBus->handle(
+            new GetQuestionWithAnswers($request->get('questionId'))
+        );
+        $question = $dto->getQuestion();
+
+        $form = $this->createForm(
+            QuestionCategoryForm::class
+        );
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new UpdateQuestion(
+                    $question->getId(),
+                    $question->getQuestion(),
+                    $form->getData()[QuestionCategoryForm::QUESTION_CATEGORY_FIELD]
+                )
+            );
+
+            return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
+        }
+
+        return $this->renderForm('admin/select_category.twig', [
+            'select_question_category_form' => $form,
+            'question' => $question,
+            'answers' => $dto->getAnswers(),
+            'question_categories' => QuestionCategoryEnum::toArray()
+        ]);
+    }
+}
+
+

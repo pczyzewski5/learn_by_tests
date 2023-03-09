@@ -14,9 +14,9 @@
         </div>
     </div>
     <div class="d-flex justify-content-end edit-buttons">
-        <a class="btn btn-outline-primary btn-sm" href="{{ path('question_select_category', {'questionId': question.getId()}) }}">change category</a>
+        <a class="btn btn-outline-primary btn-sm" href="{{ path('select_category', {'questionId': question.getId()}) }}">change category</a>
         <a class="btn btn-outline-warning btn-sm" href="{{ path('question_edit', {'questionId': question.getId()}) }}">edit</a>
-        <a class="btn btn-outline-danger btn-sm" href="{{ path('question_delete', {'questionId': question.getId()}) }}">delete</a>
+        <a class="btn btn-outline-danger btn-sm" href="{{ path('delete_question', {'questionId': question.getId()}) }}">delete</a>
     </div>
 
     {% set letters = ['A', 'B', 'C', 'D'] %}

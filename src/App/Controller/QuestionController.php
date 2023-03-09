@@ -35,38 +35,6 @@ class QuestionController extends BaseController
         $this->commandBus = $commandBus;
     }
 
-    public function questionSelectCorrectAnswer(Request $request): Response
-    {
-        $questionId = $request->get('questionId');
-        /** @var QuestionWithAnswersDTO $dto */
-        $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($questionId)
-        );
-        $form = $this->createForm(
-            CorrectAnswerForm::class,
-            null,
-            ['data' => $dto->getAnswers()]
-        );
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->commandBus->handle(
-                new SetAnswerAsCorrect(
-                    $questionId,
-                    $form->getData()[CorrectAnswerForm::IS_CORRECT_ANSWER_FIELD]
-                )
-            );
-
-            return $this->redirectToRoute('question_select_category', ['questionId' => $questionId]);
-        }
-
-        return $this->renderForm('question/select_correct_answer.html.twig', [
-            'correct_answer' => $form,
-            'question' => $dto->getQuestion(),
-            'answers' => $dto->getAnswers()
-        ]);
-    }
-
     public function setAnswerAsCorrect(Request $request): Response
     {
         $this->commandBus->handle(
@@ -153,39 +121,6 @@ class QuestionController extends BaseController
             'question' => $question,
             'answerId' => $answer->getId(),
             'answers' => $dto->getAnswers()
-        ]);
-    }
-
-    public function selectQuestionCategory(Request $request): Response
-    {
-        /** @var QuestionWithAnswersDTO $dto */
-        $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
-        );
-        $question = $dto->getQuestion();
-
-        $form = $this->createForm(
-            QuestionCategoryForm::class
-        );
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->commandBus->handle(
-                new UpdateQuestion(
-                    $question->getId(),
-                    $question->getQuestion(),
-                    $form->getData()[QuestionCategoryForm::QUESTION_CATEGORY_FIELD]
-                )
-            );
-
-            return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
-        }
-
-        return $this->renderForm('question/select_question_category.twig', [
-            'select_question_category_form' => $form,
-            'question' => $question,
-            'answers' => $dto->getAnswers(),
-            'question_categories' => QuestionCategoryEnum::toArray()
         ]);
     }
 }
