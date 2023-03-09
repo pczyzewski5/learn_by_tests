@@ -2,10 +2,9 @@
 
 namespace LearnByTests\Infrastructure\User;
 
-use App\Entity\User;
+use LearnByTests\Domain\Exception\PersisterException;
+use LearnByTests\Domain\User\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use LearnByTests\Domain\User\UserPersister as DomainPersister;
 
@@ -18,35 +17,15 @@ class UserPersister implements DomainPersister, PasswordUpgraderInterface
         $this->entityManager = $entityManager;
     }
 
-    public function save(User $entity, bool $flush = false): void
+    public function save(User $user): void
     {
-        $this->entityManager->persist($entity);
+        $entity = UserMapper::fromDomain($user);
 
-        if ($flush) {
+        try {
+            $this->entityManager->persist($entity);
             $this->entityManager->flush();
+        } catch (\Throwable $exception) {
+            throw PersisterException::fromThrowable($exception);
         }
-    }
-
-    public function remove(User $entity, bool $flush = false): void
-    {
-        $this->entityManager->remove($entity);
-
-        if ($flush) {
-            $this->entityManager->flush();
-        }
-    }
-
-    /**
-     * Used to upgrade (rehash) the user's password automatically over time.
-     */
-    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
-    {
-        if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
-        }
-
-        $user->setPassword($newHashedPassword);
-
-        $this->save($user, true);
     }
 }

@@ -16,7 +16,7 @@ class UserMapper
         $dto = new UserDTO();
         $dto->id = $entity->id;
         $dto->email = $entity->email;
-        $dto->roles = $entity->roles;
+        $dto->roles = \json_decode($entity->roles);
         $dto->password = $entity->password;
         $dto->createdAt = DateTimeNormalizer::normalizeToImmutable(
             $entity->createdAt
@@ -31,7 +31,7 @@ class UserMapper
         $entity = new User();
         $entity->id = $domainEntity->getId();
         $entity->email = $domainEntity->getEmail();
-        $entity->roles = $domainEntity->getRoles();
+        $entity->roles = \json_encode($domainEntity->getRoles());
         $entity->password = $domainEntity->getPassword();
         $entity->createdAt = DateTime::createFromImmutable(
             $domainEntity->getCreatedAt()

@@ -5,8 +5,7 @@ security:
 
   providers:
     user_provider:
-      entity:
-        class: LearnByTests\Infrastructure\User\User
+      id: App\Security\UserProvider
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -24,4 +23,4 @@ security:
         enable_csrf: true
 
   access_control:
-#    - { path: ^/question, roles: ROLE_ADMIN }
+    - { path: ^/question, roles: ROLE_ADMIN }

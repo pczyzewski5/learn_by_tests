@@ -9,7 +9,7 @@ interface QuestionPersister
     /**
      * @throws PersisterException
      */
-    public function save(Question $answer): void;
+    public function save(Question $question): void;
 
     /**
      * @throws PersisterException

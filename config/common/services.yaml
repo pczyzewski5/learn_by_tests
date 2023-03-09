@@ -15,6 +15,11 @@ services:
             - '@twig'
         tags: [ 'twig.extension' ]
 
+    App\Security\UserProvider:
+        class: App\Security\UserProvider
+        arguments:
+            - '@LearnByTests\Domain\User\UserRepository'
+
 imports:
     - { resource: 'infrastructure/services.yaml' }
     - { resource: 'repositories.yaml' }

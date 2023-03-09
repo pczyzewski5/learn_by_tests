@@ -8,7 +8,7 @@ class UserDTO
 {
     public ?string $id = null;
     public ?string $email = null;
-    public ?string $roles = null;
+    public ?array $roles = null;
     public ?string $password = null;
     public ?\DateTimeImmutable $createdAt = null;
 }

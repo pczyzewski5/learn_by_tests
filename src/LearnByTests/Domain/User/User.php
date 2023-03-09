@@ -16,7 +16,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private string $id;
     private string $email;
-    private string $roles;
+    private array $roles;
     private string $password;
     private \DateTimeImmutable $createdAt;
 
@@ -42,7 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             throw UserValidationException::missingProperty('email');
         }
 
-        if (!isset($this->roles) || '' === $this->roles) {
+        if (!isset($this->roles) || empty($this->roles)) {
             throw UserValidationException::missingProperty('roles');
         }
 
@@ -65,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function getRoles(): string
+    public function getRoles(): array
     {
         return $this->roles;
     }

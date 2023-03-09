@@ -67,3 +67,8 @@ login:
     path: /login
     controller: App\Controller\LoginController::login
     methods: [ GET, POST ]
+
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+    methods: [ GET ]
