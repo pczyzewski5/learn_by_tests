@@ -30,3 +30,6 @@ textarea {
 .question-category:hover .card-title, .question-category.selected-category .card-title {
     color: rgb(33, 37, 41);
 }
+.ql-editor {
+    height: 300px;
+}

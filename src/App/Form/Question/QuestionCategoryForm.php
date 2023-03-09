@@ -40,7 +40,7 @@ class QuestionCategoryForm extends AbstractType
                 'choices' => $choices,
                 'required' => true,
                 'attr' => [
-//                    'hidden' => true,
+                    'hidden' => true,
                 ],
                 'label_attr' => [
                     'hidden' => true
