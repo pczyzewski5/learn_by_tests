@@ -12,3 +12,6 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN apt-get update
 RUN apt-get install -y git libzip-dev zip
 RUN docker-php-ext-install zip
+
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
