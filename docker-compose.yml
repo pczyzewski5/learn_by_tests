@@ -13,6 +13,7 @@ services:
     environment:
       APP_ENV: dev
       APP_SECRET: secret
+      APP_DEBUG: true
 
   nginx:
     image: nginx
