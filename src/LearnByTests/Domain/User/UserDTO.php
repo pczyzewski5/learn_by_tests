@@ -10,5 +10,6 @@ class UserDTO
     public ?string $email = null;
     public ?array $roles = null;
     public ?string $password = null;
+    public ?bool $isActive = null;
     public ?\DateTimeImmutable $createdAt = null;
 }

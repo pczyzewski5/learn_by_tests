@@ -17,6 +17,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $id;
     private string $email;
     private array $roles;
+    private bool $isActive;
     private string $password;
     private \DateTimeImmutable $createdAt;
 
@@ -50,6 +51,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             throw UserValidationException::missingProperty('password');
         }
 
+        if (!\is_bool($this->isActive)) {
+            throw UserValidationException::missingProperty('is_active');
+        }
+
         if (!isset($this->createdAt)) {
             throw UserValidationException::missingProperty('createdAt');
         }
@@ -73,6 +78,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->isActive;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
