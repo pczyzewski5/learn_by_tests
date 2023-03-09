@@ -28,3 +28,10 @@ doctrine:
                 dir: '%kernel.project_dir%/config/common/orm/Question'
                 is_bundle: false
                 alias: Question
+
+            User:
+                type: xml
+                prefix:  LearnByTests\Infrastructure\User
+                dir: '%kernel.project_dir%/config/common/orm/User'
+                is_bundle: false
+                alias: User

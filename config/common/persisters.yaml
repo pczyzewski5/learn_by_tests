@@ -4,3 +4,6 @@ services:
 
   LearnByTests\Domain\Answer\AnswerPersister:
     alias: LearnByTests\Infrastructure\Answer\AnswerPersister
+
+  LearnByTests\Domain\User\UserPersister:
+    alias: LearnByTests\Infrastructure\User\UserPersister

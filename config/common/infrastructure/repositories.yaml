@@ -8,3 +8,8 @@ services:
     class: LearnByTests\Infrastructure\Answer\AnswerRepository
     arguments:
       - '@doctrine.orm.entity_manager'
+
+  LearnByTests\Infrastructure\User\UserRepository:
+    class: LearnByTests\Infrastructure\User\UserRepository
+    arguments:
+      - '@doctrine.orm.entity_manager'
