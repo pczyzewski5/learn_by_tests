@@ -22,7 +22,7 @@ class IndexController extends BaseController
     public function index(): Response
     {
         return $this->renderForm('index/index.html.twig', [
-            'php_info' => 'yolo'
+            'php_info' => 'Yolo!'
         ]);
     }
 }
