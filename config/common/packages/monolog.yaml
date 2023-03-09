@@ -1,0 +1,4 @@
+monolog:
+  use_microseconds: true
+  channels: {  }
+  handlers: {  }
