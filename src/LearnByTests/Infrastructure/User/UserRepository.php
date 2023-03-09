@@ -2,26 +2,19 @@
 
 namespace LearnByTests\Infrastructure\User;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use LearnByTests\Domain\User\UserRepository as DomainRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\EntityRepository;
 
-class UserRepository implements DomainRepository, PasswordUpgraderInterface, UserLoaderInterface
+class UserRepository extends EntityRepository implements DomainRepository, PasswordUpgraderInterface, UserLoaderInterface
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function loadUserByUsername(string $username): ?UserInterface
     {
-        $entity = $this->entityManager->getRepository(User::class)->findOneBy([
+        $entity = $this->getEntityManager()->getRepository(User::class)->findOneBy([
             'email' => $username
         ]);
 
