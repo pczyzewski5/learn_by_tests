@@ -6,7 +6,11 @@ namespace App\Controller;
 
 use App\CommandBus\CommandBus;
 use App\DTO\QuestionWithAnswersDTO;
+use App\Form\Question\AnswerForm;
+use App\Form\Question\QuestionForm;
 use App\QueryBus\QueryBus;
+use LearnByTests\Domain\Command\AddAnswer;
+use LearnByTests\Domain\Command\AddQuestion;
 use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
@@ -59,4 +63,62 @@ class AdminController extends BaseController
 
         return $this->redirectToRoute('question_list');
     }
-}
+
+    public function createQuestion(Request $request): Response
+    {
+        $form = $this->createForm(QuestionForm::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $questionId = $this->commandBus->handle(
+                new AddQuestion(
+                    $form->getData()[QuestionForm::QUESTION_FIELD]
+                )
+            );
+
+            return $this->redirectToRoute(
+                'create_answer',
+                ['questionId' => $questionId]
+            );
+        }
+
+        return $this->renderForm('admin/create_question.html.twig', [
+            'add_question' => $form,
+        ]);
+    }
+
+    public function createAnswer(Request $request): Response
+    {
+        $questionId = $request->get('questionId');
+        /** @var QuestionWithAnswersDTO $questionWithAnswersDTO */
+        $questionWithAnswersDTO = $this->queryBus->handle(
+            new GetQuestionWithAnswers($questionId)
+        );
+        $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
+        if ($hasAllAnswers) {
+            return $this->redirectToRoute('question_select_correct_answer', ['questionId' => $questionId]);
+        }
+        $form = $this->createForm(AnswerForm::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new AddAnswer(
+                    $questionId,
+                    $form->getData()[AnswerForm::ANSWER_FIELD],
+                )
+            );
+
+            $redirectTo = $hasAllAnswers
+                ? $this->redirectToRoute('question_select_correct_answer', ['questionId' => $questionId])
+                : $this->redirectToRoute('create_answer', ['questionId' => $questionId]);
+
+            return $redirectTo;
+        }
+
+        return $this->renderForm('admin/create_answer.html.twig', [
+            'add_question_answers' => $form,
+            'question' => $questionWithAnswersDTO->getQuestion(),
+            'answers' => $questionWithAnswersDTO->getAnswers()
+        ]);
+    }}

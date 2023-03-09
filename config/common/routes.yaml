@@ -19,21 +19,21 @@ question_details:
     controller: App\Controller\AdminController::questionDetails
     methods: [ GET ]
 
-question_delete:
+delete_question:
     path: /admin/question/{questionId}/delete
     controller: App\Controller\AdminController::deleteQuestion
     methods: [ GET ]
+
+create_question:
+    path: /admin/question/create
+    controller: App\Controller\AdminController::createQuestion
+    methods: [ GET, POST ]
+
+create_answer:
+    path: /admin/question/{questionId}/answer/create
+    controller: App\Controller\AdminController::createAnswer
+    methods: [ GET, POST ]
 # end of AdminController
-
-question_add:
-    path: /question/add
-    controller: App\Controller\QuestionController::addQuestion
-    methods: [ GET, POST ]
-
-question_add_answer:
-    path: /question/{questionId}/answer/add
-    controller: App\Controller\QuestionController::addQuestionAnswer
-    methods: [ GET, POST ]
 
 question_select_correct_answer:
     path: /question/{questionId}/answers/select_correct
