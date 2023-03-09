@@ -56,38 +56,6 @@ class QuestionController extends BaseController
         return $this->redirectToRoute('question_details', ['questionId' => $request->get('questionId')]);
     }
 
-    public function editQuestion(Request $request): Response
-    {
-        /** @var QuestionWithAnswersDTO $dto */
-        $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
-        );
-        $question = $dto->getQuestion();
-
-        $form = $this->createForm(
-            QuestionForm::class,
-            [QuestionForm::QUESTION_FIELD => $question->getQuestion()]
-        );
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->commandBus->handle(
-                new UpdateQuestion(
-                    $question->getId(),
-                    $form->getData()[QuestionForm::QUESTION_FIELD]
-                )
-            );
-
-            return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
-        }
-
-        return $this->renderForm('question/edit_question.twig', [
-            'edit_question_form' => $form,
-            'question' => $question,
-            'answers' => $dto->getAnswers()
-        ]);
-    }
-
     public function editQuestionAnswer(Request $request): Response
     {
         /** @var QuestionWithAnswersDTO $dto */

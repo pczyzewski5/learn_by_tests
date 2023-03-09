@@ -43,6 +43,11 @@ select_category:
     path: /admin/question/{questionId}/category/select
     controller: App\Controller\AdminController::selectCategory
     methods: [ GET, POST ]
+
+update_question:
+    path: /admin/question/{questionId}/edit
+    controller: App\Controller\AdminController::updateQuestion
+    methods: [ GET, POST ]
 # end of AdminController
 
 question_delete_answer:
@@ -54,11 +59,6 @@ set_answer_as_correct:
     path: /question/{questionId}/answer/{answerId}/set_as_correct
     controller: App\Controller\QuestionController::setAnswerAsCorrect
     methods: [ GET ]
-
-question_edit:
-    path: /question/{questionId}/edit
-    controller: App\Controller\QuestionController::editQuestion
-    methods: [ GET, POST ]
 
 question_answer_edit:
     path: /question/{questionId}/answer/{answerId}/edit

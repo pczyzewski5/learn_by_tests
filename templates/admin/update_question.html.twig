@@ -1,23 +1,7 @@
 {% extends 'base.html.twig' %}
-{% block title %}Question details{% endblock %}
+{% block title %}Edit question{% endblock %}
 {% block body %}
-    <div class="mt-3">
-        <div class="card question-category selected-category mb-2" style="max-width: 10rem;">
-            <div class="card-body text-secondary">
-                <h5 class="card-title text-center">{{ question.getCategory().getValue() }}</h5>
-            </div>
-        </div>
-    </div>
-    <div class="card question">
-        <div class="card-body">
-            <p class="card-text">{{ question.getQuestion()|quill }}</p>
-        </div>
-    </div>
-    <div class="d-flex justify-content-end edit-buttons">
-        <a class="btn btn-outline-primary btn-sm" href="{{ path('select_category', {'questionId': question.getId()}) }}">change category</a>
-        <a class="btn btn-outline-warning btn-sm" href="{{ path('update_question', {'questionId': question.getId()}) }}">edit</a>
-        <a class="btn btn-outline-danger btn-sm" href="{{ path('delete_question', {'questionId': question.getId()}) }}">delete</a>
-    </div>
+    {{ form(edit_question_form) }}
 
     {% set letters = ['A', 'B', 'C', 'D'] %}
     {% for key, answer in answers %}
@@ -40,6 +24,6 @@
         </div>
     {% endfor %}
     {% if answers|length < 4 %}
-        <a class="btn btn-outline-secondary btn-sm" href="{{ path('question_add_answer', {'questionId': question.getId()}) }}">Add answer</a>
+        <a class="btn btn-outline-secondary btn-sm" href="{{ path('create_answer', {'questionId': question.getId()}) }}">Add answer</a>
     {% endif %}
 {% endblock %}

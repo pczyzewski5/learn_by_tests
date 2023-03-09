@@ -191,6 +191,39 @@ class AdminController extends BaseController
             'question_categories' => QuestionCategoryEnum::toArray()
         ]);
     }
+
+    public function updateQuestion(Request $request): Response
+    {
+        /** @var QuestionWithAnswersDTO $dto */
+        $dto = $this->queryBus->handle(
+            new GetQuestionWithAnswers($request->get('questionId'))
+        );
+        $question = $dto->getQuestion();
+
+        $form = $this->createForm(
+            QuestionForm::class,
+            [QuestionForm::QUESTION_FIELD => $question->getQuestion()]
+        );
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new UpdateQuestion(
+                    $question->getId(),
+                    $form->getData()[QuestionForm::QUESTION_FIELD],
+                    $question->getCategory()->getValue()
+                )
+            );
+
+            return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
+        }
+
+        return $this->renderForm('admin/update_question.html.twig', [
+            'edit_question_form' => $form,
+            'question' => $question,
+            'answers' => $dto->getAnswers()
+        ]);
+    }
 }
 
 
