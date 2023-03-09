@@ -10,5 +10,6 @@ class User
     public ?string $email;
     public ?string $roles;
     public ?string $password;
+    public ?bool $isActive;
     public ?\DateTime $createdAt;
 }
