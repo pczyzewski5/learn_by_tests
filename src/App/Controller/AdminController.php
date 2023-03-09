@@ -15,6 +15,7 @@ use LearnByTests\Domain\Command\AddAnswer;
 use LearnByTests\Domain\Command\AddQuestion;
 use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
+use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
@@ -221,6 +222,54 @@ class AdminController extends BaseController
         return $this->renderForm('admin/update_question.html.twig', [
             'edit_question_form' => $form,
             'question' => $question,
+            'answers' => $dto->getAnswers()
+        ]);
+    }
+
+    public function setAnswerAsCorrect(Request $request): Response
+    {
+        $this->commandBus->handle(
+            new SetAnswerAsCorrect(
+                $request->get('questionId'),
+                $request->get('answerId')
+            )
+        );
+
+        return $this->redirectToRoute('question_details', ['questionId' => $request->get('questionId')]);
+    }
+
+    public function updateAnswer(Request $request): Response
+    {
+        /** @var QuestionWithAnswersDTO $dto */
+        $dto = $this->queryBus->handle(
+            new GetQuestionWithAnswers($request->get('questionId'))
+        );
+        $question = $dto->getQuestion();
+        $answer = $dto->findAnswer(
+            $request->get('answerId')
+        );
+
+        $form = $this->createForm(
+            AnswerForm::class,
+            [AnswerForm::ANSWER_FIELD => $answer->getAnswer()]
+        );
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new UpdateAnswer(
+                    $answer->getId(),
+                    $form->getData()[AnswerForm::ANSWER_FIELD]
+                )
+            );
+
+            return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
+        }
+
+        return $this->renderForm('admin/update_answer.twig', [
+            'edit_answer_form' => $form,
+            'question' => $question,
+            'answerId' => $answer->getId(),
             'answers' => $dto->getAnswers()
         ]);
     }

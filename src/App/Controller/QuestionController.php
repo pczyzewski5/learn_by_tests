@@ -35,18 +35,6 @@ class QuestionController extends BaseController
         $this->commandBus = $commandBus;
     }
 
-    public function setAnswerAsCorrect(Request $request): Response
-    {
-        $this->commandBus->handle(
-            new SetAnswerAsCorrect(
-                $request->get('questionId'),
-                $request->get('answerId')
-            )
-        );
-
-        return $this->redirectToRoute('question_details', ['questionId' => $request->get('questionId')]);
-    }
-
     public function deleteQuestionAnswer(Request $request): Response
     {
         $this->commandBus->handle(
@@ -54,41 +42,5 @@ class QuestionController extends BaseController
         );
 
         return $this->redirectToRoute('question_details', ['questionId' => $request->get('questionId')]);
-    }
-
-    public function editQuestionAnswer(Request $request): Response
-    {
-        /** @var QuestionWithAnswersDTO $dto */
-        $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
-        );
-        $question = $dto->getQuestion();
-        $answer = $dto->findAnswer(
-            $request->get('answerId')
-        );
-
-        $form = $this->createForm(
-            AnswerForm::class,
-            [AnswerForm::ANSWER_FIELD => $answer->getAnswer()]
-        );
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->commandBus->handle(
-                new UpdateAnswer(
-                    $answer->getId(),
-                    $form->getData()[AnswerForm::ANSWER_FIELD]
-                )
-            );
-
-            return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
-        }
-
-        return $this->renderForm('question/edit_question_answer.twig', [
-            'edit_answer_form' => $form,
-            'question' => $question,
-            'answerId' => $answer->getId(),
-            'answers' => $dto->getAnswers()
-        ]);
     }
 }

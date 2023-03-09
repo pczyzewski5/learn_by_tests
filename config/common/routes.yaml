@@ -48,6 +48,16 @@ update_question:
     path: /admin/question/{questionId}/edit
     controller: App\Controller\AdminController::updateQuestion
     methods: [ GET, POST ]
+
+set_answer_as_correct:
+    path: /admin/question/{questionId}/answer/{answerId}/set_as_correct
+    controller: App\Controller\AdminController::setAnswerAsCorrect
+    methods: [ GET ]
+
+update_answer:
+    path: /admin/question/{questionId}/answer/{answerId}/edit
+    controller: App\Controller\AdminController::updateAnswer
+    methods: [ GET, POST ]
 # end of AdminController
 
 question_delete_answer:
@@ -55,15 +65,7 @@ question_delete_answer:
     controller: App\Controller\QuestionController::deleteQuestionAnswer
     methods: [ GET ]
 
-set_answer_as_correct:
-    path: /question/{questionId}/answer/{answerId}/set_as_correct
-    controller: App\Controller\QuestionController::setAnswerAsCorrect
-    methods: [ GET ]
 
-question_answer_edit:
-    path: /question/{questionId}/answer/{answerId}/edit
-    controller: App\Controller\QuestionController::editQuestionAnswer
-    methods: [ GET, POST ]
 
 login:
     path: /login
