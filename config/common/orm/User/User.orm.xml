@@ -3,10 +3,10 @@
                   xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="LearnByTests\Infrastructure\User\User" table="users">
+    <entity name="LearnByTests\Infrastructure\User\User" repository-class="LearnByTests\Infrastructure\User\UserRepository" table="users">
         <id name="id" type="string" column="id"/>
         <field name="email" type="string" column="email"/>
-        <field name="roles" type="json" column="roles"/>
+        <field name="roles" type="string" column="roles"/>
         <field name="password" type="string" column="password"/>
         <field name="createdAt" type="datetime" column="created_at"/>
     </entity>
