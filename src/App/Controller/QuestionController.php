@@ -35,19 +35,6 @@ class QuestionController extends BaseController
         $this->commandBus = $commandBus;
     }
 
-    public function questionList(Request $request): Response
-    {
-        $activeQuestionCategory = $request->get('category');
-        $questions = $this->queryBus->handle(new GetQuestions($activeQuestionCategory));
-        $categories = QuestionCategoryEnum::toArray();
-
-        return $this->renderForm('question/question_list.html.twig', [
-            'active_question_category' => $activeQuestionCategory,
-            'questions' => $questions,
-            'question_categories' => $categories
-        ]);
-    }
-
     public function questionDetails(Request $request): Response
     {
         /** @var QuestionWithAnswersDTO $dto */

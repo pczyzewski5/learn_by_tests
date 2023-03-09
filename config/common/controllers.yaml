@@ -34,3 +34,21 @@ services:
     calls:
       - [ setContainer, [ '@service_container' ] ]
     tags: [ 'controller.service_arguments' ]
+
+  App\Controller\UserController:
+    class: App\Controller\UserController
+    arguments:
+      - '@App\QueryBus\QueryBus'
+      - '@App\CommandBus\CommandBus'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
+    tags: [ 'controller.service_arguments' ]
+
+  App\Controller\AdminController:
+    class: App\Controller\AdminController
+    arguments:
+      - '@App\QueryBus\QueryBus'
+      - '@App\CommandBus\CommandBus'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
+    tags: [ 'controller.service_arguments' ]

@@ -3,6 +3,13 @@ index:
     controller: App\Controller\IndexController::index
     methods: [ GET ]
 
+# AdminController
+question_list:
+    path: /admin/question/list
+    controller: App\Controller\AdminController::questionList
+    methods: [ GET ]
+# end of AdminController
+
 question_add:
     path: /question/add
     controller: App\Controller\QuestionController::addQuestion
@@ -17,11 +24,6 @@ question_select_correct_answer:
     path: /question/{questionId}/answers/select_correct
     controller: App\Controller\QuestionController::questionSelectCorrectAnswer
     methods: [ GET, POST ]
-
-question_list:
-    path: /questions
-    controller: App\Controller\QuestionController::questionList
-    methods: [ GET ]
 
 question_category_list:
     path: /questions/category/{category}
