@@ -6,6 +6,7 @@ use App\CommandBus\CommandBus;
 use App\Form\RegisterUserForm;
 use App\QueryBus\QueryBus;
 use LearnByTests\Domain\Command\RegisterUser;
+use LearnByTests\Domain\User\Exception\UserAlreadyExistsException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,14 +28,22 @@ class RegistrationController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $this->commandBus->handle(
-                new RegisterUser(
-                    $data[RegisterUserForm::EMAIL_FIELD],
-                    'ROLE_USER',
-                    $data[RegisterUserForm::PASSWORD_FIELD],
-                    false
-                )
-            );
+
+            try {
+                $this->commandBus->handle(
+                    new RegisterUser(
+                        $data[RegisterUserForm::EMAIL_FIELD],
+                        'ROLE_USER',
+                        $data[RegisterUserForm::PASSWORD_FIELD],
+                        false
+                    )
+                );
+            } catch (UserAlreadyExistsException $e) {
+                return $this->renderForm('registration/register.html.twig', [
+                    'register_form' => $form,
+                    'error_message' => 'Account already exists.'
+                ]);
+            }
 
             return $this->redirectToRoute('register_info');
         }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace LearnByTests\Domain\Command;
 
+use LearnByTests\Domain\Exception\PersisterException;
+use LearnByTests\Domain\User\Exception\UserAlreadyExistsException;
 use LearnByTests\Domain\User\UserDTO;
 use LearnByTests\Domain\User\UserFactory;
 use LearnByTests\Domain\User\UserPersister;
@@ -41,6 +43,10 @@ class RegisterUserHandler
 
         $user->update($dto);
 
-        $this->userPersister->save($user);
+        try {
+            $this->userPersister->save($user);
+        } catch (PersisterException $e) {
+            throw new UserAlreadyExistsException();
+        }
     }
 }
