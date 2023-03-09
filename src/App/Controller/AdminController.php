@@ -13,6 +13,7 @@ use App\Form\Question\QuestionForm;
 use App\QueryBus\QueryBus;
 use LearnByTests\Domain\Command\AddAnswer;
 use LearnByTests\Domain\Command\AddQuestion;
+use LearnByTests\Domain\Command\DeleteAnswer;
 use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
 use LearnByTests\Domain\Command\UpdateAnswer;
@@ -272,6 +273,15 @@ class AdminController extends BaseController
             'answerId' => $answer->getId(),
             'answers' => $dto->getAnswers()
         ]);
+    }
+
+    public function deleteAnswer(Request $request): Response
+    {
+        $this->commandBus->handle(
+            new DeleteAnswer($request->get('answerId'))
+        );
+
+        return $this->redirectToRoute('question_details', ['questionId' => $request->get('questionId')]);
     }
 }
 

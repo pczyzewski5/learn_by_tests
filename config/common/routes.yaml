@@ -58,13 +58,12 @@ update_answer:
     path: /admin/question/{questionId}/answer/{answerId}/edit
     controller: App\Controller\AdminController::updateAnswer
     methods: [ GET, POST ]
-# end of AdminController
 
-question_delete_answer:
-    path: /question/{questionId}/answer/{answerId}/delete
-    controller: App\Controller\QuestionController::deleteQuestionAnswer
+delete_answer:
+    path: /admin/question/{questionId}/answer/{answerId}/delete
+    controller: App\Controller\AdminController::deleteAnswer
     methods: [ GET ]
-
+# end of AdminController
 
 
 login:

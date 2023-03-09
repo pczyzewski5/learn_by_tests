@@ -35,12 +35,5 @@ class QuestionController extends BaseController
         $this->commandBus = $commandBus;
     }
 
-    public function deleteQuestionAnswer(Request $request): Response
-    {
-        $this->commandBus->handle(
-            new DeleteAnswer($request->get('answerId'))
-        );
 
-        return $this->redirectToRoute('question_details', ['questionId' => $request->get('questionId')]);
-    }
 }
