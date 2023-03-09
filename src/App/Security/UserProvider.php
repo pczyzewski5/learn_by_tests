@@ -21,7 +21,7 @@ class UserProvider implements UserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        $user = $this->userRepository->findUserByEmail($identifier);
+        $user = $this->userRepository->findActiveUserByEmail($identifier);
 
         if (null === $user) {
             throw new UserNotFoundException();
@@ -32,7 +32,7 @@ class UserProvider implements UserProviderInterface
 
     public function loadUserByUsername(string $username): UserInterface
     {
-        $user = $this->userRepository->findUserByEmail($username);
+        $user = $this->userRepository->findActiveUserByEmail($username);
 
         if (null === $user) {
             throw new UserNotFoundException();
