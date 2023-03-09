@@ -16,3 +16,12 @@ services:
     calls:
       - [ setContainer, [ '@service_container' ] ]
     tags: [ 'controller.service_arguments' ]
+
+  App\Controller\LoginController:
+    class: App\Controller\LoginController
+    arguments:
+      - '@App\QueryBus\QueryBus'
+      - '@App\CommandBus\CommandBus'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
+    tags: [ 'controller.service_arguments' ]

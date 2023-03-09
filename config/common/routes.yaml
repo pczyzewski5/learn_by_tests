@@ -63,3 +63,7 @@ question_select_category:
     controller: App\Controller\QuestionController::selectQuestionCategory
     methods: [ GET, POST ]
 
+login:
+    path: /login
+    controller: App\Controller\LoginController::login
+    methods: [ GET, POST ]
