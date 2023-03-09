@@ -1,0 +1,6 @@
+debug:
+  max_items: 2500
+  min_depth: 1
+  max_string_length: -1
+  dump_destination: null
+  theme: dark
