@@ -17,6 +17,8 @@ security:
       form_login:
         login_path: login
         check_path: login
+      logout:
+        path: logout
 
     secured_area:
       form_login:
