@@ -7,8 +7,9 @@ use LearnByTests\Domain\User\UserRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class UserProvider
+class UserProvider implements UserProviderInterface
 {
     private UserRepository $userRepository;
 
@@ -21,6 +22,17 @@ class UserProvider
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
         $user = $this->userRepository->findUserByEmail($identifier);
+
+        if (null === $user) {
+            throw new UserNotFoundException();
+        }
+
+        return $user;
+    }
+
+    public function loadUserByUsername(string $username): UserInterface
+    {
+        $user = $this->userRepository->findUserByEmail($username);
 
         if (null === $user) {
             throw new UserNotFoundException();
