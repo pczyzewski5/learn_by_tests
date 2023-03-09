@@ -8,6 +8,7 @@
         <field name="email" type="string" column="email"/>
         <field name="roles" type="string" column="roles"/>
         <field name="password" type="string" column="password"/>
+        <field name="isActive" type="boolean" column="is_active"/>
         <field name="createdAt" type="datetime" column="created_at"/>
     </entity>
 
