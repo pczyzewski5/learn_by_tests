@@ -9,15 +9,18 @@ class RegisterUser
     private string $email;
     private string $role;
     private string $password;
+    private bool $isActive;
 
     public function __construct(
         string $email,
         string $role,
         string $password,
+        bool $isActive,
     ) {
         $this->email = $email;
         $this->role = $role;
         $this->password = $password;
+        $this->isActive = $isActive;
     }
 
     public function getEmail(): string
@@ -33,5 +36,10 @@ class RegisterUser
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->isActive;
     }
 }

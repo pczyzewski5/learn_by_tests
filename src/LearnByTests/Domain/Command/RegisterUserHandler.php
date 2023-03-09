@@ -28,6 +28,7 @@ class RegisterUserHandler
             $command->getEmail(),
             [$command->getRole()],
             $command->getPassword(),
+            $command->isActive()
         );
 
         $hashedPassword = $this->userPasswordHasher->hashPassword(

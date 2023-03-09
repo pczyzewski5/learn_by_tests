@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\CommandBus\CommandBus;
+use App\Form\RegisterUserForm;
 use App\QueryBus\QueryBus;
 use LearnByTests\Domain\Command\RegisterUser;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RegistrationController extends BaseController
@@ -18,16 +20,32 @@ class RegistrationController extends BaseController
         $this->commandBus = $commandBus;
     }
 
-    public function register(): Response
+    public function register(Request $request): Response
     {
-        $this->commandBus->handle(
-            new RegisterUser(
-                'nocny88@gmail.com',
-                'ROLE_ADMIN',
-                'master000'
-            )
-        );
+        $form = $this->createForm(RegisterUserForm::class);
+        $form->handleRequest($request);
 
-        return $this->redirectToRoute('question_list');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $this->commandBus->handle(
+                new RegisterUser(
+                    $data[RegisterUserForm::EMAIL_FIELD],
+                    'ROLE_USER',
+                    $data[RegisterUserForm::PASSWORD_FIELD],
+                    false
+                )
+            );
+
+            return $this->redirectToRoute('register_info');
+        }
+
+        return $this->renderForm('registration/register.html.twig', [
+            'register_form' => $form
+        ]);
+    }
+
+    public function registerInfo()
+    {
+        return $this->renderForm('registration/register_info.html.twig');
     }
 }

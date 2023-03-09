@@ -71,4 +71,9 @@ login:
 register:
     path: /register
     controller: App\Controller\RegistrationController::register
+    methods: [ GET, POST ]
+
+register_info:
+    path: /register/info
+    controller: App\Controller\RegistrationController::registerInfo
     methods: [ GET ]

@@ -10,3 +10,7 @@ services:
   App\Form\Question\CorrectAnswerForm:
     class: App\Form\Question\CorrectAnswerForm
     tags: [ 'form.type' ]
+
+  App\Form\RegisterUserForm:
+    class: App\Form\RegisterUserForm
+    tags: [ 'form.type' ]
