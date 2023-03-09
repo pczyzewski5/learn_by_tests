@@ -14,7 +14,7 @@
     {% set letters = ['A', 'B', 'C', 'D'] %}
     {% for key, answer in answers %}
         {% if answer.getId() == answerId %}
-            {{ form(edit_answer_form) }}
+            {{ form(answer_form) }}
         {% else %}
             <div class="card mt-1 {{ answer.isCorrect() ? 'selected-answer' }} answer">
                 <div class="card-body d-flex p-0">

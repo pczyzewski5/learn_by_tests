@@ -40,6 +40,6 @@
         </div>
     {% endfor %}
     {% if answers|length < 4 %}
-        <a class="btn btn-outline-secondary btn-sm" href="{{ path('create_answer', {'questionId': question.getId()}) }}">Add answer</a>
+        <a class="btn btn-outline-secondary btn-sm" href="{{ path('add_answer', {'questionId': question.getId()}) }}">Add answer</a>
     {% endif %}
 {% endblock %}

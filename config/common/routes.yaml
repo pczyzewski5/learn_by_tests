@@ -59,6 +59,11 @@ update_answer:
     controller: App\Controller\AdminController::updateAnswer
     methods: [ GET, POST ]
 
+add_answer:
+    path: /admin/question/{questionId}/answer/add
+    controller: App\Controller\AdminController::addAnswer
+    methods: [ GET, POST ]
+
 delete_answer:
     path: /admin/question/{questionId}/answer/{answerId}/delete
     controller: App\Controller\AdminController::deleteAnswer

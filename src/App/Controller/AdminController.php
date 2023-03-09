@@ -123,7 +123,7 @@ class AdminController extends BaseController
         }
 
         return $this->renderForm('admin/create_answer.html.twig', [
-            'add_question_answers' => $form,
+            'answer_form' => $form,
             'question' => $questionWithAnswersDTO->getQuestion(),
             'answers' => $questionWithAnswersDTO->getAnswers()
         ]);
@@ -268,10 +268,42 @@ class AdminController extends BaseController
         }
 
         return $this->renderForm('admin/update_answer.twig', [
-            'edit_answer_form' => $form,
+            'answer_form' => $form,
             'question' => $question,
             'answerId' => $answer->getId(),
             'answers' => $dto->getAnswers()
+        ]);
+    }
+
+    public function addAnswer(Request $request): Response
+    {
+        $questionId = $request->get('questionId');
+        /** @var QuestionWithAnswersDTO $questionWithAnswersDTO */
+        $questionWithAnswersDTO = $this->queryBus->handle(
+            new GetQuestionWithAnswers($questionId)
+        );
+        $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
+        if ($hasAllAnswers) {
+            return $this->redirectToRoute('question_details', ['questionId' => $questionId]);
+        }
+        $form = $this->createForm(AnswerForm::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->commandBus->handle(
+                new AddAnswer(
+                    $questionId,
+                    $form->getData()[AnswerForm::ANSWER_FIELD],
+                )
+            );
+
+            return $this->redirectToRoute('question_details', ['questionId' => $questionId]);
+        }
+
+        return $this->renderForm('admin/add_answer.html.twig', [
+            'answer_form' => $form,
+            'question' => $questionWithAnswersDTO->getQuestion(),
+            'answers' => $questionWithAnswersDTO->getAnswers()
         ]);
     }
 
