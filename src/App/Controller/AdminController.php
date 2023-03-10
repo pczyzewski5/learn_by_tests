@@ -181,6 +181,7 @@ class AdminController extends BaseController
                 new UpdateQuestion(
                     $question->getId(),
                     $question->getQuestion(),
+                    $this->getUser()->getId(),
                     $form->getData()[QuestionCategoryForm::QUESTION_CATEGORY_FIELD]
                 )
             );
