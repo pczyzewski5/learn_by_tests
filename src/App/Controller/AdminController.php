@@ -298,6 +298,7 @@ class AdminController extends BaseController
                 new CreateAnswer(
                     $questionId,
                     $form->getData()[AnswerForm::ANSWER_FIELD],
+                    $this->getUser()->getId()
                 )
             );
 
