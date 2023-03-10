@@ -26,6 +26,7 @@ class UpdateQuestionHandler
     {
         $dto = new QuestionDTO();
         $dto->question = $command->getQuestion();
+        $dto->authorId = $command->getAuthorId();
         $dto->category = QuestionCategoryEnum::from($command->getCategory());
 
         $question = $this->questionRepository->getOneById($command->getQuestionId());

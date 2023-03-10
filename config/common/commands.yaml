@@ -1,18 +1,18 @@
 services:
-  LearnByTests\Domain\Command\AddQuestionHandler:
-    class: LearnByTests\Domain\Command\AddQuestionHandler
+  LearnByTests\Domain\Command\CreateQuestionHandler:
+    class: LearnByTests\Domain\Command\CreateQuestionHandler
     arguments:
       - '@LearnByTests\Domain\Question\QuestionPersister'
     tags:
-      - { name: tactician.handler, command: LearnByTests\Domain\Command\AddQuestion, bus: command }
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\CreateQuestion, bus: command }
 
-  LearnByTests\Domain\Command\AddAnswerHandler:
-    class: LearnByTests\Domain\Command\AddAnswerHandler
+  LearnByTests\Domain\Command\CreateAnswerHandler:
+    class: LearnByTests\Domain\Command\CreateAnswerHandler
     arguments:
       - '@LearnByTests\Domain\Question\QuestionRepository'
       - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
-      - { name: tactician.handler, command: LearnByTests\Domain\Command\AddAnswer, bus: command }
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\CreateAnswer, bus: command }
 
   LearnByTests\Domain\Command\SetAnswerAsCorrectHandler:
     class: LearnByTests\Domain\Command\SetAnswerAsCorrectHandler

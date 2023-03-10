@@ -8,7 +8,7 @@ use LearnByTests\Domain\Question\QuestionFactory;
 use LearnByTests\Domain\Question\QuestionPersister;
 use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
 
-class AddQuestionHandler
+class CreateQuestionHandler
 {
     private QuestionPersister $questionPersister;
 
@@ -16,11 +16,12 @@ class AddQuestionHandler
         $this->questionPersister = $questionPersister;
     }
 
-    public function handle(AddQuestion $command): string
+    public function handle(CreateQuestion $command): string
     {
         $question = QuestionFactory::create(
             $command->getQuestion(),
-            QuestionCategoryEnum::UNASSIGNED()
+            $command->getAuthorId(),
+            QuestionCategoryEnum::UNASSIGNED(),
         );
 
         $this->questionPersister->save($question);

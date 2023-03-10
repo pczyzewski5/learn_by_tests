@@ -11,8 +11,8 @@ use App\Form\Question\CorrectAnswerForm;
 use App\Form\Question\QuestionCategoryForm;
 use App\Form\Question\QuestionForm;
 use App\QueryBus\QueryBus;
-use LearnByTests\Domain\Command\AddAnswer;
-use LearnByTests\Domain\Command\AddQuestion;
+use LearnByTests\Domain\Command\CreateAnswer;
+use LearnByTests\Domain\Command\CreateQuestion;
 use LearnByTests\Domain\Command\DeleteAnswer;
 use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
@@ -77,8 +77,9 @@ class AdminController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $questionId = $this->commandBus->handle(
-                new AddQuestion(
-                    $form->getData()[QuestionForm::QUESTION_FIELD]
+                new CreateQuestion(
+                    $form->getData()[QuestionForm::QUESTION_FIELD],
+                    $this->getUser()->getId()
                 )
             );
 
@@ -109,9 +110,10 @@ class AdminController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->commandBus->handle(
-                new AddAnswer(
+                new CreateAnswer(
                     $questionId,
                     $form->getData()[AnswerForm::ANSWER_FIELD],
+                    $this->getUser()->getId()
                 )
             );
 
@@ -213,6 +215,7 @@ class AdminController extends BaseController
                 new UpdateQuestion(
                     $question->getId(),
                     $form->getData()[QuestionForm::QUESTION_FIELD],
+                    $this->getUser()->getId(),
                     $question->getCategory()->getValue()
                 )
             );
@@ -260,7 +263,8 @@ class AdminController extends BaseController
             $this->commandBus->handle(
                 new UpdateAnswer(
                     $answer->getId(),
-                    $form->getData()[AnswerForm::ANSWER_FIELD]
+                    $form->getData()[AnswerForm::ANSWER_FIELD],
+                    $this->getUser()->getId()
                 )
             );
 
@@ -291,7 +295,7 @@ class AdminController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->commandBus->handle(
-                new AddAnswer(
+                new CreateAnswer(
                     $questionId,
                     $form->getData()[AnswerForm::ANSWER_FIELD],
                 )

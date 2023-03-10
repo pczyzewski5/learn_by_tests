@@ -8,13 +8,16 @@ class UpdateAnswer
 {
     private string $answerId;
     private string $answer;
+    private string $authorId;
 
     public function __construct(
         string $answerId,
-        string $answer
+        string $answer,
+        string $authorId,
     ) {
         $this->answerId = $answerId;
         $this->answer = $answer;
+        $this->authorId = $authorId;
     }
 
     public function getAnswerId():string
@@ -25,5 +28,10 @@ class UpdateAnswer
     public function getAnswer(): string
     {
         return $this->answer;
+    }
+
+    public function getAuthorId(): string
+    {
+        return $this->authorId;
     }
 }

@@ -26,6 +26,7 @@ class UpdateAnswerHandler
     {
         $dto = new AnswerDTO();
         $dto->answer = $command->getAnswer();
+        $dto->authorId = $command->getAuthorId();
 
         $answer = $this->answerRepository->getOneById($command->getAnswerId());
         $answer->update($dto);

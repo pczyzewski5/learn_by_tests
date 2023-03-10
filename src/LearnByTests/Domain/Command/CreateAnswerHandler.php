@@ -8,7 +8,7 @@ use LearnByTests\Domain\Answer\AnswerFactory;
 use LearnByTests\Domain\Answer\AnswerPersister;
 use LearnByTests\Domain\Question\QuestionRepository;
 
-class AddAnswerHandler
+class CreateAnswerHandler
 {
     private QuestionRepository $questionRepository;
     private AnswerPersister $answerPersister;
@@ -21,13 +21,14 @@ class AddAnswerHandler
         $this->answerPersister = $answerPersister;
     }
 
-    public function handle(AddAnswer $command): void
+    public function handle(CreateAnswer $command): void
     {
         $question = $this->questionRepository->getOneById($command->getQuestionId());
 
         $answer = AnswerFactory::create(
             $question->getId(),
             $command->getAnswer(),
+            $command->getAuthorId(),
             false
         );
 
