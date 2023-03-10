@@ -10,6 +10,7 @@ class QuestionDTO
 {
     public ?string $id = null;
     public ?string $question = null;
+    public ?string $authorId = null;
     public ?QuestionCategoryEnum $category = null;
     public ?\DateTimeImmutable $createdAt = null;
 }

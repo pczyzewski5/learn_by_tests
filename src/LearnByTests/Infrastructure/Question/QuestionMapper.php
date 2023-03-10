@@ -17,6 +17,7 @@ class QuestionMapper
         $dto = new QuestionDTO();
         $dto->id = $entity->id;
         $dto->question = $entity->question;
+        $dto->authorId = $entity->authorId;
         $dto->category = QuestionCategoryEnum::from($entity->category);
         $dto->createdAt = DateTimeNormalizer::normalizeToImmutable(
             $entity->createdAt
@@ -31,6 +32,7 @@ class QuestionMapper
         $entity = new Question();
         $entity->id = $domainEntity->getId();
         $entity->question = $domainEntity->getQuestion();
+        $entity->authorId = $domainEntity->getAuthorId();
         $entity->category = $domainEntity->getCategory()->getValue();
         $entity->createdAt = DateTime::createFromImmutable(
             $domainEntity->getCreatedAt()

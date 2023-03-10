@@ -11,11 +11,13 @@ class QuestionFactory
 {
     public static function create(
         string $question,
+        string $authorId,
         QuestionCategoryEnum $category
     ): Question {
         $dto = new QuestionDTO();
         $dto->id = Uuid::v1()->toRfc4122();
         $dto->question = $question;
+        $dto->authorId = $authorId;
         $dto->category = $category;
         $dto->createdAt = new \DateTimeImmutable();
 

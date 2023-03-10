@@ -39,6 +39,7 @@ class QuestionPersister implements DomainPersister
         try {
             $sql = 'UPDATE questions
                   SET question = :question,
+                      author_id = :authorId,
                       category = :category
                   WHERE id = :id;';
 
@@ -47,11 +48,13 @@ class QuestionPersister implements DomainPersister
                 [
                     'id' => $question->getId(),
                     'question' => $question->getQuestion(),
+                    'authorId' => $question->getAuthorId(),
                     'category' => $question->getCategory(),
                 ],
                 [
                     'id' => Types::STRING,
                     'question' => Types::STRING,
+                    'authorId' => Types::STRING,
                     'category' => Types::STRING,
                 ]
             );

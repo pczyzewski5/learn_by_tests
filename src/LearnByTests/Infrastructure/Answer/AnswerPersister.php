@@ -38,7 +38,7 @@ class AnswerPersister implements DomainPersister
     {
         try {
             $sql = 'UPDATE answers
-                  SET answer = :answer, is_correct = :isCorrect
+                  SET answer = :answer, author_id = :authorId, is_correct = :isCorrect
                   WHERE id = :id;';
 
             $this->entityManager->getConnection()->executeQuery(
@@ -46,11 +46,13 @@ class AnswerPersister implements DomainPersister
                 [
                     'id' => $answer->getId(),
                     'answer' => $answer->getAnswer(),
+                    'authorId' => $answer->getAuthorId(),
                     'isCorrect' => (int)$answer->isCorrect()
                 ],
                 [
                     'id' => Types::STRING,
                     'answer' => Types::STRING,
+                    'authorId' => Types::STRING,
                     'isCorrect' => Types::BOOLEAN
                 ]
             );

@@ -15,6 +15,7 @@ class Question
 
     private string $id;
     private string $question;
+    private string $authorId;
     private QuestionCategoryEnum $category;
     private \DateTimeImmutable $createdAt;
 
@@ -34,9 +35,13 @@ class Question
         if (!isset($this->id) && UuidV1::isValid($this->id)) {
             throw AnswerValidationException::missingProperty('id');
         }
-        
+
         if (!isset($this->question) || '' === $this->question) {
             throw AnswerValidationException::missingProperty('question');
+        }
+
+        if (!isset($this->authorId) && UuidV1::isValid($this->authorId)) {
+            throw AnswerValidationException::missingProperty('author_id');
         }
 
         if (!isset($this->category)) {
@@ -56,6 +61,11 @@ class Question
     public function getQuestion(): string
     {
         return $this->question;
+    }
+
+    public function getAuthorId(): string
+    {
+        return $this->authorId;
     }
 
     public function getCategory(): QuestionCategoryEnum

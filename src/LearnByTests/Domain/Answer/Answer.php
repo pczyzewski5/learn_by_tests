@@ -15,6 +15,7 @@ class Answer
     private string $id;
     private string $questionId;
     private string $answer;
+    private string $authorId;
     private bool $isCorrect;
     private \DateTimeImmutable $createdAt;
 
@@ -43,6 +44,10 @@ class Answer
             throw AnswerValidationException::missingProperty('answer');
         }
 
+        if (!isset($this->authorId) && UuidV1::isValid($this->authorId)) {
+            throw AnswerValidationException::missingProperty('author_id');
+        }
+
         if (!\is_bool($this->isCorrect)) {
             throw AnswerValidationException::missingProperty('is_valid');
         }
@@ -65,6 +70,11 @@ class Answer
     public function getAnswer(): string
     {
         return $this->answer;
+    }
+
+    public function getAuthorId(): string
+    {
+        return $this->authorId;
     }
 
     public function isCorrect(): bool
