@@ -2,7 +2,6 @@
 
 namespace Deployer;
 
-require 'recipe/symfony.php';
 require 'contrib/rsync.php';
 
 // Config
@@ -15,7 +14,7 @@ set('rsync', [
         '.env.*.local',
         'config/secrets/prod/prod.decrypt.private.php',
         'public/bundles/',
-        'var/',
+        'var',
         'phpunit.xml',
         'phpunit.xml.dist',
         '.phpunit.result.cache',
@@ -25,7 +24,7 @@ set('rsync', [
         'docker-compose.yml',
         '.revision',
         '.gitignore',
-        'vendor/'
+        'vendor'
     ],
     'exclude-file' => false,
     'include'      => [],
@@ -41,6 +40,11 @@ set('rsync_src', '/data/application');
 set('rsync_dest', '/home/southpaw/domains/learnbytests.pl');
 set('deploy_path', '/home/southpaw/domains/learnbytests.pl');
 
+// Tasks
+task('install vendors', function() {
+    run('cd /home/southpaw/domains/learnbytests.pl && composer install');
+});
+
 // Hosts
 host('s148.cyber-folks.pl')
     ->set('remote_user', 'southpaw')
@@ -49,4 +53,5 @@ host('s148.cyber-folks.pl')
 // Hooks
 task('deploy', [
     'rsync',
+    'install vendors'
 ])->desc('Deploy your project');
