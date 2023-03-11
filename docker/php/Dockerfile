@@ -10,8 +10,11 @@ RUN mv composer.phar /usr/local/bin/composer
 
 # install other soft
 RUN apt-get update
-RUN apt-get install -y git libzip-dev zip
+RUN apt-get install -y git libzip-dev zip rsync
 RUN docker-php-ext-install zip
 
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
+
+# generate ssh key
+RUN ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
