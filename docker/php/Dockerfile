@@ -15,6 +15,3 @@ RUN docker-php-ext-install zip
 
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
-
-# generate ssh key
-RUN ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
