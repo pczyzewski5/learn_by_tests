@@ -5,8 +5,10 @@ namespace LearnByTests\Infrastructure\User;
 use LearnByTests\Domain\Exception\PersisterException;
 use LearnByTests\Domain\User\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use LearnByTests\Domain\User\UserPersister as DomainPersister;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserPersister implements DomainPersister, PasswordUpgraderInterface
 {
@@ -27,5 +29,12 @@ class UserPersister implements DomainPersister, PasswordUpgraderInterface
         } catch (\Throwable $exception) {
             throw PersisterException::fromThrowable($exception);
         }
+    }
+
+    public function upgradePassword(
+        UserInterface|PasswordAuthenticatedUserInterface $user,
+        string $newHashedPassword
+    ): void {
+        throw new \Exception('not implemented');
     }
 }
