@@ -1,6 +1,6 @@
 parameters:
-  learn_by_tests.mysql_host: '%env(learn_by_tests)%'
-  learn_by_tests.mysql_port: '%env(learn_by_tests.mysql_port)%'
-  learn_by_tests.mysql_database: '%env(learn_by_tests.mysql_database)%'
-  learn_by_tests.mysql_user: '%env(learn_by_tests.mysql_user)%'
-  learn_by_tests.mysql_password: '%env(learn_by_tests.mysql_password)%'
+  learn_by_tests.mysql_host: '%env(learn_by_tests_mysql_host)%'
+  learn_by_tests.mysql_port: '%env(learn_by_tests_mysql_port)%'
+  learn_by_tests.mysql_database: '%env(learn_by_tests_mysql_database)%'
+  learn_by_tests.mysql_user: '%env(learn_by_tests_mysql_user)%'
+  learn_by_tests.mysql_password: '%env(learn_by_tests_mysql_password)%'
