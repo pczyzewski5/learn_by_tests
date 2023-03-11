@@ -10,10 +10,6 @@ services:
     links:
       - mysql
     working_dir: /data/application
-    environment:
-      APP_ENV: dev
-      APP_SECRET: secret
-      APP_DEBUG: true
 
   nginx:
     image: nginx
