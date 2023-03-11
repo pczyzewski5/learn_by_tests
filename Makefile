@@ -56,14 +56,26 @@ init-db:
 	$(PHPCLI) php ./bin/console doctrine:cache:clear-metadata
 	$(PHPCLI) php ./bin/console doctrine:migrations:migrate
 
+cli-mysql:
+	docker-compose -f docker-compose.yml exec mysql mysql -u learn_by_tests -D learn_by_tests --password=password123
+
+tail-mysql-logs:
+	docker-compose exec mysql tail -f $(MYSQL_LOG_FILE)
+
+##################################################################################################################
+# MIGRATION
+##################################################################################################################
+
 generate-migration:
 	$(PHPCLI) php ./bin/console doctrine:migrations:generate
 
 migration:
 	$(PHPCLI) php ./bin/console doctrine:migrations:migrate
 
-cli-mysql:
-	docker-compose -f docker-compose.yml exec mysql mysql -u learn_by_tests -D learn_by_tests --password=password123
 
-tail-mysql-logs:
-	docker-compose exec mysql tail -f $(MYSQL_LOG_FILE)
+##################################################################################################################
+# DEPLOY
+##################################################################################################################
+
+deploy:
+	$(PHPCLI) vendor/deployer/deployer/dep deploy
