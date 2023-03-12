@@ -11,9 +11,6 @@ set('rsync', [
     'exclude'      => [
         '.git',
         'deploy.php',
-        '.env.local',
-        '.env.local.php',
-        '.env.*.local',
         'config/secrets/prod/prod.decrypt.private.php',
         'public/bundles/',
         'var',
@@ -30,7 +27,7 @@ set('rsync', [
     ],
     'exclude-file' => false,
     'include'      => [],
-    'include-file' => '.env',
+    'include-file' => false,
     'filter'       => [],
     'filter-file'  => false,
     'filter-perdir'=> false,
