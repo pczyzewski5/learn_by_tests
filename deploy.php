@@ -35,15 +35,15 @@ set('rsync', [
     'options'      => ['delete'],
     'timeout'      => 60,
 ]);
-set('rsync_src', '/data/application');
-set('rsync_dest', APP_DIR . '/new_release');
+set('rsync_src', '/data/application/');
+set('rsync_dest', APP_DIR . '/new_release/');
 
 // Hosts
 host('s148.cyber-folks.pl')
     ->set('remote_user', 'southpaw')
     ->set('port', 222);
 
-// Tasks
+// Remote tasks
 task('create previous_release dir', function() {
     run('rm -rf ' . APP_DIR . '/previous_release &&
     mkdir -p ' . APP_DIR . '/previous_release');
@@ -58,11 +58,20 @@ task('create current_release dir', function() {
 task('copy new_release to current_release', function() {
     run('cp -r ' . APP_DIR . '/new_release/* ' . APP_DIR . '/current_release/');
 });
-task('copy prod env file', function() {
+task('rename env_template to .env', function() {
+    run('mv ' . APP_DIR . '/current_release/env_template ' . APP_DIR . '/current_release/.env');
+});
+task('copy env local file', function() {
     run('cp ' . APP_DIR . '/.env.local ' . APP_DIR . '/current_release/');
+});
+task('copy .htaccess file', function() {
+    run('cp ' . APP_DIR . '/.htaccess ' . APP_DIR . '/current_release/public/');
 });
 task('install vendors', function() {
     run('cd ' . APP_DIR . '/current_release && composer install');
+});
+task('deploy success', function () {
+    writeln('Deploy successful!');
 });
 
 
@@ -73,6 +82,10 @@ task('deploy', [
     'rsync',
     'create current_release dir',
     'copy new_release to current_release',
-    'copy prod env file',
+    'rename env_template to .env',
+    'copy env local file',
+    'copy .htaccess file',
     'install vendors',
 ])->desc('Deploy your project');
+
+after('deploy', 'deploy success');
