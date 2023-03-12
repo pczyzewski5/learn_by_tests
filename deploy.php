@@ -30,7 +30,7 @@ set('rsync', [
     ],
     'exclude-file' => false,
     'include'      => [],
-    'include-file' => false,
+    'include-file' => '.env',
     'filter'       => [],
     'filter-file'  => false,
     'filter-perdir'=> false,
@@ -62,7 +62,7 @@ task('copy new_release to current_release', function() {
     run('cp -r ' . APP_DIR . '/new_release/* ' . APP_DIR . '/current_release/');
 });
 task('copy prod env file', function() {
-    run('cp ' . APP_DIR . '/.env.prod ' . APP_DIR . '/current_release/');
+    run('cp ' . APP_DIR . '/.env.local ' . APP_DIR . '/current_release/');
 });
 task('install vendors', function() {
     run('cd ' . APP_DIR . '/current_release && composer install');

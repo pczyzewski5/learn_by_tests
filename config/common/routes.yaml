@@ -89,3 +89,8 @@ register_info:
     path: /register/info
     controller: App\Controller\RegistrationController::registerInfo
     methods: [ GET ]
+
+test:
+    path: /test
+    controller: App\Controller\IndexController::test
+    methods: [ GET ]
