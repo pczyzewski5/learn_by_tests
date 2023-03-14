@@ -119,7 +119,7 @@ class AdminController extends BaseController
             return $this->redirectToRoute(
                 'create_answer', [
                 'questionId' => $questionId,
-                'category' => $category
+                'category' => $category->getKey()
             ]);
         }
 
