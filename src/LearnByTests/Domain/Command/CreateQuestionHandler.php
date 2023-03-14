@@ -21,6 +21,7 @@ class CreateQuestionHandler
         $question = QuestionFactory::create(
             $command->getQuestion(),
             $command->getAuthorId(),
+            $command->getCategory(),
             CategoryEnum::UNASSIGNED(),
         );
 
