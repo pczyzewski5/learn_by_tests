@@ -41,7 +41,9 @@ class AdminController extends BaseController
     public function categoryList(): Response
     {
         return $this->renderForm('admin/category_list.html.twig', [
-            'categories' => $this->queryBus->handle(new GetCategories())
+            'categories' => $this->queryBus->handle(
+                new GetCategories()
+            )
         ]);
     }
 

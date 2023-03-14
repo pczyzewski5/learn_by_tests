@@ -10,8 +10,8 @@ class CategoryEnum extends BaseEnum
 {
     const ALL = 'wszystkie';
     const UNASSIGNED = 'bez kategorii';
-    const ZJ = 'ŻJ';
-    const JSM = 'JSM';
+    const ZJ = 'żeglarz jachtowy';
+    const JSM = 'jachtowy sternik morski';
     const NAVIGATION = 'nawigacja';
     const REGULATIONS = 'przepisy';
     const PILOT = 'locja';
