@@ -14,7 +14,7 @@ class SelectValidAnswer {
                 $('#correct_answer_form_is_correct_answer_field').val(
                     $(this).attr('answer-id')
                 );
-                $('#correct_answer_form_save').removeAttr('disabled');
+                $('#correct_answer_form_zapisz').removeAttr('disabled');
             });
         }
     }
