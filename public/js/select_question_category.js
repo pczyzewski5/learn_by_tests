@@ -4,17 +4,17 @@ class SelectQuestionCategory {
     }
 
     execute() {
-        let $questionCategory = $('.question-category');
-        let $attr = $questionCategory.attr('question-category');
+        let $questionSubCategory = $('.question-subcategory');
+        let $attr = $questionSubCategory.attr('question-subcategory');
 
         if (typeof $attr !== 'undefined' && $attr !== false) {
-            $questionCategory.click(function () {
-                $('.question-category').removeClass('selected-category');
-                $(this).addClass('selected-category');
-                $('#question_category_form_question_category').val(
-                    $(this).attr('question-category')
+            $questionSubCategory.click(function () {
+                $('.question-subcategory').removeClass('selected-subcategory');
+                $(this).addClass('selected-subcategory');
+                $('#category_form_category').val(
+                    $(this).attr('question-subcategory')
                 );
-                $('#question_category_form_save').removeAttr('disabled');
+                $('#category_form_zapisz').removeAttr('disabled');
             });
         }
     }
