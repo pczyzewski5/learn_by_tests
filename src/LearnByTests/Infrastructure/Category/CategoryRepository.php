@@ -30,6 +30,7 @@ class CategoryRepository implements DomainRepository
                 CategoryEnum::SIGNALLING(),
                 CategoryEnum::METEOROLOGY(),
                 CategoryEnum::SAR(),
+                CategoryEnum::UNASSIGNED(),
             ],
             CategoryEnum::ZJ => [
 
