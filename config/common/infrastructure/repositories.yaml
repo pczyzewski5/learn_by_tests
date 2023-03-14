@@ -13,3 +13,6 @@ services:
     class: LearnByTests\Infrastructure\User\UserRepository
     arguments:
       - '@doctrine.orm.entity_manager'
+
+  LearnByTests\Infrastructure\Category\CategoryRepository:
+    class: LearnByTests\Infrastructure\Category\CategoryRepository

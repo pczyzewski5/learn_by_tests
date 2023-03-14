@@ -7,3 +7,6 @@ services:
 
   LearnByTests\Domain\User\UserRepository:
     alias: LearnByTests\Infrastructure\User\UserRepository
+
+  LearnByTests\Domain\Category\CategoryRepository:
+    alias: LearnByTests\Infrastructure\Category\CategoryRepository
