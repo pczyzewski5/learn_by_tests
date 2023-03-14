@@ -8,6 +8,7 @@ use App\BaseEnum;
 
 class CategoryEnum extends BaseEnum
 {
+    const ALL = 'wszystkie';
     const UNASSIGNED = 'bez kategorii';
     const ZJ = 'ŻJ';
     const JSM = 'JSM';
