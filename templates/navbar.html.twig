@@ -7,32 +7,34 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {% if is_granted('ROLE_USER') %}
+            {% if is_granted('ROLE_ADMIN') %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link active" href="{{ path('category_list') }}" aria-current="page">Kursy</a>
                     </li>
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{{ path('question_list') }}">Questions</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{{ path('create_question') }}">Create question</a>#}
-{#                    </li>#}
+                    {% if category is defined %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('logout') }}">Logout</a>
+                        <a class="nav-link" href="{{ path('question_list', {'category': category.getKey()}) }}">Lista pytań</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('create_question', {'category': category.getKey()}) }}">Dodaj pytanie</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('logout') }}">Wyloguj</a>
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Szukaj</button>
                 </form>
             {% else %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('login') }}">Login</a>
+                        <a class="nav-link" href="{{ path('login') }}">Logowanie</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('register') }}">Register</a>
+                        <a class="nav-link" href="{{ path('register') }}">Rejestracja</a>
                     </li>
                 </ul>
             {% endif %}

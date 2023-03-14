@@ -4,7 +4,7 @@ index:
     methods: [ GET ]
 
 # AdminController
-categorty_list:
+category_list:
     path: /admin/category/list
     controller: App\Controller\AdminController::categoryList
     methods: [ GET ]
@@ -20,12 +20,12 @@ question_category_list:
     methods: [ GET ]
 
 question_details:
-    path: /{category}/admin/question/{questionId}/details
+    path: /admin/question/{questionId}/details
     controller: App\Controller\AdminController::questionDetails
     methods: [ GET ]
 
 delete_question:
-    path: /{category}/admin/question/{questionId}/delete
+    path: /admin/question/{questionId}/delete
     controller: App\Controller\AdminController::deleteQuestion
     methods: [ GET ]
 
