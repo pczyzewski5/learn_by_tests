@@ -21,15 +21,6 @@ class IndexController extends BaseController
 
     public function index(): Response
     {
-        return $this->renderForm('index/index.html.twig', [
-            'php_info' => 'Yolo!'
-        ]);
-    }
-
-    public function test(): Response
-    {
-        return $this->renderForm('index/index.html.twig', [
-            'php_info' => 'Hello!!'
-        ]);
+        return $this->renderForm('index/index.html.twig');
     }
 }

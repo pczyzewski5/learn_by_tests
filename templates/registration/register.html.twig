@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Rejestracja{% endblock %}
 {% block body %}
-    <h5 class="text-center">Register</h5>
     {{ form(register_form) }}
     {% if error_message is defined %}
         <div class="alert alert-danger" role="alert">

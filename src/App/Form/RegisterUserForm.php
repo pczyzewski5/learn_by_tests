@@ -25,10 +25,11 @@ class RegisterUserForm extends AbstractType
         $builder->add(
             self::PASSWORD_FIELD,
             PasswordType::class,
+            ['label' => 'Hasło']
         );
 
         $builder->add(
-            'submit',
+            'zapisz',
             SubmitType::class
         );
     }
