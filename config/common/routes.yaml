@@ -15,17 +15,17 @@ question_list:
     methods: [ GET ]
 
 question_category_list:
-    path: /{category}/admin/question/category/{sub_category}/list
+    path: /{category}/admin/question/category/{subcategory}/list
     controller: App\Controller\AdminController::questionList
     methods: [ GET ]
 
 question_details:
-    path: /admin/question/{questionId}/details
+    path: /{category}/admin/question/{questionId}/details
     controller: App\Controller\AdminController::questionDetails
     methods: [ GET ]
 
 delete_question:
-    path: /admin/question/{questionId}/delete
+    path: /{category}/admin/question/{questionId}/delete
     controller: App\Controller\AdminController::deleteQuestion
     methods: [ GET ]
 
@@ -46,7 +46,12 @@ select_correct_answer:
 
 select_question_category:
     path: /{category}/admin/question/{questionId}/category/select
-    controller: App\Controller\AdminController::selectCategory
+    controller: App\Controller\AdminController::selectQuestionCategory
+    methods: [ GET, POST ]
+
+update_question_category:
+    path: /{category}/admin/question/{questionId}/category/update
+    controller: App\Controller\AdminController::updateQuestionCategory
     methods: [ GET, POST ]
 
 update_question:
