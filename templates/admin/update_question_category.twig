@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edytuj kategorię pytania{% endblock %}
+{% block body %}
+    <div class="d-flex flex-wrap">
+        {% for key, subcategory in subcategories %}
+            {{ include('admin/common/question_subcategory.html.twig') }}
+        {% endfor %}
+    </div>
+
+    {{ form(select_question_category_form) }}
+
+    {{ include('admin/common/question_with_controls.html.twig') }}
+
+    {% for key, answer in answers %}
+        {{ include('admin/common/answer_list_item_with_controls.html.twig') }}
+    {% endfor %}
+{% endblock %}
