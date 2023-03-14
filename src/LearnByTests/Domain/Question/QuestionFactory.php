@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LearnByTests\Domain\Question;
 
-use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
+use LearnByTests\Domain\Category\CategoryEnum;
 use Symfony\Component\Uid\Uuid;
 
 class QuestionFactory
@@ -12,7 +12,7 @@ class QuestionFactory
     public static function create(
         string $question,
         string $authorId,
-        QuestionCategoryEnum $category
+        CategoryEnum $category
     ): Question {
         $dto = new QuestionDTO();
         $dto->id = Uuid::v1()->toRfc4122();

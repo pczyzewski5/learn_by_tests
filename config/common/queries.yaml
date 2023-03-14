@@ -20,3 +20,17 @@ services:
       - '@LearnByTests\Domain\Answer\AnswerRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetAnswerCountForQuestion, bus: query }
+
+  LearnByTests\Domain\Query\GetCategoriesHandler:
+    class: LearnByTests\Domain\Query\GetCategoriesHandler
+    arguments:
+      - '@LearnByTests\Domain\Category\CategoryRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetCategories, bus: query }
+
+  LearnByTests\Domain\Query\GetSubCategoriesHandler:
+    class: LearnByTests\Domain\Query\GetSubCategoriesHandler
+    arguments:
+      - '@LearnByTests\Domain\Category\CategoryRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetSubCategories, bus: query }

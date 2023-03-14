@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\Question;
 
-use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
+use LearnByTests\Domain\Category\CategoryEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,8 +29,8 @@ class QuestionCategoryForm extends AbstractType
     protected function addSelectQuestionCategory(FormBuilderInterface $builder): void
     {
         $choices = \array_combine(
-            QuestionCategoryEnum::toArray(),
-            QuestionCategoryEnum::toArray()
+            CategoryEnum::toArray(),
+            CategoryEnum::toArray()
         );
 
         $builder->add(

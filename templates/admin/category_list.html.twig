@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Wybierz kurs{% endblock %}
+{% block body %}
+    {% for category in categories %}
+        <div>
+            <a class="nav-link" href="{{ path('question_list', {'category': category.getKey()}) }}">{{ category.getValue() }}</a>
+        </div>
+    {% endfor %}
+{% endblock %}

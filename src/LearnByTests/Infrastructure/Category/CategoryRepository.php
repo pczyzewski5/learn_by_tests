@@ -16,12 +16,26 @@ class CategoryRepository implements DomainRepository
     {
         return [
             CategoryEnum::ZJ(),
-            CategoryEnum::JSM()
+            CategoryEnum::JSM(),
         ];
     }
 
-    public function getSubCategoriesForCategory(): array
+    public function getSubCategoriesForCategory(CategoryEnum $category): array
     {
+        $data = [
+            CategoryEnum::JSM => [
+                CategoryEnum::NAVIGATION(),
+                CategoryEnum::REGULATIONS(),
+                CategoryEnum::PILOT(),
+                CategoryEnum::SIGNALLING(),
+                CategoryEnum::METEOROLOGY(),
+                CategoryEnum::SAR(),
+            ],
+            CategoryEnum::ZJ => [
 
+            ]
+        ];
+
+        return $data[$category->getValue()];
     }
 }

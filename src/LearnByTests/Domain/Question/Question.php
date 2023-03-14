@@ -6,7 +6,7 @@ namespace LearnByTests\Domain\Question;
 
 use LearnByTests\Domain\Answer\Exception\AnswerValidationException;
 use LearnByTests\Domain\MergerTrait;
-use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
+use LearnByTests\Domain\Category\CategoryEnum;
 use Symfony\Component\Uid\UuidV1;
 
 class Question
@@ -16,7 +16,7 @@ class Question
     private string $id;
     private string $question;
     private string $authorId;
-    private QuestionCategoryEnum $category;
+    private CategoryEnum $category;
     private \DateTimeImmutable $createdAt;
 
     public function __construct(QuestionDTO $dto)
@@ -68,7 +68,7 @@ class Question
         return $this->authorId;
     }
 
-    public function getCategory(): QuestionCategoryEnum
+    public function getCategory(): CategoryEnum
     {
         return $this->category;
     }

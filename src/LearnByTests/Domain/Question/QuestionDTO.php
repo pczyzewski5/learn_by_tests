@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace LearnByTests\Domain\Question;
 
-use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
+use LearnByTests\Domain\Category\CategoryEnum;
 
 class QuestionDTO
 {
     public ?string $id = null;
     public ?string $question = null;
     public ?string $authorId = null;
-    public ?QuestionCategoryEnum $category = null;
+    public ?CategoryEnum $category = null;
     public ?\DateTimeImmutable $createdAt = null;
 }

@@ -18,9 +18,11 @@ use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
 use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
+use LearnByTests\Domain\Query\GetCategories;
 use LearnByTests\Domain\Query\GetQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
-use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
+use LearnByTests\Domain\Category\CategoryEnum;
+use LearnByTests\Domain\Query\GetSubCategories;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,16 +37,27 @@ class AdminController extends BaseController
         $this->commandBus = $commandBus;
     }
 
+    public function categoryList(): Response
+    {
+        return $this->renderForm('admin/category_list.html.twig', [
+            'categories' => $this->queryBus->handle(new GetCategories())
+        ]);
+    }
+
     public function questionList(Request $request): Response
     {
-        $activeQuestionCategory = $request->get('category');
-        $questions = $this->queryBus->handle(new GetQuestions($activeQuestionCategory));
-        $categories = QuestionCategoryEnum::toArray();
+        $category = CategoryEnum::fromKey($request->get('category'));
+        $subCategories = $this->queryBus->handle(
+            new GetSubCategories($category)
+        );
+        $subCategory = $request->get('sub_category');
+        $questions = $this->queryBus->handle(new GetQuestions($subCategory));
 
         return $this->renderForm('admin/question_list.html.twig', [
-            'active_question_category' => $activeQuestionCategory,
+            'category' => $category,
+            'sub_categories' => $subCategories,
+            'active_sub_category' => $subCategory,
             'questions' => $questions,
-            'question_categories' => $categories
         ]);
     }
 
@@ -153,7 +166,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('select_category', ['questionId' => $questionId]);
+            return $this->redirectToRoute('select_question_category', ['questionId' => $questionId]);
         }
 
         return $this->renderForm('admin/select_correct_answer.html.twig', [
@@ -189,11 +202,11 @@ class AdminController extends BaseController
             return $this->redirectToRoute('question_details', ['questionId' => $question->getId()]);
         }
 
-        return $this->renderForm('admin/select_category.twig', [
+        return $this->renderForm('select_question_category.twig', [
             'select_question_category_form' => $form,
             'question' => $question,
             'answers' => $dto->getAnswers(),
-            'question_categories' => QuestionCategoryEnum::toArray()
+            'categories' => CategoryEnum::toArray()
         ]);
     }
 

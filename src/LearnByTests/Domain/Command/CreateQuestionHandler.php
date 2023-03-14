@@ -6,7 +6,7 @@ namespace LearnByTests\Domain\Command;
 
 use LearnByTests\Domain\Question\QuestionFactory;
 use LearnByTests\Domain\Question\QuestionPersister;
-use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
+use LearnByTests\Domain\Category\CategoryEnum;
 
 class CreateQuestionHandler
 {
@@ -21,7 +21,7 @@ class CreateQuestionHandler
         $question = QuestionFactory::create(
             $command->getQuestion(),
             $command->getAuthorId(),
-            QuestionCategoryEnum::UNASSIGNED(),
+            CategoryEnum::UNASSIGNED(),
         );
 
         $this->questionPersister->save($question);

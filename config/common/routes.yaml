@@ -4,68 +4,73 @@ index:
     methods: [ GET ]
 
 # AdminController
+categorty_list:
+    path: /admin/category/list
+    controller: App\Controller\AdminController::categoryList
+    methods: [ GET ]
+
 question_list:
-    path: /admin/question/list
+    path: /{category}/admin/question/list
     controller: App\Controller\AdminController::questionList
     methods: [ GET ]
 
 question_category_list:
-    path: /admin/question/category/{category}/list
+    path: /{category}/admin/question/category/{sub_category}/list
     controller: App\Controller\AdminController::questionList
     methods: [ GET ]
 
 question_details:
-    path: /admin/question/{questionId}/details
+    path: /{category}/admin/question/{questionId}/details
     controller: App\Controller\AdminController::questionDetails
     methods: [ GET ]
 
 delete_question:
-    path: /admin/question/{questionId}/delete
+    path: /{category}/admin/question/{questionId}/delete
     controller: App\Controller\AdminController::deleteQuestion
     methods: [ GET ]
 
 create_question:
-    path: /admin/question/create
+    path: /{category}/admin/question/create
     controller: App\Controller\AdminController::createQuestion
     methods: [ GET, POST ]
 
 create_answer:
-    path: /admin/question/{questionId}/answer/create
+    path: /{category}/admin/question/{questionId}/answer/create
     controller: App\Controller\AdminController::createAnswer
     methods: [ GET, POST ]
 
 select_correct_answer:
-    path: /admin/question/{questionId}/answers/select_correct
+    path: /{category}/admin/question/{questionId}/answers/select_correct
     controller: App\Controller\AdminController::selectCorrectAnswer
     methods: [ GET, POST ]
 
-select_category:
-    path: /admin/question/{questionId}/category/select
+select_question_category:
+    path: /{category}/admin/question/{questionId}/category/select
     controller: App\Controller\AdminController::selectCategory
     methods: [ GET, POST ]
 
 update_question:
-    path: /admin/question/{questionId}/edit
+    path: /{category}/admin/question/{questionId}/edit
     controller: App\Controller\AdminController::updateQuestion
     methods: [ GET, POST ]
 
 set_answer_as_correct:
-    path: /admin/question/{questionId}/answer/{answerId}/set_as_correct
+    path: /{category}/admin/question/{questionId}/answer/{answerId}/set_as_correct
     controller: App\Controller\AdminController::setAnswerAsCorrect
     methods: [ GET ]
 
 update_answer:
-    path: /admin/question/{questionId}/answer/{answerId}/edit
+    path: /{category}/admin/question/{questionId}/answer/{answerId}/edit
     controller: App\Controller\AdminController::updateAnswer
     methods: [ GET, POST ]
 
 add_answer:
-    path: /admin/question/{questionId}/answer/add
+    path: /{category}/admin/question/{questionId}/answer/add
     controller: App\Controller\AdminController::addAnswer
     methods: [ GET, POST ]
 
 delete_answer:
-    path: /admin/question/{questionId}/answer/{answerId}/delete
+    path: /{category}/admin/question/{questionId}/answer/{answerId}/delete
     controller: App\Controller\AdminController::deleteAnswer
     methods: [ GET ]
 # end of AdminController

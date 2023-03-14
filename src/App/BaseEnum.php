@@ -15,4 +15,9 @@ abstract class BaseEnum extends Enum
     {
         return \array_values(self::toArray());
     }
+
+    public static function fromKey($string): self
+    {
+        return self::$string();
+    }
 }

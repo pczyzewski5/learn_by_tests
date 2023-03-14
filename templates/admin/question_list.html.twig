@@ -2,18 +2,18 @@
 {% block title %}Questions{% endblock %}
 {% block body %}
     <div class="d-flex mt-3 justify-content-between flex-wrap">
-        <a href="{{ path('question_list') }}" class="text-decoration-none">
-            <div class="card green-hover question-category mb-2 {{ null == active_question_category ? 'selected-category' }}" style="max-width: 10rem;">
+        <a href="{{ path('question_list', {'category': category.getKey()}) }}" class="text-decoration-none">
+            <div class="card green-hover question-category mb-2 {{ null == active_sub_category ? 'selected-category' }}" style="max-width: 10rem;">
                 <div class="card-body text-secondary">
                     <h5 class="card-title text-center">All</h5>
                 </div>
             </div>
         </a>
-        {% for category in question_categories %}
-            <a href="{{ path('question_category_list', {'category': category}) }}" class="text-decoration-none">
-                <div class="card green-hover question-category mb-2 {{ category == active_question_category ? 'selected-category' }}" style="max-width: 10rem;">
+        {% for sub_category in sub_categories %}
+            <a href="{{ path('question_category_list', {'category': category.getValue(), 'sub_category': sub_category.getValue()}) }}" class="text-decoration-none">
+                <div class="card green-hover question-category mb-2 {{ sub_category.getValue() == active_sub_category ? 'selected-category' }}" style="max-width: 10rem;">
                     <div class="card-body text-secondary">
-                        <h5 class="card-title text-center">{{ category }}</h5>
+                        <h5 class="card-title text-center">{{ sub_category.getValue() }}</h5>
                     </div>
                 </div>
             </a>
@@ -26,8 +26,8 @@
                     {{ question.getQuestion()|quill(true)|slice(0, 85) }}
                 </div>
                 <div>
-                    <a class="btn btn-outline-primary" href="{{ path('question_details', {'questionId': question.getId()}) }}">details</a>
-                    <a class="btn btn-outline-danger" href="{{ path('delete_question', {'questionId': question.getId()}) }}">delete</a>
+                    <a class="btn btn-outline-primary" href="{{ path('question_details', {'category': category.getKey(), 'questionId': question.getId()}) }}">details</a>
+                    <a class="btn btn-outline-danger" href="{{ path('delete_question', {'category': category.getKey(), 'questionId': question.getId()}) }}">delete</a>
                 </div>
             </li>
         {% endfor %}

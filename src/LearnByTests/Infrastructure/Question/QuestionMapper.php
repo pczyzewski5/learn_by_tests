@@ -8,7 +8,7 @@ use DateTime;
 use LearnByTests\Domain\Question\Question as DomainQuestion;
 use LearnByTests\Domain\Question\QuestionDTO;
 use App\DateTimeNormalizer;
-use LearnByTests\Domain\QuestionCategory\QuestionCategoryEnum;
+use LearnByTests\Domain\Category\CategoryEnum;
 
 class QuestionMapper
 {
@@ -18,7 +18,7 @@ class QuestionMapper
         $dto->id = $entity->id;
         $dto->question = $entity->question;
         $dto->authorId = $entity->authorId;
-        $dto->category = QuestionCategoryEnum::from($entity->category);
+        $dto->category = CategoryEnum::from($entity->category);
         $dto->createdAt = DateTimeNormalizer::normalizeToImmutable(
             $entity->createdAt
         );
