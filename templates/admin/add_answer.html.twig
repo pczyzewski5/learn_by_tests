@@ -1,1 +1,12 @@
-{% extends 'admin/create_answer.html.twig' %}
+{% extends 'base.html.twig' %}
+{% block title %}Dodaj odpowiedź{% endblock %}
+{% block body %}
+    {{ include('admin/common/question_with_controls.html.twig') }}
+
+    {% for key, answer in answers %}
+        {{ include('admin/common/answer_list_item_with_controls.html.twig') }}
+    {% endfor %}
+    <div class="mt-1">
+        {{ form(answer_form) }}
+    </div>
+{% endblock %}
