@@ -10,23 +10,23 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class QuestionCategoryForm extends AbstractType
+class CategoryForm extends AbstractType
 {
-    public const QUESTION_CATEGORY_FIELD = 'question_category';
+    public const CATEGORY_FIELD = 'category';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $this->addSelectQuestionCategory($builder);
-
-        $builder->add('save', SubmitType::class,
+        $builder->add('zapisz', SubmitType::class,
             [
                 'disabled' => true,
                 'attr' => ['class' => 'w-100 btn-primary']
             ]
         );
+
+        $this->addSelectCategory($builder);
     }
 
-    protected function addSelectQuestionCategory(FormBuilderInterface $builder): void
+    protected function addSelectCategory(FormBuilderInterface $builder): void
     {
         $choices = \array_combine(
             CategoryEnum::toArray(),
@@ -34,7 +34,7 @@ class QuestionCategoryForm extends AbstractType
         );
 
         $builder->add(
-            self::QUESTION_CATEGORY_FIELD,
+            self::CATEGORY_FIELD,
             ChoiceType::class,
             [
                 'choices' => $choices,
@@ -44,7 +44,8 @@ class QuestionCategoryForm extends AbstractType
                 ],
                 'label_attr' => [
                     'hidden' => true
-                ]
+                ],
+                'label' => false,
             ]
         );
     }

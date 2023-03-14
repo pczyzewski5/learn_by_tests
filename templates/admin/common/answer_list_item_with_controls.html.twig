@@ -1,0 +1,6 @@
+{{ include('admin/common/answer_list_item.html.twig') }}
+<div class="d-flex justify-content-end edit-buttons">
+    <a class="btn btn-outline-primary btn-sm" href="{{ path('set_answer_as_correct', {'category': category.getKey(), 'questionId': question.getId(), 'answerId': answer.getId()}) }}">ustaw jako prawidłową</a>
+    <a class="btn btn-outline-warning btn-sm" href="{{ path('update_answer', {'category': category.getKey(), 'questionId': question.getId(), 'answerId': answer.getId()}) }}">edytuj</a>
+    <a class="btn btn-outline-danger btn-sm" href="{{ path('delete_answer', {'category': category.getKey(), 'questionId': question.getId(), 'answerId': answer.getId()}) }}">usuń</a>
+</div>

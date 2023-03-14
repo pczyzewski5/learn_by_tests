@@ -1,0 +1,6 @@
+<small>Kategoria pytania: {{ question.getSubCategory().getValue() }}</small>
+<div class="card question">
+    <div class="card-body">
+        <p class="card-text">{{ question.getQuestion()|quill }}</p>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+{{ include('admin/common/question.html.twig') }}
+<div class="d-flex justify-content-end edit-buttons">
+    <a class="btn btn-outline-primary btn-sm" href="{{ path('update_question_category', {'category': category.getKey(), 'questionId': question.getId()}) }}">zmień kategorię</a>
+    <a class="btn btn-outline-warning btn-sm" href="{{ path('update_question', {'category': category.getKey(), 'questionId': question.getId()}) }}">edytuj</a>
+    <a class="btn btn-outline-danger btn-sm" href="{{ path('delete_question', {'category': category.getKey(), 'questionId': question.getId()}) }}">usuń</a>
+</div>
