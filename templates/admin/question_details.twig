@@ -1,45 +1,13 @@
 {% extends 'base.html.twig' %}
-{% block title %}Question details{% endblock %}
+{% block title %}
+    Szczegóły
+{% endblock %}
 {% block body %}
-    <div class="mt-3">
-        <div class="card question-category selected-category mb-2" style="max-width: 10rem;">
-            <div class="card-body text-secondary">
-                <h5 class="card-title text-center">{{ question.getCategory().getValue() }}</h5>
-            </div>
-        </div>
-    </div>
-    <div class="card question">
-        <div class="card-body">
-            <p class="card-text">{{ question.getQuestion()|quill }}</p>
-        </div>
-    </div>
-    <div class="d-flex justify-content-end edit-buttons">
-        <a class="btn btn-outline-primary btn-sm" href="{{ path('select_question_category', {'questionId': question.getId()}) }}">change category</a>
-        <a class="btn btn-outline-warning btn-sm" href="{{ path('update_question', {'questionId': question.getId()}) }}">edit</a>
-        <a class="btn btn-outline-danger btn-sm" href="{{ path('delete_question', {'questionId': question.getId()}) }}">delete</a>
-    </div>
+    {{ include('admin/common/question_with_controls.html.twig') }}
 
-    {% set letters = ['A', 'B', 'C', 'D'] %}
     {% for key, answer in answers %}
-        <div class="card mt-1 {{ answer.isCorrect() ? 'selected-answer' }} answer">
-            <div class="card-body d-flex p-0">
-                <div class="d-flex align-items-center justify-content-center"
-                     style="width: 5%; border-right: 1px solid rgba(0, 0, 0, 0.1) !important;"
-                >
-                    <h5 class="m-0">{{ letters[key] }}</h5>
-                </div>
-                <div class="p-3" style="width: 95%;">
-                    <p class="card-text">{{ answer.getAnswer()|quill }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-end edit-buttons">
-            <a class="btn btn-outline-primary btn-sm" href="{{ path('set_answer_as_correct', {'questionId': question.getId(), 'answerId': answer.getId()}) }}">set as correct</a>
-            <a class="btn btn-outline-warning btn-sm" href="{{ path('update_answer', {'questionId': question.getId(), 'answerId': answer.getId()}) }}">edit</a>
-            <a class="btn btn-outline-danger btn-sm" href="{{ path('delete_answer', {'questionId': question.getId(), 'answerId': answer.getId()}) }}">delete</a>
-        </div>
+        {{ include('admin/common/answer_list_item_with_controls.html.twig') }}
     {% endfor %}
-    {% if answers|length < 4 %}
-        <a class="btn btn-outline-secondary btn-sm" href="{{ path('add_answer', {'questionId': question.getId()}) }}">Add answer</a>
-    {% endif %}
+
+    {{ include('admin/common/add_answer_button.html.twig') }}
 {% endblock %}
