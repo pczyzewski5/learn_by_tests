@@ -20,6 +20,6 @@ class AnswerForm extends AbstractType
             QuillType::class,
         );
 
-        $builder->add('save', SubmitType::class);
+        $builder->add('zapisz', SubmitType::class);
     }
 }

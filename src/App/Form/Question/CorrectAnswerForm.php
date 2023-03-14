@@ -16,9 +16,14 @@ class CorrectAnswerForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $this->addIsCorrectAnswer($builder, $options['data']);
+        $builder->add('zapisz', SubmitType::class, [
+            'disabled' => true,
+            'attr' => [
+                'class' => 'mt-2 btn-primary btn'
+            ]
+        ]);
 
-        $builder->add('save', SubmitType::class, ['disabled' => true]);
+        $this->addIsCorrectAnswer($builder, $options['data']);
     }
 
     protected function addIsCorrectAnswer(FormBuilderInterface $builder, array $answers): void
@@ -37,11 +42,12 @@ class CorrectAnswerForm extends AbstractType
                 'choices' => $choices,
                 'required' => true,
                 'attr' => [
-                    'hidden' => true
+                    'hidden' => true,
                 ],
                 'label_attr' => [
                     'hidden' => true
-                ]
+                ],
+                'label' => false
             ]
         );
     }

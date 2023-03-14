@@ -21,7 +21,7 @@ class QuestionForm extends AbstractType
         );
 
         $builder->add(
-            'save',
+            'zapisz',
             SubmitType::class
         );
     }
