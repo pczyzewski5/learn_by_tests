@@ -8,6 +8,7 @@
         <field name="question" type="string" column="question"/>
         <field name="authorId" type="string" column="author_id"/>
         <field name="category" type="string" column="category"/>
+        <field name="subcategory" type="string" column="subcategory"/>
         <field name="createdAt" type="datetime" column="created_at"/>
     </entity>
 

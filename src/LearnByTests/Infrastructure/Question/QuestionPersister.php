@@ -40,7 +40,8 @@ class QuestionPersister implements DomainPersister
             $sql = 'UPDATE questions
                   SET question = :question,
                       author_id = :authorId,
-                      category = :category
+                      category = :category,
+                      subcategory = :subcategory
                   WHERE id = :id;';
 
             $this->entityManager->getConnection()->executeQuery(
@@ -50,12 +51,14 @@ class QuestionPersister implements DomainPersister
                     'question' => $question->getQuestion(),
                     'authorId' => $question->getAuthorId(),
                     'category' => $question->getCategory(),
+                    'subcategory' => $question->getSubcategory(),
                 ],
                 [
                     'id' => Types::STRING,
                     'question' => Types::STRING,
                     'authorId' => Types::STRING,
                     'category' => Types::STRING,
+                    'subcategory' => Types::STRING,
                 ]
             );
         } catch (\Throwable $exception) {

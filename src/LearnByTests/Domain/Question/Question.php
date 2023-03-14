@@ -17,6 +17,7 @@ class Question
     private string $question;
     private string $authorId;
     private CategoryEnum $category;
+    private CategoryEnum $subcategory;
     private \DateTimeImmutable $createdAt;
 
     public function __construct(QuestionDTO $dto)
@@ -48,6 +49,10 @@ class Question
             throw AnswerValidationException::missingProperty('category');
         }
 
+        if (!isset($this->subcategory)) {
+            throw AnswerValidationException::missingProperty('subcategory');
+        }
+
         if (!isset($this->createdAt)) {
             throw AnswerValidationException::missingProperty('createdAt');
         }
@@ -71,6 +76,11 @@ class Question
     public function getCategory(): CategoryEnum
     {
         return $this->category;
+    }
+
+    public function getSubcategory(): CategoryEnum
+    {
+        return $this->subcategory;
     }
 
     public function getCreatedAt(): \DateTimeImmutable

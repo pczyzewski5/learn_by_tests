@@ -10,5 +10,6 @@ class Question
     public ?string $question;
     public ?string $authorId;
     public ?string $category;
+    public ?string $subcategory;
     public ?\DateTime $createdAt;
 }
