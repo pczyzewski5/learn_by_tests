@@ -141,7 +141,7 @@ class AdminController extends BaseController
         );
         $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
         if ($hasAllAnswers) {
-            return $this->redirectToRoute('select_correct_answer', ['category' => $category, 'questionId' => $questionId]);
+            return $this->redirectToRoute('select_correct_answer', ['category' => $category->getKey(), 'questionId' => $questionId]);
         }
         $form = $this->createForm(AnswerForm::class);
         $form->handleRequest($request);
@@ -155,14 +155,14 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('create_answer', ['category' => $category, 'questionId' => $questionId]);
+            return $this->redirectToRoute('create_answer', ['category' => $category->getKey(), 'questionId' => $questionId]);
         }
 
         return $this->renderForm('admin/create_answer.html.twig', [
             'answer_form' => $form,
             'question' => $questionWithAnswersDTO->getQuestion(),
             'answers' => $questionWithAnswersDTO->getAnswers(),
-            'category' => $category->getKey()
+            'category' => $category
         ]);
     }
 
@@ -191,7 +191,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('select_question_category', ['category' => $category, 'questionId' => $questionId]);
+            return $this->redirectToRoute('select_question_category', ['category' => $category->getKey(), 'questionId' => $questionId]);
         }
 
         return $this->renderForm('admin/select_correct_answer.html.twig', [
@@ -234,7 +234,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('question_details', ['category' => $category, 'questionId' => $question->getId()]);
+            return $this->redirectToRoute('question_details', ['category' => $category->getKey(), 'questionId' => $question->getId()]);
         }
 
         return $this->renderForm('admin/select_question_category.twig', [
