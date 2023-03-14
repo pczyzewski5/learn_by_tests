@@ -162,7 +162,7 @@ class AdminController extends BaseController
             'answer_form' => $form,
             'question' => $questionWithAnswersDTO->getQuestion(),
             'answers' => $questionWithAnswersDTO->getAnswers(),
-            'category' => $category
+            'category' => $category->getKey()
         ]);
     }
 
