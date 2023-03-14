@@ -1,25 +1,10 @@
 {% extends 'base.html.twig' %}
-{% block title %}Select correct answer{% endblock %}
+{% block title %}Wybierz prawidłową odpowiedź{% endblock %}
 {% block body %}
-    <div class="card">
-        <div class="card-body">
-            <p class="card-text">{{ question.getQuestion()|quill }}</p>
-        </div>
-    </div>
-    {% set letters = ['A', 'B', 'C', 'D'] %}
+    {{ include('admin/common/question.html.twig') }}
+
     {% for key, answer in answers %}
-        <div class="card mt-1 green-hover answer" answer-id="{{ answer.getId() }}">
-            <div class="card-body d-flex p-0">
-                <div class="d-flex align-items-center justify-content-center"
-                     style="width: 5%; border-right: 1px solid rgba(0, 0, 0, 0.1) !important;"
-                >
-                    <h5 class="m-0">{{ letters[key] }}</h5>
-                </div>
-                <div class="p-3" style="width: 95%;">
-                    <p class="card-text">{{ answer.getAnswer()|quill }}</p>
-                </div>
-            </div>
-        </div>
+        {{ include('admin/common/answer_list_item.html.twig', {'showAnswerId': true}) }}
     {% endfor %}
     {{ form(correct_answer) }}
 {% endblock %}
