@@ -22,4 +22,9 @@ interface QuestionRepository
      * @return Question[]
      */
     public function findAllByCategory(string $category): array;
+
+    /**
+     * @return Question[]
+     */
+    public function findAllBySubcategory(string $subcategory): array;
 }

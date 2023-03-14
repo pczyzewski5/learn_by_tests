@@ -50,4 +50,16 @@ class QuestionRepository implements DomainRepository
             ])
         );
     }
+
+    /**
+     * @return DomainQuestion[]
+     */
+    public function findAllBySubcategory(string $subcategory): array
+    {
+        return QuestionMapper::mapArrayToDomain(
+            $this->entityManager->getRepository(Question::class)->findBy([
+                'subcategory' => $subcategory
+            ])
+        );
+    }
 }
