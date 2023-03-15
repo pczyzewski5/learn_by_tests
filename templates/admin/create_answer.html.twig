@@ -9,4 +9,7 @@
     <div class="mt-1">
         {{ form(answer_form) }}
     </div>
+    {% if answers|length < 4 %}
+        <a class="btn btn-outline-secondary btn-sm w-100" href="{{ path('select_correct_answer', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">Przejdź do wyboru właściwej odpowiedzi</a>
+    {% endif %}
 {% endblock %}
