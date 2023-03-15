@@ -31,6 +31,7 @@ if ($container.length != 0 && $dataContainer.length != 0) {
 
             if ($dataContainer.val() == '{"ops":[{"insert":"\\n"}]}') {
                 $dataContainer.val(null)
+                $dataContainer.removeAttr('value')
             }
         }
     });

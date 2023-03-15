@@ -32,6 +32,7 @@ if ($commentContainer.length != 0 && $commentDataContainer.length != 0) {
 
             if ($commentDataContainer.val() == '{"ops":[{"insert":"\\n"}]}') {
                 $commentDataContainer.val(null)
+                $commentDataContainer.removeAttr('value')
             }
         }
     });

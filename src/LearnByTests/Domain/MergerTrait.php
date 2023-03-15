@@ -13,7 +13,7 @@ trait MergerTrait
         );
 
         foreach ($properties as $property) {
-            if (null !== $dto->$property) {
+            if (isset($dto->$property)) {
                 $this->$property = $dto->$property;
             }
         }
