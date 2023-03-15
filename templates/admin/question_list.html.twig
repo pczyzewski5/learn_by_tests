@@ -17,11 +17,10 @@
     <ul class="list-group">
         {% for question in questions %}
             <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question.getId() }}">
-                <div class="flex-grow-1 d-flex align-items-center">
+                <div class="flex-grow-1 d-flex align-items-center question-content">
                     {{ question.getQuestion()|quill(true)|slice(0, 85) }}
                 </div>
                 <div>
-                    <a class="btn btn-outline-primary" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">szczegóły</a>
                     <a class="btn btn-outline-danger" href="{{ path('delete_question', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">usuń</a>
                 </div>
             </li>
