@@ -50,7 +50,7 @@ class AdminController extends BaseController
     public function questionList(Request $request): Response
     {
         $subcategory = $request->get('subcategory');
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $subcategories = $this->queryBus->handle(
@@ -59,7 +59,7 @@ class AdminController extends BaseController
         $questions = $this->queryBus->handle(
             null === $subcategory
                 ? new FindQuestionsByCategory($category)
-                : new FindQuestionsBySubcategory(CategoryEnum::fromKey($subcategory))
+                : new FindQuestionsBySubcategory(CategoryEnum::fromLowerKey($subcategory))
         );
 
         return $this->renderForm('admin/question_list.html.twig', [
@@ -72,7 +72,7 @@ class AdminController extends BaseController
 
     public function questionDetails(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         /** @var QuestionWithAnswersDTO $dto */
@@ -89,19 +89,19 @@ class AdminController extends BaseController
 
     public function deleteQuestion(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $this->commandBus->handle(
             new DeleteQuestion($request->get('questionId'))
         );
 
-        return $this->redirectToRoute('question_list', ['category' => $category->getKey()]);
+        return $this->redirectToRoute('question_list', ['category' => $category->getLowerKey()]);
     }
 
     public function createQuestion(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $form = $this->createForm(QuestionForm::class);
@@ -119,7 +119,7 @@ class AdminController extends BaseController
             return $this->redirectToRoute(
                 'create_answer', [
                 'questionId' => $questionId,
-                'category' => $category->getKey()
+                'category' => $category->getLowerKey()
             ]);
         }
 
@@ -131,7 +131,7 @@ class AdminController extends BaseController
 
     public function createAnswer(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $questionId = $request->get('questionId');
@@ -141,7 +141,7 @@ class AdminController extends BaseController
         );
         $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
         if ($hasAllAnswers) {
-            return $this->redirectToRoute('select_correct_answer', ['category' => $category->getKey(), 'questionId' => $questionId]);
+            return $this->redirectToRoute('select_correct_answer', ['category' => $category->getLowerKey(), 'questionId' => $questionId]);
         }
         $form = $this->createForm(AnswerForm::class);
         $form->handleRequest($request);
@@ -155,7 +155,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('create_answer', ['category' => $category->getKey(), 'questionId' => $questionId]);
+            return $this->redirectToRoute('create_answer', ['category' => $category->getLowerKey(), 'questionId' => $questionId]);
         }
 
         return $this->renderForm('admin/create_answer.html.twig', [
@@ -168,7 +168,7 @@ class AdminController extends BaseController
 
     public function selectCorrectAnswer(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $questionId = $request->get('questionId');
@@ -191,7 +191,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('select_question_category', ['category' => $category->getKey(), 'questionId' => $questionId]);
+            return $this->redirectToRoute('select_question_category', ['category' => $category->getLowerKey(), 'questionId' => $questionId]);
         }
 
         return $this->renderForm('admin/select_correct_answer.html.twig', [
@@ -204,7 +204,7 @@ class AdminController extends BaseController
 
     public function selectQuestionCategory(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $subcategories = $this->queryBus->handle(
@@ -234,7 +234,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('question_details', ['category' => $category->getKey(), 'questionId' => $question->getId()]);
+            return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $question->getId()]);
         }
 
         return $this->renderForm('admin/select_question_category.twig', [
@@ -248,7 +248,7 @@ class AdminController extends BaseController
 
     public function updateQuestionCategory(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $subcategories = $this->queryBus->handle(
@@ -278,7 +278,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('question_details', ['category' => $category, 'questionId' => $question->getId()]);
+            return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $question->getId()]);
         }
 
         return $this->renderForm('admin/update_question_category.twig', [
@@ -292,7 +292,7 @@ class AdminController extends BaseController
 
     public function updateQuestion(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         /** @var QuestionWithAnswersDTO $dto */
@@ -317,7 +317,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('question_details', ['category' => $category->getKey(), 'questionId' => $question->getId()]);
+            return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $question->getId()]);
         }
 
         return $this->renderForm('admin/update_question.html.twig', [
@@ -330,7 +330,7 @@ class AdminController extends BaseController
 
     public function setAnswerAsCorrect(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $this->commandBus->handle(
@@ -340,12 +340,12 @@ class AdminController extends BaseController
             )
         );
 
-        return $this->redirectToRoute('question_details', ['category' => $category->getKey(), 'questionId' => $request->get('questionId')]);
+        return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $request->get('questionId')]);
     }
 
     public function updateAnswer(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         /** @var QuestionWithAnswersDTO $dto */
@@ -372,7 +372,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('question_details', ['category' => $category->getKey(), 'questionId' => $question->getId()]);
+            return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $question->getId()]);
         }
 
         return $this->renderForm('admin/update_answer.twig', [
@@ -386,7 +386,7 @@ class AdminController extends BaseController
 
     public function addAnswer(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $questionId = $request->get('questionId');
@@ -396,7 +396,7 @@ class AdminController extends BaseController
         );
         $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
         if ($hasAllAnswers) {
-            return $this->redirectToRoute('question_details', ['questionId' => $questionId]);
+            return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $questionId]);
         }
         $form = $this->createForm(AnswerForm::class);
         $form->handleRequest($request);
@@ -410,7 +410,7 @@ class AdminController extends BaseController
                 )
             );
 
-            return $this->redirectToRoute('question_details', ['category' => $category, 'questionId' => $questionId]);
+            return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $questionId]);
         }
 
         return $this->renderForm('admin/add_answer.html.twig', [
@@ -423,14 +423,14 @@ class AdminController extends BaseController
 
     public function deleteAnswer(Request $request): Response
     {
-        $category = CategoryEnum::fromKey(
+        $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
         $this->commandBus->handle(
             new DeleteAnswer($request->get('answerId'))
         );
 
-        return $this->redirectToRoute('question_details', ['category' => $category->getKey(), 'questionId' => $request->get('questionId')]);
+        return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $request->get('questionId')]);
     }
 }
 

@@ -3,7 +3,7 @@
 {% block body %}
     {% for category in categories %}
         <div>
-            <a class="nav-link" href="{{ path('question_list', {'category': category.getKey()}) }}">{{ category.getValue() }}</a>
+            <a class="nav-link" href="{{ path('question_list', {'category': category.getLowerKey()}) }}">{{ category.getValue()|capitalize }}</a>
         </div>
     {% endfor %}
 {% endblock %}

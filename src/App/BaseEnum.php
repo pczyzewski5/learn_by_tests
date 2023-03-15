@@ -16,8 +16,15 @@ abstract class BaseEnum extends Enum
         return \array_values(self::toArray());
     }
 
-    public static function fromKey($string): self
+    public function getLowerKey(): string
     {
+        return \strtolower($this->getKey());
+    }
+
+    public static function fromLowerKey($string): self
+    {
+        $string = \strtoupper($string);
+
         return self::$string();
     }
 }
