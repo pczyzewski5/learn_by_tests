@@ -18,5 +18,6 @@ class CategoryEnum extends BaseEnum
     const SIGNALLING = 'sygnalizacja';
     const METEOROLOGY = 'meteorologia';
     const SAR = 'SAR';
+    const YACHT_TYPES = 'budowa jachtów';
 }
 
