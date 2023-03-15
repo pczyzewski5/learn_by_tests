@@ -29,6 +29,10 @@ if ($commentContainer.length != 0 && $commentDataContainer.length != 0) {
         }
         if ($source == 'user') {
             $commentDataContainer.val(JSON.stringify($quillComment.getContents()));
+
+            if ($commentDataContainer.val() == '{"ops":[{"insert":"\\n"}]}') {
+                $commentDataContainer.val(null)
+            }
         }
     });
 

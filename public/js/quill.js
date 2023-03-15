@@ -28,6 +28,10 @@ if ($container.length != 0 && $dataContainer.length != 0) {
         }
         if ($source == 'user') {
             $dataContainer.val(JSON.stringify($quill.getContents()));
+
+            if ($dataContainer.val() == '{"ops":[{"insert":"\\n"}]}') {
+                $dataContainer.val(null)
+            }
         }
     });
 
