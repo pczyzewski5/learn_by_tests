@@ -9,6 +9,7 @@ class Answer
     public ?string $id;
     public ?string $questionId;
     public ?string $answer;
+    public ?string $comment;
     public ?string $authorId;
     public ?bool $isCorrect;
     public ?\DateTime $createdAt;

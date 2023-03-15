@@ -12,12 +12,14 @@ class AnswerFactory
         string $questionId,
         string $answer,
         string $authorId,
-        bool $isCorrect
+        bool $isCorrect,
+        ?string $comment = null
     ): Answer {
         $dto = new AnswerDTO();
         $dto->id = Uuid::v1()->toRfc4122();
         $dto->questionId = $questionId;
         $dto->answer = $answer;
+        $dto->comment = $comment;
         $dto->authorId = $authorId;
         $dto->isCorrect = $isCorrect;
         $dto->createdAt = new \DateTimeImmutable();

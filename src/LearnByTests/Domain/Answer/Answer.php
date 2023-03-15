@@ -15,6 +15,7 @@ class Answer
     private string $id;
     private string $questionId;
     private string $answer;
+    private ?string $comment = null;
     private string $authorId;
     private bool $isCorrect;
     private \DateTimeImmutable $createdAt;
@@ -44,6 +45,10 @@ class Answer
             throw AnswerValidationException::missingProperty('answer');
         }
 
+        if (isset($this->answer) && '' === $this->answer) {
+            throw AnswerValidationException::missingProperty('comment');
+        }
+
         if (!isset($this->authorId) && UuidV1::isValid($this->authorId)) {
             throw AnswerValidationException::missingProperty('author_id');
         }
@@ -70,6 +75,11 @@ class Answer
     public function getAnswer(): string
     {
         return $this->answer;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
     }
 
     public function getAuthorId(): string

@@ -9,6 +9,7 @@ class AnswerDTO
     public ?string $id = null;
     public ?string $questionId = null;
     public ?string $answer = null;
+    public ?string $comment = null;
     public ?string $authorId = null;
     public ?bool $isCorrect = null;
     public ?\DateTimeImmutable $createdAt = null;
