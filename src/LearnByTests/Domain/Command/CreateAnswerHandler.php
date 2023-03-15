@@ -29,7 +29,8 @@ class CreateAnswerHandler
             $question->getId(),
             $command->getAnswer(),
             $command->getAuthorId(),
-            false
+            false,
+            $command->getComment()
         );
 
         $this->answerPersister->save($answer);

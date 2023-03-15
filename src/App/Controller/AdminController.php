@@ -153,7 +153,8 @@ class AdminController extends BaseController
                 new CreateAnswer(
                     $questionId,
                     $form->getData()[AnswerForm::ANSWER_FIELD],
-                    $this->getUser()->getId()
+                    $this->getUser()->getId(),
+                    $form->getData()[AnswerForm::COMMENT_FIELD],
                 )
             );
 
@@ -370,7 +371,8 @@ class AdminController extends BaseController
                 new UpdateAnswer(
                     $answer->getId(),
                     $form->getData()[AnswerForm::ANSWER_FIELD],
-                    $this->getUser()->getId()
+                    $this->getUser()->getId(),
+                    $form->getData()[AnswerForm::COMMENT_FIELD],
                 )
             );
 
