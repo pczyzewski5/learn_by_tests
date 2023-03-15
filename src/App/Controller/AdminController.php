@@ -20,7 +20,7 @@ use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
 use LearnByTests\Domain\Query\FindQuestionsBySubcategory;
 use LearnByTests\Domain\Query\GetCategories;
-use LearnByTests\Domain\Query\FindQuestionsByCategory;
+use LearnByTests\Domain\Query\FindQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
 use LearnByTests\Domain\Category\CategoryEnum;
 use LearnByTests\Domain\Query\GetSubCategories;
@@ -57,9 +57,12 @@ class AdminController extends BaseController
             new GetSubCategories($category)
         );
         $questions = $this->queryBus->handle(
-            null === $subcategory
-                ? new FindQuestionsByCategory($category)
-                : new FindQuestionsBySubcategory(CategoryEnum::fromLowerKey($subcategory))
+            new FindQuestions(
+                $category,
+                null === $subcategory
+                    ? null
+                    : CategoryEnum::fromLowerKey($subcategory)
+            )
         );
 
         return $this->renderForm('admin/question_list.html.twig', [

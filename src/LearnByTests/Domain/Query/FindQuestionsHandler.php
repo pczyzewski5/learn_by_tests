@@ -6,7 +6,7 @@ namespace LearnByTests\Domain\Query;
 
 use LearnByTests\Domain\Question\QuestionRepository;
 
-class FindQuestionsByCategoryHandler
+class FindQuestionsHandler
 {
     private QuestionRepository $questionRepository;
 
@@ -16,12 +16,15 @@ class FindQuestionsByCategoryHandler
         $this->questionRepository = $questionRepository;
     }
 
-    public function __invoke(FindQuestionsByCategory $query): array
+    public function __invoke(FindQuestions $query): array
     {
-        return null === $query->getCategory()
-            ? $this->questionRepository->findAll()
-            : $this->questionRepository->findAllByCategory(
+        return null === $query->getSubcategory()
+            ? $this->questionRepository->findAllByCategory(
                 $query->getCategory()->getValue()
+            )
+            : $this->questionRepository->findAllByCategoryAndSubcategory(
+                $query->getCategory()->getValue(),
+                $query->getSubcategory()->getValue()
             );
     }
 }

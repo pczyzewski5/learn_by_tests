@@ -6,13 +6,22 @@ namespace LearnByTests\Domain\Query;
 
 use LearnByTests\Domain\Category\CategoryEnum;
 
-class FindQuestionsBySubcategory
+class FindQuestions
 {
+    private CategoryEnum $category;
     private ?CategoryEnum $subcategory;
 
-    public function __construct(?CategoryEnum $subcategory = null)
-    {
+    public function __construct(
+        CategoryEnum $category,
+        ?CategoryEnum $subcategory = null
+    ) {
+        $this->category = $category;
         $this->subcategory = $subcategory;
+    }
+
+    public function getCategory(): CategoryEnum
+    {
+        return $this->category;
     }
 
     public function getSubcategory(): ?CategoryEnum

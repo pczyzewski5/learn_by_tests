@@ -7,19 +7,12 @@ services:
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetQuestionWithAnswers, bus: query }
 
-  LearnByTests\Domain\Query\FindQuestionsByCategoryHandler:
-    class: LearnByTests\Domain\Query\FindQuestionsByCategoryHandler
+  LearnByTests\Domain\Query\FindQuestionsHandler:
+    class: LearnByTests\Domain\Query\FindQuestionsHandler
     arguments:
       - '@LearnByTests\Domain\Question\QuestionRepository'
     tags:
-      - { name: tactician.handler, command: LearnByTests\Domain\Query\FindQuestionsByCategory, bus: query }
-
-  LearnByTests\Domain\Query\FindQuestionsBySubcategoryHandler:
-    class: LearnByTests\Domain\Query\FindQuestionsBySubcategoryHandler
-    arguments:
-      - '@LearnByTests\Domain\Question\QuestionRepository'
-    tags:
-      - { name: tactician.handler, command: LearnByTests\Domain\Query\FindQuestionsBySubcategory, bus: query }
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\FindQuestions, bus: query }
 
   LearnByTests\Domain\Query\GetAnswerCountForQuestionHandler:
     class: LearnByTests\Domain\Query\GetAnswerCountForQuestionHandler

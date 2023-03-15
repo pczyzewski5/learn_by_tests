@@ -26,5 +26,5 @@ interface QuestionRepository
     /**
      * @return Question[]
      */
-    public function findAllBySubcategory(string $subcategory): array;
+    public function findAllByCategoryAndSubcategory(string $category, string $subcategory): array;
 }
