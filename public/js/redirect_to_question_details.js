@@ -8,7 +8,7 @@ class RedirectToQuestionDetails {
 
         if (typeof $questionListItemContent !== 'undefined' && $questionListItemContent !== false) {
             $questionListItemContent.click(function () {
-                window.location.href = $(this).parent().find('.details-button').attr('href');
+                window.location.href = $(this).attr('href');
             });
         }
     }
