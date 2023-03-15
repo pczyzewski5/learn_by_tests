@@ -24,10 +24,14 @@ class UpdateAnswerHandler
 
     public function handle(UpdateAnswer $command): void
     {
+        $comment = empty($command->getComment())
+            ? null
+            : $command->getComment();
+
         $dto = new AnswerDTO();
         $dto->answer = $command->getAnswer();
         $dto->authorId = $command->getAuthorId();
-        $dto->comment = $command->getComment();
+        $dto->comment = $comment;
 
         $answer = $this->answerRepository->getOneById($command->getAnswerId());
         $answer->update($dto);
