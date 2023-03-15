@@ -19,5 +19,6 @@ class CategoryEnum extends BaseEnum
     const METEOROLOGY = 'meteorologia';
     const SAR = 'SAR';
     const YACHT_TYPES = 'budowa jachtów';
+    const LIGHT_SIGNALS_QUIZ = 'światła quiz';
 }
 
