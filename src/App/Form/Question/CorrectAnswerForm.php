@@ -19,7 +19,7 @@ class CorrectAnswerForm extends AbstractType
         $builder->add('zapisz', SubmitType::class, [
             'disabled' => true,
             'attr' => [
-                'class' => 'mt-2 btn-primary btn'
+                'class' => 'mt-2 btn-primary btn w-100'
             ]
         ]);
 

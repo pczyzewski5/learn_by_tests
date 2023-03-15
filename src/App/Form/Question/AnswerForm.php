@@ -20,6 +20,10 @@ class AnswerForm extends AbstractType
             QuillType::class,
         );
 
-        $builder->add('zapisz', SubmitType::class);
+        $builder->add('zapisz', SubmitType::class, [
+            'attr' => [
+                'class' => 'btn-primary btn w-100'
+            ]
+        ]);
     }
 }

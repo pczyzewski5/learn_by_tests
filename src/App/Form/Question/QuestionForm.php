@@ -22,7 +22,11 @@ class QuestionForm extends AbstractType
 
         $builder->add(
             'zapisz',
-            SubmitType::class
+            SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn-primary btn w-100'
+                ]
+            ]
         );
     }
 }
