@@ -3,7 +3,7 @@
 {% block body %}
     <div class="d-flex flex-wrap">
         {% set isSelected = (null == active_subcategory) %}
-        <a href="{{ path('question_list', {'category': category.getKey()}) }}" class="text-decoration-none">
+        <a href="{{ path('question_list', {'category': category.getLowerKey()}) }}" class="text-decoration-none">
             {{ include('admin/common/question_subcategory.html.twig', {'subcategory': 'wszystkie', 'isSelected': isSelected}) }}
         </a>
         {% for subcategory in subcategories %}
