@@ -362,7 +362,10 @@ class AdminController extends BaseController
 
         $form = $this->createForm(
             AnswerForm::class,
-            [AnswerForm::ANSWER_FIELD => $answer->getAnswer()]
+            [
+                AnswerForm::ANSWER_FIELD => $answer->getAnswer(),
+                AnswerForm::COMMENT_FIELD => $answer->getComment()
+            ]
         );
 
         $form->handleRequest($request);
