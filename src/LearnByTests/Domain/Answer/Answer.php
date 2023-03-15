@@ -10,8 +10,6 @@ use Symfony\Component\Uid\UuidV1;
 
 class Answer
 {
-    use MergerTrait;
-
     private string $id;
     private string $questionId;
     private string $answer;
@@ -95,5 +93,34 @@ class Answer
     public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    private function merge(AnswerDTO $dto): void
+    {
+        if (null !== $dto->id) {
+            $this->id = $dto->id;
+        }
+
+        if (null !== $dto->questionId) {
+            $this->questionId = $dto->questionId;
+        }
+
+        if (null !== $dto->answer) {
+            $this->answer = $dto->answer;
+        }
+
+        $this->comment = $dto->comment;
+
+        if (null !== $dto->authorId) {
+            $this->authorId = $dto->authorId;
+        }
+
+        if (null !== $dto->isCorrect) {
+            $this->isCorrect = $dto->isCorrect;
+        }
+
+        if (null !== $dto->createdAt) {
+            $this->createdAt = $dto->createdAt;
+        }
     }
 }
