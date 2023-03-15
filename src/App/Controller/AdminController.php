@@ -15,6 +15,7 @@ use LearnByTests\Domain\Command\CreateAnswer;
 use LearnByTests\Domain\Command\CreateQuestion;
 use LearnByTests\Domain\Command\DeleteAnswer;
 use LearnByTests\Domain\Command\DeleteQuestion;
+use LearnByTests\Domain\Command\DuplicateQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
 use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
@@ -438,6 +439,21 @@ class AdminController extends BaseController
         );
 
         return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $request->get('questionId')]);
+    }
+
+    public function duplicateQuestion(Request $request): Response
+    {
+        $category = CategoryEnum::fromLowerKey(
+            $request->get('category')
+        );
+        $questionId = $this->commandBus->handle(
+            new DuplicateQuestion(
+                $request->get('questionId'),
+                $this->getUser()->getId()
+            )
+        );
+
+        return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $questionId]);
     }
 }
 

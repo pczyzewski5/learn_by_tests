@@ -78,6 +78,11 @@ delete_answer:
     path: /{category}/admin/question/{questionId}/answer/{answerId}/delete
     controller: App\Controller\AdminController::deleteAnswer
     methods: [ GET ]
+
+duplicate_question:
+    path: /{category}/admin/question/{questionId}/duplicate
+    controller: App\Controller\AdminController::duplicateQuestion
+    methods: [ GET ]
 # end of AdminController
 
 

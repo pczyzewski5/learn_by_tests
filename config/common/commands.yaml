@@ -60,3 +60,13 @@ services:
       - '@LearnByTests\Domain\User\UserPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\RegisterUser, bus: command }
+
+  LearnByTests\Domain\Command\DuplicateQuestionHandler:
+    class: LearnByTests\Domain\Command\DuplicateQuestionHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+      - '@LearnByTests\Domain\Answer\AnswerRepository'
+      - '@LearnByTests\Domain\Question\QuestionPersister'
+      - '@LearnByTests\Domain\Answer\AnswerPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\DuplicateQuestion, bus: command }
