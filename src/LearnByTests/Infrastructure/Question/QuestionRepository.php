@@ -45,9 +45,10 @@ class QuestionRepository implements DomainRepository
     public function findAllByCategory(string $category): array
     {
         return QuestionMapper::mapArrayToDomain(
-            $this->entityManager->getRepository(Question::class)->findBy([
-                'category' => $category
-            ])
+            $this->entityManager->getRepository(Question::class)->findBy(
+                ['category' => $category],
+                ['createdAt' => 'DESC']
+            )
         );
     }
 
@@ -57,10 +58,15 @@ class QuestionRepository implements DomainRepository
     public function findAllByCategoryAndSubcategory(string $category, string $subcategory): array
     {
         return QuestionMapper::mapArrayToDomain(
-            $this->entityManager->getRepository(Question::class)->findBy([
-                'category' => $category,
-                'subcategory' => $subcategory
-            ])
+            $this->entityManager->getRepository(Question::class)->findBy(
+                [
+                    'category' => $category,
+                    'subcategory' => $subcategory
+                ],
+                [
+                    'createdAt' => 'DESC'
+                ]
+            )
         );
     }
 }
