@@ -33,7 +33,12 @@ class CategoryRepository implements DomainRepository
                 CategoryEnum::UNASSIGNED(),
             ],
             CategoryEnum::ZJ => [
-
+                CategoryEnum::REGULATIONS(),
+                CategoryEnum::PILOT(),
+                CategoryEnum::SIGNALLING(),
+                CategoryEnum::METEOROLOGY(),
+                CategoryEnum::SAR(),
+                CategoryEnum::UNASSIGNED(),
             ]
         ];
 
