@@ -14,10 +14,10 @@
                     </li>
                     {% if category is defined %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('question_list', {'category': category.getKey()}) }}">Lista pytań</a>
+                        <a class="nav-link" href="{{ path('question_list', {'category': category.getLowerKey()}) }}">Lista pytań</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('create_question', {'category': category.getKey()}) }}">Dodaj pytanie</a>
+                        <a class="nav-link" href="{{ path('create_question', {'category': category.getLowerKey()}) }}">Dodaj pytanie</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">

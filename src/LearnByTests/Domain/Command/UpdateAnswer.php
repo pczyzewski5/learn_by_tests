@@ -15,7 +15,7 @@ class UpdateAnswer
         string $answerId,
         string $answer,
         string $authorId,
-        ?string $comment,
+        ?string $comment = null,
     ) {
         $this->answerId = $answerId;
         $this->answer = $answer;

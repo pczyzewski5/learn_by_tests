@@ -29,7 +29,8 @@ class AnswerForm extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'miejsce na komentarz do odpowiedzi'
-                ]
+                ],
+                'required' => false
             ]
         );
 

@@ -15,7 +15,7 @@ class CreateAnswer
         string $questionId,
         string $answer,
         string $authorId,
-        ?string $comment,
+        ?string $comment = null,
     ) {
         $this->questionId = $questionId;
         $this->answer = $answer;
