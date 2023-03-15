@@ -15,8 +15,11 @@
     </div>
 
     <ul class="list-group">
-        {% for question in questions %}
+        {% for key, question in questions %}
             <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question.getId() }}">
+                <div class="d-flex align-items-center" style="color: gray;">
+                    {{ key + 1 }}&nbsp;&nbsp;
+                </div>
                 <div class="flex-grow-1 d-flex align-items-center question-content" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">
                     {{ question.getQuestion()|quill(true)|slice(0, 85) }}
                 </div>
