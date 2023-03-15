@@ -8,7 +8,7 @@
         </a>
         {% for subcategory in subcategories %}
             {% set isSelected = (subcategory.getKey() == active_subcategory) %}
-            <a href="{{ path('question_category_list', {'category': category.getKey(), 'subcategory': subcategory.getKey()}) }}" class="text-decoration-none">
+            <a href="{{ path('question_category_list', {'category': category.getLowerKey(), 'subcategory': subcategory.getLowerKey()}) }}" class="text-decoration-none">
                 {{ include('admin/common/question_subcategory.html.twig', {'isSelected': isSelected}) }}
             </a>
         {% endfor %}
@@ -21,8 +21,8 @@
                     {{ question.getQuestion()|quill(true)|slice(0, 85) }}
                 </div>
                 <div>
-                    <a class="btn btn-outline-primary" href="{{ path('question_details', {'category': category.getKey(), 'questionId': question.getId()}) }}">details</a>
-                    <a class="btn btn-outline-danger" href="{{ path('delete_question', {'category': category.getKey(), 'questionId': question.getId()}) }}">delete</a>
+                    <a class="btn btn-outline-primary" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">details</a>
+                    <a class="btn btn-outline-danger" href="{{ path('delete_question', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">delete</a>
                 </div>
             </li>
         {% endfor %}
