@@ -33,3 +33,6 @@ textarea {
 .ql-editor {
     height: 300px;
 }
+#quill-comment-editor-container .ql-editor {
+    height: 100px !important;
+}

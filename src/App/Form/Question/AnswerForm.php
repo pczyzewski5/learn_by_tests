@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Form\Question;
 
+use App\FormType\QuillCommentType;
 use App\FormType\QuillType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class AnswerForm extends AbstractType
@@ -24,14 +24,7 @@ class AnswerForm extends AbstractType
 
         $builder->add(
             self::COMMENT_FIELD,
-            TextareaType::class,
-            [
-                'label' => false,
-                'attr' => [
-                    'placeholder' => 'miejsce na komentarz do odpowiedzi'
-                ],
-                'required' => false
-            ]
+            QuillCommentType::class,
         );
 
         $builder->add('zapisz', SubmitType::class, [

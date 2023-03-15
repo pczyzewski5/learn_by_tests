@@ -11,7 +11,7 @@
         <div class="p-3" style="width: 95%;">
             <p class="card-text">{{ answer.getAnswer()|quill }}</p>
             {% if answer.getComment() != null %}
-                <small class="card-text fst-italic">{{ answer.getComment() }}</small>
+                <small class="card-text fst-italic">{{ answer.getComment()|quill }}</small>
             {% endif %}
         </div>
     </div>

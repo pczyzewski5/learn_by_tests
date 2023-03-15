@@ -1,0 +1,15 @@
+{% block quill_comment_type_label %}{% endblock %}
+{% block quill_comment_type_errors %}{% endblock %}
+{% block quill_comment_type_widget %}
+    <div id="quill-comment-editor-container"></div>
+    <input id="quill-comment-data-container"
+           type="text"
+           name="{{ parent_name }}[{{ name }}]"
+            {% if data[name] is defined %}
+                value="{{ data[name] }}"
+            {% endif %}
+           class="form-control"
+           hidden
+           readonly
+    >
+{% endblock %}

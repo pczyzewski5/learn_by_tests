@@ -3,3 +3,4 @@ twig:
     form_themes:
       - 'bootstrap_5_layout.html.twig'
       - 'form/quill_type.html.twig'
+      - 'form/quill_comment_type.html.twig'
