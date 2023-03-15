@@ -18,7 +18,6 @@ use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
 use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
-use LearnByTests\Domain\Query\FindQuestionsBySubcategory;
 use LearnByTests\Domain\Query\GetCategories;
 use LearnByTests\Domain\Query\FindQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;

@@ -7,7 +7,7 @@
             {{ include('admin/common/question_subcategory.html.twig', {'subcategory': 'wszystkie', 'isSelected': isSelected}) }}
         </a>
         {% for subcategory in subcategories %}
-            {% set isSelected = (subcategory.getKey() == active_subcategory) %}
+            {% set isSelected = (subcategory.getLowerKey() == active_subcategory) %}
             <a href="{{ path('question_category_list', {'category': category.getLowerKey(), 'subcategory': subcategory.getLowerKey()}) }}" class="text-decoration-none">
                 {{ include('admin/common/question_subcategory.html.twig', {'isSelected': isSelected}) }}
             </a>
