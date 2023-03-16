@@ -21,6 +21,6 @@ class CategoryEnum extends BaseEnum
     const CHIEF_WORKS = 'prace bosmańskie';
     const YACHT_MANEUVERS = 'manewrowanie jachtem';
     const LIGHTS = 'światła';
-    const DAY_NIGHT_SHIP_MARKINGS = 'dzienne oraz nocne oznaczenia statków';
+    const SHIP_MARKINGS = 'oznakowanie statków';
 }
 
