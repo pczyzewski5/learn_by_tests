@@ -15,7 +15,7 @@ class CategoryEnum extends BaseEnum
     const NAVIGATION = 'nawigacja';
     const REGULATIONS = 'przepisy';
     const PILOT = 'locja';
-    const SIGNALLING = 'sygnalizacja';
+    const RADIO = 'radio';
     const METEOROLOGY = 'meteorologia';
     const SAR = 'SAR';
     const YACHT_TYPES = 'budowa jachtów';
