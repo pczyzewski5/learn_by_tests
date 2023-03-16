@@ -20,7 +20,6 @@ class CategoryEnum extends BaseEnum
     const LIFESAVING = 'ratownictwo';
     const CHIEF_WORKS = 'prace bosmańskie';
     const YACHT_MANEUVERS = 'manewrowanie jachtem';
-    const LIGHTS = 'światła';
     const SHIP_MARKINGS = 'oznakowanie statków';
 }
 

@@ -35,7 +35,6 @@ class CategoryRepository implements DomainRepository
                 CategoryEnum::LIFESAVING(),
                 CategoryEnum::CHIEF_WORKS(),
                 CategoryEnum::YACHT_MANEUVERS(),
-                CategoryEnum::LIGHTS(),
                 CategoryEnum::SHIP_MARKINGS(),
             ]
         ];
