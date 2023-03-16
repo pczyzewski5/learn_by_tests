@@ -24,24 +24,19 @@ class CategoryRepository implements DomainRepository
     {
         $data = [
             CategoryEnum::JSM => [
-                CategoryEnum::NAVIGATION(),
-                CategoryEnum::REGULATIONS(),
-                CategoryEnum::PILOT(),
-                CategoryEnum::RADIO(),
-                CategoryEnum::METEOROLOGY(),
-                CategoryEnum::SAR(),
-                CategoryEnum::UNASSIGNED(),
+
             ],
             CategoryEnum::ZJ => [
-                CategoryEnum::NAVIGATION(),
                 CategoryEnum::REGULATIONS(),
+                CategoryEnum::YACHT_TYPES(),
+                CategoryEnum::SAILING_THEORY(),
                 CategoryEnum::PILOT(),
                 CategoryEnum::METEOROLOGY(),
-                CategoryEnum::SAR(),
-                CategoryEnum::YACHT_TYPES(),
+                CategoryEnum::LIFESAVING(),
+                CategoryEnum::CHIEF_WORKS(),
+                CategoryEnum::YACHT_MANEUVERS(),
                 CategoryEnum::LIGHTS(),
-                CategoryEnum::PRIORITY(),
-                CategoryEnum::UNASSIGNED(),
+                CategoryEnum::DAY_NIGHT_SHIP_MARKINGS(),
             ]
         ];
 

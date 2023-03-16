@@ -12,14 +12,15 @@ class CategoryEnum extends BaseEnum
     const UNASSIGNED = 'bez kategorii';
     const ZJ = 'żeglarz jachtowy';
     const JSM = 'jachtowy sternik morski';
-    const NAVIGATION = 'nawigacja';
     const REGULATIONS = 'przepisy';
-    const PILOT = 'locja';
-    const RADIO = 'radio';
-    const METEOROLOGY = 'meteorologia';
-    const SAR = 'SAR';
     const YACHT_TYPES = 'budowa jachtów';
+    const SAILING_THEORY = 'teoria żaglowania';
+    const PILOT = 'locja';
+    const METEOROLOGY = 'meteorologia';
+    const LIFESAVING = 'ratownictwo';
+    const CHIEF_WORKS = 'prace bosmańskie';
+    const YACHT_MANEUVERS = 'manewrowanie jachtem';
     const LIGHTS = 'światła';
-    const PRIORITY = 'pierwszeństwo';
+    const DAY_NIGHT_SHIP_MARKINGS = 'dzienne oraz nocne oznaczenia statków';
 }
 
