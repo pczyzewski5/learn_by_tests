@@ -40,7 +40,8 @@ class CategoryRepository implements DomainRepository
                 CategoryEnum::METEOROLOGY(),
                 CategoryEnum::SAR(),
                 CategoryEnum::YACHT_TYPES(),
-                CategoryEnum::LIGHT_SIGNALS_QUIZ(),
+                CategoryEnum::LIGHTS(),
+                CategoryEnum::PRIORITY(),
                 CategoryEnum::UNASSIGNED(),
             ]
         ];
