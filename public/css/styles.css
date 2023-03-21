@@ -31,8 +31,8 @@ textarea {
     color: rgb(33, 37, 41);
 }
 .ql-editor {
-    height: 300px;
+    height: 200px;
 }
-#quill-comment-editor-container .ql-editor {
+#quill-comment-editor-container .ql-editor, #answer_form .ql-editor  {
     height: 100px !important;
 }
