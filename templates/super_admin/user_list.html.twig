@@ -11,12 +11,14 @@
                     {{ user.getEmail() }}
                 </div>
                 <div>
-                    {% if user.isActive() == false %}
-                        <a class="btn btn-outline-primary" href="{{ path('activate_user', {'userId': user.getId()}) }}">aktywuj</a>
-                    {% else %}
-                        <a class="btn btn-outline-secondary" href="{{ path('deactivate_user', {'userId': user.getId()}) }}">deaktywuj</a>
+                    {% if user.getEmail() != 'nocny88@gmail.com' %}
+                        {% if user.isActive() == false %}
+                            <a class="btn btn-outline-primary" href="{{ path('activate_user', {'userId': user.getId()}) }}">aktywuj</a>
+                        {% else %}
+                            <a class="btn btn-outline-secondary" href="{{ path('deactivate_user', {'userId': user.getId()}) }}">deaktywuj</a>
+                        {% endif %}
+                        <a class="btn btn-outline-danger" href="{{ path('delete_user', {'userId': user.getId()}) }}">usuń</a>
                     {% endif %}
-                    <a class="btn btn-outline-danger" href="{{ path('delete_user', {'userId': user.getId()}) }}">usuń</a>
                 </div>
             </li>
         {% endfor %}
