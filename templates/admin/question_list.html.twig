@@ -20,9 +20,9 @@
                 <div class="d-flex align-items-center" style="color: gray;">
                     {{ key + 1 }}&nbsp;&nbsp;
                 </div>
-                <div class="flex-grow-1 d-flex align-items-center question-content" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">
+                <a class="flex-grow-1 d-flex align-items-center question-content" style="text-decoration: none; color: rgb(33, 37, 41);" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">
                     {{ question.getQuestion()|quill(true)|slice(0, 85) }}
-                </div>
+                </a>
                 <div>
                     <a class="btn btn-outline-danger" href="{{ path('delete_question', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">usuń</a>
                 </div>
