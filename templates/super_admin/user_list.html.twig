@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}Użytkownicy{% endblock %}
+{% block body %}
+    <ul class="list-group">
+        {% for key, user in users %}
+            <li class="list-group-item d-flex question list-group-item-action">
+                <div class="d-flex align-items-center" style="color: gray;">
+                    {{ key + 1 }}&nbsp;&nbsp;
+                </div>
+                <div class="flex-grow-1 d-flex align-items-center question-content">
+                    {{ user.getEmail() }}
+                </div>
+                <div>
+                    {% if user.isActive() == false %}
+                        <a class="btn btn-outline-primary" href="{{ path('activate_user', {'userId': user.getId()}) }}">aktywuj</a>
+                    {% else %}
+                        <a class="btn btn-outline-secondary" href="{{ path('deactivate_user', {'userId': user.getId()}) }}">deaktywuj</a>
+                    {% endif %}
+                    <a class="btn btn-outline-danger" href="{{ path('delete_user', {'userId': user.getId()}) }}">usuń</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

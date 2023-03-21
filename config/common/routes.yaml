@@ -85,6 +85,27 @@ duplicate_question:
     methods: [ GET ]
 # end of AdminController
 
+# SuperAdminController
+user_list:
+    path: /super_admin/user/list
+    controller: App\Controller\SuperAdminController::userList
+    methods: [ GET ]
+
+activate_user:
+    path: /super_admin/user/{userId}/activate
+    controller: App\Controller\SuperAdminController::activateUser
+    methods: [ GET ]
+
+deactivate_user:
+    path: /super_admin/user/{userId}/deactivate
+    controller: App\Controller\SuperAdminController::deactivateUser
+    methods: [ GET ]
+
+delete_user:
+    path: /super_admin/user/{userId}/delete
+    controller: App\Controller\SuperAdminController::deleteUser
+    methods: [ GET ]
+# end of SuperAdminController
 
 login:
     path: /login

@@ -34,3 +34,10 @@ services:
       - '@LearnByTests\Domain\Category\CategoryRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetSubCategories, bus: query }
+
+  LearnByTests\Domain\Query\GetUsersHandler:
+    class: LearnByTests\Domain\Query\GetUsersHandler
+    arguments:
+      - '@LearnByTests\Domain\User\UserRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetUsers, bus: query }

@@ -70,3 +70,27 @@ services:
       - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DuplicateQuestion, bus: command }
+
+  LearnByTests\Domain\Command\ActivateUserHandler:
+    class: LearnByTests\Domain\Command\ActivateUserHandler
+    arguments:
+      - '@LearnByTests\Domain\User\UserRepository'
+      - '@LearnByTests\Domain\User\UserPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\ActivateUser, bus: command }
+
+  LearnByTests\Domain\Command\DeactivateUserHandler:
+    class: LearnByTests\Domain\Command\DeactivateUserHandler
+    arguments:
+      - '@LearnByTests\Domain\User\UserRepository'
+      - '@LearnByTests\Domain\User\UserPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\DeactivateUser, bus: command }
+
+  LearnByTests\Domain\Command\DeleteUserHandler:
+    class: LearnByTests\Domain\Command\DeleteUserHandler
+    arguments:
+      - '@LearnByTests\Domain\User\UserRepository'
+      - '@LearnByTests\Domain\User\UserPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteUser, bus: command }
