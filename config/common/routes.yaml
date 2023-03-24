@@ -1,8 +1,3 @@
-index:
-    path: /
-    controller: App\Controller\IndexController::index
-    methods: [ GET ]
-
 # AdminController
 category_list:
     path: /admin/category/list
