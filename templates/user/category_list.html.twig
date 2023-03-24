@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}Wybierz kurs{% endblock %}
+{% block body %}
+    <div class="card mb-2">
+        <h6 class="card-header">Żeglarz jachtowy</h6>
+        <div class="card-body">
+            <a href="{{ path('test_list', {'category': 'zj'}) }}" class=" mb-2 btn btn-primary btn-sm w-100">Przejdź do testów</a>
+        </div>
+    </div>
+{% endblock %}

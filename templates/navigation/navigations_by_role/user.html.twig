@@ -1,0 +1,10 @@
+{% if app.user.hasRole('ROLE_USER') %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ path('user_category_list') }}" aria-current="page">Kursy</a>
+    </li>
+    {% if category is defined %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('test_list', {'category': category.getLowerKey()}) }}">Lista testów</a>
+        </li>
+    {% endif %}
+{% endif %}

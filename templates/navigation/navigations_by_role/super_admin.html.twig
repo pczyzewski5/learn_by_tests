@@ -1,0 +1,16 @@
+{% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ path('category_list') }}" aria-current="page">Kursy</a>
+    </li>
+    {% if category is defined %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('question_list', {'category': category.getLowerKey()}) }}">Lista testów</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('create_question', {'category': category.getLowerKey()}) }}">Dodaj test</a>
+        </li>
+    {% endif %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('user_list') }}">Użytkownicy</a>
+    </li>
+{% endif %}

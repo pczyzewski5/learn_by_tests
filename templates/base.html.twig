@@ -19,7 +19,7 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
 </head>
 <body>
-{% include('navbar.html.twig') %}
+{% include('navigation/navbar.html.twig') %}
 {%  if category is defined %}
     <div class="bg-success text-white p-1 text-center">
         <h5>Kategoria: {{ category.getValue() }}</h5>
