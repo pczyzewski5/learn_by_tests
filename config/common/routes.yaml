@@ -5,77 +5,77 @@ category_list:
     methods: [ GET ]
 
 question_list:
-    path: /{category}/admin/question/list
+    path: /admin/{category}/question/list
     controller: App\Controller\AdminController::questionList
     methods: [ GET ]
 
 question_category_list:
-    path: /{category}/admin/question/category/{subcategory}/list
+    path: /admin/{category}/question/category/{subcategory}/list
     controller: App\Controller\AdminController::questionList
     methods: [ GET ]
 
 question_details:
-    path: /{category}/admin/question/{questionId}/details
+    path: /admin/{category}/question/{questionId}/details
     controller: App\Controller\AdminController::questionDetails
     methods: [ GET ]
 
 delete_question:
-    path: /{category}/admin/question/{questionId}/delete
+    path: /admin/{category}/question/{questionId}/delete
     controller: App\Controller\AdminController::deleteQuestion
     methods: [ GET ]
 
 create_question:
-    path: /{category}/admin/question/create
+    path: /admin/{category}/question/create
     controller: App\Controller\AdminController::createQuestion
     methods: [ GET, POST ]
 
 create_answer:
-    path: /{category}/admin/question/{questionId}/answer/create
+    path: /admin/{category}/question/{questionId}/answer/create
     controller: App\Controller\AdminController::createAnswer
     methods: [ GET, POST ]
 
 select_correct_answer:
-    path: /{category}/admin/question/{questionId}/answers/select_correct
+    path: /admin/{category}/question/{questionId}/answers/select_correct
     controller: App\Controller\AdminController::selectCorrectAnswer
     methods: [ GET, POST ]
 
 select_question_category:
-    path: /{category}/admin/question/{questionId}/category/select
+    path: /admin/{category}/question/{questionId}/category/select
     controller: App\Controller\AdminController::selectQuestionCategory
     methods: [ GET, POST ]
 
 update_question_category:
-    path: /{category}/admin/question/{questionId}/category/update
+    path: /admin/{category}/question/{questionId}/category/update
     controller: App\Controller\AdminController::updateQuestionCategory
     methods: [ GET, POST ]
 
 update_question:
-    path: /{category}/admin/question/{questionId}/edit
+    path: /admin/{category}/question/{questionId}/edit
     controller: App\Controller\AdminController::updateQuestion
     methods: [ GET, POST ]
 
 set_answer_as_correct:
-    path: /{category}/admin/question/{questionId}/answer/{answerId}/set_as_correct
+    path: /admin/{category}/question/{questionId}/answer/{answerId}/set_as_correct
     controller: App\Controller\AdminController::setAnswerAsCorrect
     methods: [ GET ]
 
 update_answer:
-    path: /{category}/admin/question/{questionId}/answer/{answerId}/edit
+    path: /admin/{category}/question/{questionId}/answer/{answerId}/edit
     controller: App\Controller\AdminController::updateAnswer
     methods: [ GET, POST ]
 
 add_answer:
-    path: /{category}/admin/question/{questionId}/answer/add
+    path: /admin/{category}/question/{questionId}/answer/add
     controller: App\Controller\AdminController::addAnswer
     methods: [ GET, POST ]
 
 delete_answer:
-    path: /{category}/admin/question/{questionId}/answer/{answerId}/delete
+    path: /admin/{category}/question/{questionId}/answer/{answerId}/delete
     controller: App\Controller\AdminController::deleteAnswer
     methods: [ GET ]
 
 duplicate_question:
-    path: /{category}/admin/question/{questionId}/duplicate
+    path: /admin/{category}/question/{questionId}/duplicate
     controller: App\Controller\AdminController::duplicateQuestion
     methods: [ GET ]
 # end of AdminController
@@ -101,6 +101,18 @@ delete_user:
     controller: App\Controller\SuperAdminController::deleteUser
     methods: [ GET ]
 # end of SuperAdminController
+
+# UserController
+user_category_list:
+    path: /user/category/list
+    controller: App\Controller\UserController::categoryList
+    methods: [ GET ]
+
+test_list:
+    path: /user/{category}/test/list
+    controller: App\Controller\UserController::testList
+    methods: [ GET ]
+# end of UserController
 
 login:
     path: /login
