@@ -36,3 +36,24 @@ textarea {
 #quill-comment-editor-container .ql-editor, #answer_form .ql-editor  {
     height: 100px !important;
 }
+.success-dot {
+    height: 24px;
+    width: 24px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+}
+.failure-dot {
+    height: 24px;
+    width: 24px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot {
+    height: 24px;
+    width: 24px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}

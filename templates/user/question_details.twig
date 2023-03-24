@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Szczegóły
+{% endblock %}
+{% block body %}
+    {{ include('admin/common/question.html.twig') }}
+
+    {% for key, answer in answers %}
+        {{ include('admin/common/answer_list_item.html.twig') }}
+    {% endfor %}
+{% endblock %}

@@ -108,9 +108,19 @@ user_category_list:
     controller: App\Controller\UserController::categoryList
     methods: [ GET ]
 
-test_list:
-    path: /user/{category}/test/list
-    controller: App\Controller\UserController::testList
+user_question_list:
+    path: /user/{category}/question/list
+    controller: App\Controller\UserController::questionList
+    methods: [ GET ]
+
+user_question_category_list:
+    path: /user/{category}/question/category/{subcategory}/list
+    controller: App\Controller\UserController::questionList
+    methods: [ GET ]
+
+user_question_details:
+    path: /user/{category}/question/{questionId}/details
+    controller: App\Controller\UserController::questionDetails
     methods: [ GET ]
 # end of UserController
 

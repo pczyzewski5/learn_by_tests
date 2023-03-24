@@ -41,3 +41,10 @@ services:
       - '@LearnByTests\Domain\User\UserRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetUsers, bus: query }
+
+  LearnByTests\Domain\Query\UnderDevHandler:
+    class: LearnByTests\Domain\Query\UnderDevHandler
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\UnderDev, bus: query }
