@@ -7,6 +7,11 @@ textarea {
     cursor: default;
     border-color: green;
 }
+.selected-wrong-answer {
+    background-color: rgba(255, 0, 0, 0.5);
+    cursor: default;
+    border-color: red !important;
+}
 .green-hover:hover {
     background-color: rgba(6, 131, 6, 0.5);
     cursor: default;

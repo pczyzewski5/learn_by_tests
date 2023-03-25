@@ -10,3 +10,6 @@ services:
 
   LearnByTests\Domain\Category\CategoryRepository:
     alias: LearnByTests\Infrastructure\Category\CategoryRepository
+
+  LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerRepository:
+    alias: LearnByTests\Infrastructure\UserQuestionAnswer\UserQuestionAnswerRepository

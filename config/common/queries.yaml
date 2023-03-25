@@ -48,3 +48,11 @@ services:
       - '@doctrine.orm.entity_manager'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\UnderDev, bus: query }
+
+  LearnByTests\Domain\Query\FindQuestionForTestHandler:
+    class: LearnByTests\Domain\Query\FindQuestionForTestHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+      - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\FindQuestionForTest, bus: query }

@@ -11,10 +11,10 @@ class SelectValidAnswer {
             $answer.click(function () {
                 $('.answer').removeClass('selected-answer');
                 $(this).addClass('selected-answer');
-                $('#correct_answer_form_is_correct_answer_field').val(
+                $('#select_answer_form_selected_answer').val(
                     $(this).attr('answer-id')
                 );
-                $('#correct_answer_form_zapisz').removeAttr('disabled');
+                $('#select_answer_form_submit').removeAttr('disabled');
             });
         }
     }

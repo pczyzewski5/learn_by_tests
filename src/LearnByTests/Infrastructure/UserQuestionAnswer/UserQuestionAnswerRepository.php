@@ -27,4 +27,23 @@ class UserQuestionAnswerRepository implements DomainRepository
 
         return UserQuestionAnswerMapper::toDomain($entity);
     }
+
+    public function findAllQuestionIds(string $userId): array
+    {
+        $qb = $this->entityManager->createQueryBuilder();
+        $query = $qb
+            ->select('uqa.questionId')
+            ->from(UserQuestionAnswer::class, 'uqa')
+            ->where('uqa.userId = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery();
+
+        $result = [];
+
+        foreach ($query->getResult() as $item) {
+            $result[] = $item['questionId'];
+        }
+
+        return $result;
+    }
 }

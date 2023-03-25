@@ -16,3 +16,8 @@ services:
 
   LearnByTests\Infrastructure\Category\CategoryRepository:
     class: LearnByTests\Infrastructure\Category\CategoryRepository
+
+  LearnByTests\Infrastructure\UserQuestionAnswer\UserQuestionAnswerRepository:
+    class: LearnByTests\Infrastructure\UserQuestionAnswer\UserQuestionAnswerRepository
+    arguments:
+      - '@doctrine.orm.entity_manager'

@@ -7,7 +7,7 @@ namespace App\Controller;
 use App\CommandBus\CommandBus;
 use App\DTO\QuestionWithAnswersDTO;
 use App\Form\Question\AnswerForm;
-use App\Form\Question\CorrectAnswerForm;
+use App\Form\Question\SelectAnswerForm;
 use App\Form\Question\CategoryForm;
 use App\Form\Question\QuestionForm;
 use App\QueryBus\QueryBus;
@@ -181,7 +181,7 @@ class AdminController extends BaseController
             new GetQuestionWithAnswers($questionId)
         );
         $form = $this->createForm(
-            CorrectAnswerForm::class,
+            SelectAnswerForm::class,
             null,
             ['data' => $dto->getAnswers()]
         );
@@ -191,7 +191,7 @@ class AdminController extends BaseController
             $this->commandBus->handle(
                 new SetAnswerAsCorrect(
                     $questionId,
-                    $form->getData()[CorrectAnswerForm::IS_CORRECT_ANSWER_FIELD]
+                    $form->getData()[SelectAnswerForm::SELECTED_ANSWER_FIELD]
                 )
             );
 
