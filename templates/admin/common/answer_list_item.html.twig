@@ -30,10 +30,10 @@
         <div class="p-2 d-flex align-items-center justify-content-center answer-letter" >
             <strong>{{ letters[key] }}</strong>
         </div>
-        <div class="p-1">
-            <p class="card-text d-flex align-items-center">{{ answer.getAnswer()|quill }}</p>
+        <div class="p-1 d-flex flex-column justify-content-center">
+            <p class="card-text">{{ answer.getAnswer()|quill }}</p>
             {% if show_details == true and answer.getComment() != null %}
-                <small class="card-text fst-italic d-flex align-items-center">{{ answer.getComment()|quill }}</small>
+                <small class="card-text fst-italic">{{ answer.getComment()|quill }}</small>
             {% endif %}
         </div>
     </div>
