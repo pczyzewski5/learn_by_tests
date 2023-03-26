@@ -4,7 +4,7 @@
     {{ include('admin/common/question.html.twig') }}
 
     {% for key, answer in answers %}
-        {{ include('admin/common/answer_list_item.html.twig', {'showAnswerId': true}) }}
+        {{ include('admin/common/answer_list_item.html.twig', {'show_answer_id': true}) }}
     {% endfor %}
     {{ form(correct_answer) }}
 {% endblock %}
