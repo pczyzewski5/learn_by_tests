@@ -34,8 +34,8 @@ class FindQuestionForTestHandler
 
 
         $userQuestionIds = $this->userQuestionAnswerRepository->findAllQuestionIds($query->getUserId());
-//        var_dump($questions, $userQuestionIds);exit;
 
+        \shuffle($questions);
         foreach ($questions as $question) {
             $questionId = $question->getId();
 
