@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-{% block title %}Pytania{% endblock %}
 {% block body %}
     <div class="d-flex flex-wrap">
         <a href="{{ path('user_question_list', {'category': category.getLowerKey()}) }}" class="text-decoration-none">
@@ -12,12 +11,12 @@
         {% endfor %}
     </div>
 
-    <a href="{{ path('user_delete_all_question_answers', {'category': category.getLowerKey()}) }}" class=" mb-2 btn btn-danger btn-sm w-100">Skasuj wyniki testów w wybranej kategorii</a>
+    <a href="{{ path('user_delete_all_question_answers', {'category': category.getLowerKey()}) }}" class="mb-1 btn btn-danger btn-sm w-100">Skasuj wyniki testów w wybranej kategorii</a>
 
     {% if next_question == null %}
-        <button type="button" class="mb-2 btn btn-primary btn-sm w-100" disabled>Przejdź do testów w wybranej kategorii</button>
+        <button type="button" class="mb-1 btn btn-primary btn-sm w-100" disabled>Przejdź do testów w wybranej kategorii</button>
     {% else %}
-        <a href="{{ path('all_categories_test', {'category': category.getLowerKey(), 'questionId': next_question.getId()}) }}" class=" mb-2 btn btn-primary btn-sm w-100">Przejdź do testów w wybranej kategorii</a>
+        <a href="{{ path('all_categories_test', {'category': category.getLowerKey(), 'questionId': next_question.getId()}) }}" class="mb-1 btn btn-primary btn-sm w-100">Przejdź do testów w wybranej kategorii</a>
     {% endif %}
 
     {{ include('user/common/question_list.html.twig') }}

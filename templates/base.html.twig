@@ -23,13 +23,13 @@
 {% include('navigation/navbar.html.twig') %}
 {%  if category is defined %}
     <div class="bg-success text-white p-1 text-center">
-        <h5>Kategoria: {{ category.getValue() }}</h5>
+        <h6 style="margin-bottom: 0.2rem !important;">Kurs: {{ category.getValue() }}</h6>
     </div>
 {% endif %}
-<div class="container mt-2">
-    <h5 class="text-center">
+<div class="container mt-1">
+    <h6 class="text-center">
         {% block title %}{% endblock %}
-    </h5>
+    </h6>
     {% block body %}{% endblock %}
 </div>
 

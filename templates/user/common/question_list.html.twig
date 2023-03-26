@@ -1,21 +1,25 @@
 <ul class="list-group">
     {% for key, question in questions %}
-        <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question['id'] }}">
+        <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question['id'] }}" style="padding: 0.5rem 1rem 0.5rem 1rem;">
             <div class="d-flex align-items-center" style="color: gray;">
                 {{ key + 1 }}&nbsp;&nbsp;
             </div>
-            <a class="flex-grow-1 d-flex align-items-center question-content" style="text-decoration: none; color: rgb(33, 37, 41);" href="{{ path('user_question_details', {'category': category.getLowerKey(), 'questionId': question['id']}) }}">
-                {{ question['question']|quill(true)|slice(0, 85) }}
-            </a>
-            {% if question['is_correct'] is same as 1 %}
-                <span class="success-dot"></span>
-            {% endif %}
-            {% if question['is_correct'] is same as 0 %}
-                <span class="failure-dot"></span>
-            {% endif %}
-            {% if question['is_correct'] is null %}
-                <span class="dot"></span>
-            {% endif %}
+            <div style="width: 100%; ">
+                <a class="flex-grow-1 d-flex align-items-center question-content" style="text-decoration: none; color: rgb(33, 37, 41); overflow: hidden;" href="{{ path('user_question_details', {'category': category.getLowerKey(), 'questionId': question['id']}) }}">
+                    {{ question['question']|quill(true)|slice(0, 85) }}
+                </a>
+            </div>
+            <div class="d-flex align-items-center">
+                {% if question['is_correct'] is same as 1 %}
+                    <span class="success-dot"></span>
+                {% endif %}
+                {% if question['is_correct'] is same as 0 %}
+                    <span class="failure-dot"></span>
+                {% endif %}
+                {% if question['is_correct'] is null %}
+                    <span class="dot"></span>
+                {% endif %}
+            </div>
         </li>
     {% endfor %}
 </ul>

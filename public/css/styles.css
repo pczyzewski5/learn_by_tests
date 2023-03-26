@@ -62,3 +62,7 @@ textarea {
     border-radius: 50%;
     display: inline-block;
 }
+.answer-letter {
+    width: 2rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
