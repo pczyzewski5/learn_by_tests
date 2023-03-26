@@ -15,6 +15,12 @@ services:
             - '@twig'
         tags: [ 'twig.extension' ]
 
+    App\Twig\TrimWords:
+        class: App\Twig\TrimWords
+        arguments:
+            - '@twig'
+        tags: [ 'twig.extension' ]
+
     App\Security\UserProvider:
         class: App\Security\UserProvider
         arguments:

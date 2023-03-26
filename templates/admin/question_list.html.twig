@@ -16,15 +16,17 @@
 
     <ul class="list-group">
         {% for key, question in questions %}
-            <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question.getId() }}">
+            <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question.getId() }}" style="padding: 0.5rem 1rem 0.5rem 1rem;">
                 <div class="d-flex align-items-center" style="color: gray;">
                     {{ key + 1 }}&nbsp;&nbsp;
                 </div>
-                <a class="flex-grow-1 d-flex align-items-center question-content" style="text-decoration: none; color: rgb(33, 37, 41);" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">
-                    {{ question.getQuestion()|quill(true)|slice(0, 85) }}
-                </a>
+                <div class="d-flex align-items-center" style="width: 100%;">
+                    <a class="flex-grow-1 d-flex align-items-center question-content" style="text-decoration: none; color: rgb(33, 37, 41);" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">
+                        {{ question.getQuestion()|quill(true)|trimWords }}
+                    </a>
+                </div>
                 <div>
-                    <a class="btn btn-outline-danger" href="{{ path('delete_question', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">usuń</a>
+                    <a class="btn btn-outline-danger btn-sm" href="{{ path('delete_question', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">usuń</a>
                 </div>
             </li>
         {% endfor %}
