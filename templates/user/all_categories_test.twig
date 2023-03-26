@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Wybierz prawidłową odpowiedź
+{% endblock %}
+{% block body %}
+    {{ include('admin/common/question.html.twig') }}
+
+    {% set params = { } %}
+
+    {% if show_correct_answer is defined %}
+        {% set params = params|merge({ 'show_correct_answer': show_correct_answer }) %}
+    {% endif %}
+
+    {% if show_answer_id is defined %}
+        {% set params = params|merge({ 'show_answer_id': show_answer_id }) %}
+    {% endif %}
+
+    {% if selected_answer_id is defined  %}
+        {% set params = params|merge({ 'selected_answer_id': selected_answer_id }) %}
+    {% endif %}
+
+    {% if show_answer_details is defined  %}
+        {% set params = params|merge({ 'show_answer_details': show_answer_details }) %}
+    {% endif %}
+
+    {% for key, answer in answers %}
+        {{ include('admin/common/answer_list_item.html.twig', params) }}
+    {% endfor %}
+
+    {% if next_question is not defined %}
+        {{ form(select_answer_form) }}
+    {% else %}
+        <a href="{{ path('all_categories_test', {'category': category.getLowerKey(), 'questionId': next_question.getId() }) }}" class="mt-2 btn btn-primary btn-sm w-100">Przejdź do następnego pytania</a>
+    {% endif %}
+
+{% endblock %}

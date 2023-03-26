@@ -22,7 +22,7 @@ interface UserQuestionAnswerPersister
      */
     public function deleteAllByCategoryAndSubcategory(
         string $userId,
-        CategoryEnum $category,
-        CategoryEnum $subcategory,
+        string $category,
+        string $subcategory,
     ): void;
 }

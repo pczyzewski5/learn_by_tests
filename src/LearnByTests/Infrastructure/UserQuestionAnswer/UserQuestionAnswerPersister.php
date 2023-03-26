@@ -56,14 +56,25 @@ class UserQuestionAnswerPersister implements DomainPersister
      */
     public function deleteAllByCategoryAndSubcategory(
         string $userId,
-        CategoryEnum $category,
-        CategoryEnum $subcategory,
+        string $category,
+        ?string $subcategory,
     ): void {
         try {
             $this->entityManager->getConnection()->executeQuery(
-                'DELETE FROM questions WHERE id = ?',
-                [$userId],
-                [Types::STRING]
+                'DELETE uqa FROM user_question_answers uqa JOIN questions q on q.id = uqa.question_id
+                        WHERE uqa.user_id = :userId
+                        AND q.category = :category
+                        AND q.subcategory LIKE :subcategory',
+                [
+                    'userId' => $userId,
+                    'category' => $category,
+                    'subcategory' => null === $subcategory ? '%' : $subcategory
+                ],
+                [
+                    'userId' => Types::STRING,
+                    'category' => Types::STRING,
+                    'subcategory' => Types::STRING,
+                ]
             );
         } catch (\Throwable $exception) {
             throw PersisterException::fromThrowable($exception);

@@ -32,7 +32,9 @@ class FindQuestionForTestHandler
                 $query->getSubcategory()->getValue()
             );
 
+
         $userQuestionIds = $this->userQuestionAnswerRepository->findAllQuestionIds($query->getUserId());
+//        var_dump($questions, $userQuestionIds);exit;
 
         foreach ($questions as $question) {
             $questionId = $question->getId();

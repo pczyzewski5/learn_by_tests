@@ -13,3 +13,8 @@ services:
     class: LearnByTests\Infrastructure\User\UserPersister
     arguments:
       - '@doctrine.orm.entity_manager'
+
+  LearnByTests\Infrastructure\UserQuestionAnswer\UserQuestionAnswerPersister:
+    class: LearnByTests\Infrastructure\UserQuestionAnswer\UserQuestionAnswerPersister
+    arguments:
+      - '@doctrine.orm.entity_manager'

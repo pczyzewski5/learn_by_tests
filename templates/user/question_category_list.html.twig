@@ -3,21 +3,22 @@
 {% block body %}
     <div class="d-flex flex-wrap">
         <a href="{{ path('user_question_list', {'category': category.getLowerKey()}) }}" class="text-decoration-none">
-            {{ include('admin/common/question_subcategory.html.twig', {'subcategory': 'wszystkie', 'isSelected': true}) }}
+            {{ include('admin/common/question_subcategory.html.twig', { 'subcategory': 'wszystkie', 'isSelected': false }) }}
         </a>
         {% for subcategory in subcategories %}
+            {% set isSelected = (subcategory.getLowerKey() == active_subcategory) %}
             <a href="{{ path('user_question_category_list', {'category': category.getLowerKey(), 'subcategory': subcategory.getLowerKey()}) }}" class="text-decoration-none">
-                {{ include('admin/common/question_subcategory.html.twig', {'isSelected': false}) }}
+                {{ include('admin/common/question_subcategory.html.twig', {'isSelected': isSelected}) }}
             </a>
         {% endfor %}
     </div>
 
-    <a href="{{ path('user_delete_all_question_answers', {'category': category.getLowerKey()}) }}" class=" mb-2 btn btn-danger btn-sm w-100">Skasuj wyniki testów w wybranej kategorii</a>
+    <a href="{{ path('user_delete_question_answers', { 'category': category.getLowerKey(), 'subcategory': active_subcategory }) }}" class=" mb-2 btn btn-danger btn-sm w-100">Skasuj wyniki testów w wybranej kategorii</a>
 
     {% if next_question == null %}
         <button type="button" class="mb-2 btn btn-primary btn-sm w-100" disabled>Przejdź do testów w wybranej kategorii</button>
     {% else %}
-        <a href="{{ path('all_categories_test', {'category': category.getLowerKey(), 'questionId': next_question.getId()}) }}" class=" mb-2 btn btn-primary btn-sm w-100">Przejdź do testów w wybranej kategorii</a>
+        <a href="{{ path('category_test', { 'category': category.getLowerKey(), 'subcategory': active_subcategory, 'questionId': next_question.getId() }) }}" class=" mb-2 btn btn-primary btn-sm w-100">Przejdź do testów w wybranej kategorii</a>
     {% endif %}
 
     {{ include('user/common/question_list.html.twig') }}

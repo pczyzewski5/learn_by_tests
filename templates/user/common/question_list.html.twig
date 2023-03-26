@@ -1,0 +1,21 @@
+<ul class="list-group">
+    {% for key, question in questions %}
+        <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question['id'] }}">
+            <div class="d-flex align-items-center" style="color: gray;">
+                {{ key + 1 }}&nbsp;&nbsp;
+            </div>
+            <a class="flex-grow-1 d-flex align-items-center question-content" style="text-decoration: none; color: rgb(33, 37, 41);" href="{{ path('user_question_details', {'category': category.getLowerKey(), 'questionId': question['id']}) }}">
+                {{ question['question']|quill(true)|slice(0, 85) }}
+            </a>
+            {% if question['is_correct'] is same as 1 %}
+                <span class="success-dot"></span>
+            {% endif %}
+            {% if question['is_correct'] is same as 0 %}
+                <span class="failure-dot"></span>
+            {% endif %}
+            {% if question['is_correct'] is null %}
+                <span class="dot"></span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

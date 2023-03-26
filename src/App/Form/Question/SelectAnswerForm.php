@@ -7,36 +7,40 @@ namespace App\Form\Question;
 use LearnByTests\Domain\Answer\Answer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class CorrectAnswerForm extends AbstractType
+class SelectAnswerForm extends AbstractType
 {
-    public const IS_CORRECT_ANSWER_FIELD = 'is_correct_answer_field';
+    public const SELECTED_ANSWER_FIELD = 'selected_answer';
+    public const ANSWERS_ORDER_FIELD = 'answers_order';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('zapisz', SubmitType::class, [
+        $builder->add('submit', SubmitType::class, [
             'disabled' => true,
             'attr' => [
                 'class' => 'mt-2 btn-primary btn w-100'
-            ]
+            ],
+            'label' => 'Zapisz'
         ]);
 
-        $this->addIsCorrectAnswer($builder, $options['data']);
+        $this->addAnswers($builder, $options);
+        $this->addAnswersOrder($builder, $options);
     }
 
-    protected function addIsCorrectAnswer(FormBuilderInterface $builder, array $answers): void
+    protected function addAnswers(FormBuilderInterface $builder, array $options): void
     {
         $choices = [];
 
         /** @var Answer $answer */
-        foreach ($answers as $answer) {
+        foreach ($options['data'] as $answer) {
             $choices[$answer->getId()] = $answer->getId();
         }
 
         $builder->add(
-            self::IS_CORRECT_ANSWER_FIELD,
+            self::SELECTED_ANSWER_FIELD,
             ChoiceType::class,
             [
                 'choices' => $choices,
@@ -49,6 +53,22 @@ class CorrectAnswerForm extends AbstractType
                 ],
                 'label' => false
             ]
+        );
+    }
+
+    protected function addAnswersOrder(FormBuilderInterface $builder, array $options): void
+    {
+        $data = [];
+
+        /** @var Answer $answer */
+        foreach ($options['data'] as $answer) {
+            $data[] = $answer->getId();
+        }
+
+        $builder->add(
+            self::ANSWERS_ORDER_FIELD,
+            HiddenType::class,
+            ['data' => \json_encode($data)]
         );
     }
 }

@@ -10,7 +10,7 @@ question_list:
     methods: [ GET ]
 
 question_category_list:
-    path: /admin/{category}/question/category/{subcategory}/list
+    path: /admin/{category}/category/{subcategory}/question/list
     controller: App\Controller\AdminController::questionList
     methods: [ GET ]
 
@@ -115,13 +115,33 @@ user_question_list:
 
 user_question_category_list:
     path: /user/{category}/question/category/{subcategory}/list
-    controller: App\Controller\UserController::questionList
+    controller: App\Controller\UserController::questionCategoryList
     methods: [ GET ]
 
 user_question_details:
     path: /user/{category}/question/{questionId}/details
     controller: App\Controller\UserController::questionDetails
     methods: [ GET ]
+
+user_delete_all_question_answers:
+    path: /user/{category}/answers/delete
+    controller: App\Controller\UserController::deleteUserQuestionAnswers
+    methods: [ GET ]
+
+user_delete_question_answers:
+    path: /user/{category}/category/{subcategory}/answers/delete
+    controller: App\Controller\UserController::deleteUserQuestionAnswers
+    methods: [ GET ]
+
+all_categories_test:
+    path: /user/{category}/question/{questionId}/test
+    controller: App\Controller\UserController::allCategoriesTest
+    methods: [ GET, POST ]
+
+category_test:
+    path: /user/{category}/category/{subcategory}/question/{questionId}/test
+    controller: App\Controller\UserController::singleCategoryTest
+    methods: [ GET, POST ]
 # end of UserController
 
 login:

@@ -94,3 +94,17 @@ services:
       - '@LearnByTests\Domain\User\UserPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteUser, bus: command }
+
+  LearnByTests\Domain\Command\CreateUserQuestionAnswerHandler:
+    class: LearnByTests\Domain\Command\CreateUserQuestionAnswerHandler
+    arguments:
+      - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\CreateUserQuestionAnswer, bus: command }
+
+  LearnByTests\Domain\Command\DeleteUserQuestionAnswersHandler:
+    class: LearnByTests\Domain\Command\DeleteUserQuestionAnswersHandler
+    arguments:
+      - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteUserQuestionAnswers, bus: command }

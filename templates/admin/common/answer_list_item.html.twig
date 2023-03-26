@@ -1,6 +1,30 @@
 {% set letters = ['A', 'B', 'C', 'D'] %}
-<div class="card mt-1 {{ answer.isCorrect() ? 'selected-answer' }} answer"
-        {{ showAnswerId is defined ? "answer-id=" ~ answer.getId() }}
+{% set selected_wrong_answer = false %}
+{% set show_correct = true %}
+{% set show_details = true %}
+{% set show_id = false %}
+
+{% if show_correct_answer is defined %}
+    {% set show_correct = show_correct_answer %}
+{% endif %}
+
+{% if show_answer_id is defined %}
+    {% set show_id = show_answer_id %}
+{% endif %}
+
+{% if show_answer_details is defined %}
+    {% set show_details = show_answer_details %}
+{% endif %}
+
+{% if selected_answer_id is defined
+    and selected_answer_id == answer.getId()
+    and answer.isCorrect() == false
+%}
+    {% set selected_wrong_answer = true %}
+{% endif %}
+
+<div class="card mt-1 answer {{ show_correct and answer.isCorrect() ? 'selected-answer' }} {{ selected_wrong_answer ? 'selected-wrong-answer' }}"
+        {{ show_id ? "answer-id=" ~ answer.getId() }}
 >
     <div class="card-body d-flex p-0">
         <div class="d-flex align-items-center justify-content-center"
@@ -10,7 +34,7 @@
         </div>
         <div class="p-3" style="width: 95%;">
             <p class="card-text">{{ answer.getAnswer()|quill }}</p>
-            {% if answer.getComment() != null %}
+            {% if show_details == true and answer.getComment() != null %}
                 <small class="card-text fst-italic">{{ answer.getComment()|quill }}</small>
             {% endif %}
         </div>
