@@ -68,12 +68,44 @@ class UserController extends BaseController
             new GetSubCategories($category)
         );
 
+        $stats = $this->calcStats($questions);
+
         return $this->renderForm('user/question_list.html.twig', [
             'category' => $category,
             'subcategories' => $subcategories,
             'questions' => $questions,
-            'next_question' => $nextQuestion
+            'next_question' => $nextQuestion,
+            'stats' => $stats
         ]);
+    }
+
+    private function calcStats(array $questions)
+    {
+        $itemsCount = \count($questions);
+        $correctAnswersCount = 0;
+        $invalidAnswersCount = 0;
+        $noAnswersCount = 0;
+
+        foreach ($questions as $question) {
+            if (1 === $question['is_correct']) {
+                $correctAnswersCount++;
+            }
+            if (0 === $question['is_correct']) {
+                $invalidAnswersCount++;
+            }
+            if (null === $question['is_correct']) {
+                $noAnswersCount++;
+            }
+        }
+
+        if ($itemsCount !== ($correctAnswersCount + $invalidAnswersCount + $noAnswersCount)) {
+            throw new \Exception('Given answers count does not match items count.');
+        }
+
+        return [
+          'correct_answers' => (int)\round($correctAnswersCount / $itemsCount * 100),
+          'invalid_answers' => (int)\round($invalidAnswersCount / $itemsCount * 100),
+        ];
     }
 
     public function questionCategoryList(Request $request): Response
@@ -105,12 +137,15 @@ class UserController extends BaseController
             new GetSubCategories($category)
         );
 
+        $stats = $this->calcStats($questions);
+
         return $this->renderForm('user/question_category_list.html.twig', [
             'active_subcategory' => $subcategory->getLowerKey(),
             'subcategories' => $subcategories,
             'next_question' => $nextQuestion,
             'category' => $category,
             'questions' => $questions,
+            'stats' => $stats
         ]);
     }
 
