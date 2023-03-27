@@ -19,7 +19,10 @@ class UserQuestionAnswerRepository implements DomainRepository
 
     public function findOne(string $userId, string $questionId): ?DomainUserQuestionAnswer
     {
-        $entity = $this->entityManager->getRepository(UserQuestionAnswer::class)->find($userId);
+        $entity = $this->entityManager->getRepository(UserQuestionAnswer::class)->findOneBy([
+            'userId' => $userId,
+            'questionId' => $questionId
+        ]);
 
         if (null === $entity) {
             return null;

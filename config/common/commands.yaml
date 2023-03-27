@@ -98,6 +98,7 @@ services:
   LearnByTests\Domain\Command\CreateUserQuestionAnswerHandler:
     class: LearnByTests\Domain\Command\CreateUserQuestionAnswerHandler
     arguments:
+      - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerRepository'
       - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\CreateUserQuestionAnswer, bus: command }

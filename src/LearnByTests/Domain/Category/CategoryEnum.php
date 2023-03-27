@@ -21,5 +21,8 @@ class CategoryEnum extends BaseEnum
     const CHIEF_WORKS = 'prace bosmańskie';
     const YACHT_MANEUVERS = 'manewrowanie jachtem';
     const SHIP_MARKINGS = 'oznakowanie statków';
+    const BEAUFORT_SCALE = 'skala Beauforta';
+    const SOUND_SIGNALS = 'sygnały dźwiękowe';
+    const SIGNS = 'znaki';
 }
 

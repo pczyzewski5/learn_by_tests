@@ -6,23 +6,32 @@ namespace LearnByTests\Domain\Command;
 
 use LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerFactory;
 use LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister;
+use LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerRepository;
 
 class CreateUserQuestionAnswerHandler
 {
+    private UserQuestionAnswerRepository $repository;
     private UserQuestionAnswerPersister $persister;
 
-    public function __construct(UserQuestionAnswerPersister $persister) {
+    public function __construct(
+        UserQuestionAnswerRepository $repository,
+        UserQuestionAnswerPersister $persister
+    ) {
+        $this->repository = $repository;
         $this->persister = $persister;
     }
 
     public function handle(CreateUserQuestionAnswer $command): void
     {
-        $entity = UserQuestionAnswerFactory::create(
-            $command->getUserId(),
-            $command->getQuestionId(),
-            $command->getAnswerId()
-        );
+        if (null === $this->repository->findOne($command->getUserId(), $command->getQuestionId())) {
 
-        $this->persister->save($entity);
+            $entity = UserQuestionAnswerFactory::create(
+                $command->getUserId(),
+                $command->getQuestionId(),
+                $command->getAnswerId()
+            );
+
+            $this->persister->save($entity);
+        }
     }
 }

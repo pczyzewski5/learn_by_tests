@@ -33,7 +33,7 @@
     {% if next_question is not defined %}
         {{ form(select_answer_form) }}
     {% else %}
-        <a href="{{ path('all_categories_test', {'category': category.getLowerKey(), 'questionId': next_question.getId() }) }}" class="mt-2 btn btn-primary btn-sm w-100">Przejdź do następnego pytania</a>
+        <a href="{{ path('all_categories_test', {'category': category.getLowerKey(), 'questionId': next_question.getId() }) }}" id="next-question" class="mt-2 btn btn-primary btn-sm w-100">Przejdź do następnego pytania</a>
     {% endif %}
 
 {% endblock %}
