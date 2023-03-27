@@ -103,8 +103,8 @@ class UserController extends BaseController
         }
 
         return [
-          'correct_answers' => 0 === $itemsCount ? 0 : (int)\round($correctAnswersCount / $itemsCount * 100),
-          'invalid_answers' => 0 === $itemsCount ? 0 : (int)\round($invalidAnswersCount / $itemsCount * 100),
+          'correct_answers' => 0 === $itemsCount ? 0 : (int)\round(($correctAnswersCount / $itemsCount) * 100),
+          'invalid_answers' => 0 === $itemsCount ? 0 : (int)\round(($invalidAnswersCount / $itemsCount) * 100),
         ];
     }
 
