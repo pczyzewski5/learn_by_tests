@@ -36,6 +36,9 @@ class CategoryRepository implements DomainRepository
                 CategoryEnum::CHIEF_WORKS(),
                 CategoryEnum::YACHT_MANEUVERS(),
                 CategoryEnum::SHIP_MARKINGS(),
+                CategoryEnum::BEAUFORT_SCALE(),
+                CategoryEnum::SOUND_SIGNALS(),
+                CategoryEnum::SIGNS(),
             ]
         ];
 
