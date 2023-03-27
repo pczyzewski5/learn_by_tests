@@ -40,8 +40,16 @@ class UnderDevHandler
             ]
         );
 
-        $a = $stmt->fetchAllAssociative();
+        $result = [];
 
-        return $a;
+        foreach ($stmt->fetchAllAssociative() as $item) {
+            if (null !== $item['is_correct']) {
+                $item['is_correct'] = (int)$item['is_correct'];
+            }
+
+            $result[] = $item;
+        };
+
+        return $result;
     }
 }

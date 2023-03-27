@@ -87,10 +87,10 @@ class UserController extends BaseController
         $noAnswersCount = 0;
 
         foreach ($questions as $question) {
-            if ('1' === $question['is_correct']) {
+            if (1 === $question['is_correct']) {
                 $correctAnswersCount++;
             }
-            if ('0' === $question['is_correct']) {
+            if (0 === $question['is_correct']) {
                 $invalidAnswersCount++;
             }
             if (null === $question['is_correct']) {

@@ -2,6 +2,12 @@
 {% block body %}
     {{ include('admin/common/question.html.twig') }}
 
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="d-flex justify-content-end edit-buttons">
+            <a class="btn btn-primary btn-sm" target="_blank" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">szczegóły</a>
+        </div>
+    {% endif %}
+
     {% for key, answer in answers %}
         {{ include('admin/common/answer_list_item.html.twig') }}
     {% endfor %}

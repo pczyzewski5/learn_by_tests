@@ -80,4 +80,44 @@ class UserQuestionAnswerPersister implements DomainPersister
             throw PersisterException::fromThrowable($exception);
         }
     }
+
+    /**
+     * @throws PersisterException
+     */
+    public function deleteAllByQuestionId(string $questionId): void
+    {
+        try {
+            $this->entityManager->getConnection()->executeQuery(
+                'DELETE FROM user_question_answers WHERE question_id = :questionId;',
+                [
+                    'questionId' => $questionId,
+                ],
+                [
+                    'questionId' => Types::STRING,
+                ]
+            );
+        } catch (\Throwable $exception) {
+            throw PersisterException::fromThrowable($exception);
+        }
+    }
+
+    /**
+     * @throws PersisterException
+     */
+    public function deleteAllByAnswerId(string $answerId): void
+    {
+        try {
+            $this->entityManager->getConnection()->executeQuery(
+                'DELETE FROM user_question_answers WHERE answer_id = :answerId;',
+                [
+                    'answerId' => $answerId,
+                ],
+                [
+                    'answerId' => Types::STRING,
+                ]
+            );
+        } catch (\Throwable $exception) {
+            throw PersisterException::fromThrowable($exception);
+        }
+    }
 }

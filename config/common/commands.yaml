@@ -27,6 +27,7 @@ services:
     arguments:
       - '@LearnByTests\Domain\Question\QuestionPersister'
       - '@LearnByTests\Domain\Answer\AnswerPersister'
+      - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteQuestion, bus: command }
 
@@ -34,6 +35,7 @@ services:
     class: LearnByTests\Domain\Command\DeleteAnswerHandler
     arguments:
       - '@LearnByTests\Domain\Answer\AnswerPersister'
+      - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteAnswer, bus: command }
 

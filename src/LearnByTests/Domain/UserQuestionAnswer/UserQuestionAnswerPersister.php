@@ -25,4 +25,14 @@ interface UserQuestionAnswerPersister
         string $category,
         string $subcategory,
     ): void;
+
+    /**
+     * @throws PersisterException
+     */
+    public function deleteAllByQuestionId(string $questionId): void;
+
+    /**
+     * @throws PersisterException
+     */
+    public function deleteAllByAnswerId(string $answerId): void;
 }
