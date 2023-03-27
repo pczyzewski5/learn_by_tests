@@ -1,0 +1,6 @@
+services:
+    App\Command\ImportSQL:
+        class: App\Command\ImportSQL
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags: ['console.command']

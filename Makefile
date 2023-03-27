@@ -55,6 +55,7 @@ init-db:
 	docker-compose exec -T mysql mysql -u root -proot123 -e 'SET GLOBAL general_log = "ON";'
 	$(PHPCLI) php ./bin/console doctrine:cache:clear-metadata
 	$(PHPCLI) php ./bin/console doctrine:migrations:migrate
+	$(PHPCLI) php ./bin/console app:import-sql
 
 cli-mysql:
 	docker-compose -f docker-compose.yml exec mysql mysql -u learn_by_tests -D learn_by_tests --password=password123

@@ -1,45 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Czas generowania: 27 Mar 2023, 19:02
--- Wersja serwera: 10.4.27-MariaDB-cll-lve
--- Wersja PHP: 7.4.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Baza danych: `southpaw_learn_by_tests`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `answers`
---
-
-CREATE TABLE `answers` (
-  `id` varchar(36) NOT NULL,
-  `question_id` varchar(36) NOT NULL,
-  `answer` mediumtext NOT NULL,
-  `comment` mediumtext DEFAULT NULL,
-  `author_id` varchar(36) NOT NULL,
-  `is_correct` tinyint(1) NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Zrzut danych tabeli `answers`
---
+TRUNCATE TABLE `answers`;
 
 INSERT INTO `answers` (`id`, `question_id`, `answer`, `comment`, `author_id`, `is_correct`, `created_at`) VALUES
 ('003ff6be-c43e-11ed-affb-a180cd8974cc', 'fde4fba8-c43d-11ed-be8d-0fded131c76c', '{\"ops\":[{\"insert\":\"Zakaz ruchu statków o napędzie mechanicznym.\\n\"}]}', NULL, '06146240-c2aa-11ed-a624-75d2c03933cd', 1, '2023-03-16 22:03:28'),
@@ -598,18 +557,3 @@ INSERT INTO `answers` (`id`, `question_id`, `answer`, `comment`, `author_id`, `i
 ('fe58b420-c6a0-11ed-a3a2-7b1504a06f5d', 'fe58206e-c6a0-11ed-b959-7b1504a06f5d', '{\"ops\":[{\"insert\":\"płaski\\n\"}]}', NULL, '13b536b4-c119-11ed-b555-d156ab03f906', 0, '2023-03-19 22:57:08'),
 ('ff646204-c440-11ed-a44a-01e858d615aa', 'f4c1b432-c440-11ed-8405-c5d76c45b872', '{\"ops\":[{\"insert\":\"Nakaz nieprzekraczania podanej na znaku prędkości w km/godz.\\n\"}]}', NULL, '06146240-c2aa-11ed-a624-75d2c03933cd', 0, '2023-03-16 22:24:56'),
 ('ffe51c1c-c339-11ed-af5d-dd17b5097c64', 'ca78092c-c339-11ed-80e7-8932ea105c31', '{\"ops\":[{\"insert\":\"kolor zielony, sektor świecenia to 135\"},{\"attributes\":{\"bold\":true},\"insert\":\"°\"},{\"insert\":\"\\n\"}]}', NULL, '13b536b4-c119-11ed-b555-d156ab03f906', 0, '2023-03-15 15:02:19');
-
---
--- Indeksy dla zrzutów tabel
---
-
---
--- Indeksy dla tabeli `answers`
---
-ALTER TABLE `answers`
-  ADD UNIQUE KEY `id` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
