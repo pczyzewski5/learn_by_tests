@@ -1,0 +1,12 @@
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="LearnByTests\Infrastructure\UserSkippedQuestion\UserSkippedQuestion" table="user_skipped_questions">
+        <id name="userId" type="string" column="user_id"/>
+        <id name="questionId" type="string" column="question_id"/>
+        <field name="createdAt" type="datetime" column="created_at"/>
+    </entity>
+
+</doctrine-mapping>

@@ -42,3 +42,10 @@ doctrine:
                 dir: '%kernel.project_dir%/config/common/orm/UserQuestionAnswer'
                 is_bundle: false
                 alias: UserQuestionAnswer
+
+            UserSkippedQuestion:
+                type: xml
+                prefix: LearnByTests\Infrastructure\UserSkippedQuestion
+                dir: '%kernel.project_dir%/config/common/orm/UserSkippedQuestion'
+                is_bundle: false
+                alias: UserSkippedQuestion
