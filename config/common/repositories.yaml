@@ -13,3 +13,6 @@ services:
 
   LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerRepository:
     alias: LearnByTests\Infrastructure\UserQuestionAnswer\UserQuestionAnswerRepository
+
+  LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionRepository:
+    alias: LearnByTests\Infrastructure\UserSkippedQuestion\UserSkippedQuestionRepository

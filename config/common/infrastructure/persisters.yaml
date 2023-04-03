@@ -18,3 +18,8 @@ services:
     class: LearnByTests\Infrastructure\UserQuestionAnswer\UserQuestionAnswerPersister
     arguments:
       - '@doctrine.orm.entity_manager'
+
+  LearnByTests\Infrastructure\UserSkippedQuestion\UserSkippedQuestionPersister:
+    class: LearnByTests\Infrastructure\UserSkippedQuestion\UserSkippedQuestionPersister
+    arguments:
+      - '@doctrine.orm.entity_manager'

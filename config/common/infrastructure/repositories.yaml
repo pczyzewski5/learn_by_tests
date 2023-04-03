@@ -21,3 +21,8 @@ services:
     class: LearnByTests\Infrastructure\UserQuestionAnswer\UserQuestionAnswerRepository
     arguments:
       - '@doctrine.orm.entity_manager'
+
+  LearnByTests\Infrastructure\UserSkippedQuestion\UserSkippedQuestionRepository:
+    class: LearnByTests\Infrastructure\UserSkippedQuestion\UserSkippedQuestionRepository
+    arguments:
+      - '@doctrine.orm.entity_manager'

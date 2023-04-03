@@ -10,3 +10,6 @@ services:
 
   LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister:
     alias: LearnByTests\Infrastructure\UserQuestionAnswer\UserQuestionAnswerPersister
+
+  LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionPersister:
+    alias: LearnByTests\Infrastructure\UserSkippedQuestion\UserSkippedQuestionPersister
