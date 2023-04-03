@@ -15,5 +15,5 @@ interface UserSkippedQuestionPersister
     /**
      * @throws PersisterException
      */
-    public function deleteAllForUser(string $userId): void;
+    public function deleteAllByQuestionId(string $questionId): void;
 }
