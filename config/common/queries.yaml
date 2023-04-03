@@ -4,6 +4,7 @@ services:
     arguments:
       - '@LearnByTests\Domain\Question\QuestionRepository'
       - '@LearnByTests\Domain\Answer\AnswerRepository'
+      - '@LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetQuestionWithAnswers, bus: query }
 
@@ -54,5 +55,6 @@ services:
     arguments:
       - '@LearnByTests\Domain\Question\QuestionRepository'
       - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerRepository'
+      - '@LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\FindQuestionForTest, bus: query }

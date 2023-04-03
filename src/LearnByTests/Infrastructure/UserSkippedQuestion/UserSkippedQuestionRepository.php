@@ -30,4 +30,30 @@ class UserSkippedQuestionRepository implements DomainRepository
 
         return UserSkippedQuestionMapper::toDomain($entity);
     }
+
+    public function findAllQuestionIds(string $userId): array
+    {
+        $qb = $this->entityManager->createQueryBuilder();
+        $query = $qb
+            ->select('usq.questionId')
+            ->from(UserSkippedQuestion::class, 'usq')
+            ->where('usq.userId = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery();
+
+        $result = [];
+
+        foreach ($query->getResult() as $item) {
+            $result[] = $item['questionId'];
+        }
+
+        return $result;
+    }
+
+    public function isSkipped(string $userId, string $questionId): bool
+    {
+        $entity = $this->findOne($userId, $questionId);
+
+        return null !== $entity;
+    }
 }

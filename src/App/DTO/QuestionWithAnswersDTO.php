@@ -12,11 +12,16 @@ class QuestionWithAnswersDTO extends AbstractType
 {
     private Question $question;
     private array $answers;
+    private bool $isQuestionSkipped;
 
-    public function __construct(Question $question, array $answers)
-    {
+    public function __construct(
+        Question $question,
+        array $answers,
+        bool $isQuestionSkipped,
+    ) {
         $this->question = $question;
         $this->answers = $answers;
+        $this->isQuestionSkipped = $isQuestionSkipped;
     }
 
     public function getQuestion(): Question
@@ -44,5 +49,10 @@ class QuestionWithAnswersDTO extends AbstractType
     public function getAnswers(): array
     {
         return $this->answers;
+    }
+
+    public function isQuestionSkipped(): bool
+    {
+        return $this->isQuestionSkipped;
     }
 }

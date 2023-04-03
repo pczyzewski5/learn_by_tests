@@ -147,6 +147,16 @@ category_test:
     path: /user/{category}/category/{subcategory}/question/{questionId}/test
     controller: App\Controller\UserController::singleCategoryTest
     methods: [ GET, POST ]
+
+skip_question:
+    path: /user/question/{questionId}/skip
+    controller: App\Controller\UserController::toggleSkipQuestion
+    methods: [ GET ]
+
+unskip_question:
+    path: /user/question/{questionId}/unskip
+    controller: App\Controller\UserController::toggleSkipQuestion
+    methods: [ GET ]
 # end of UserController
 
 login:

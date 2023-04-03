@@ -112,3 +112,11 @@ services:
       - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteUserQuestionAnswers, bus: command }
+
+  LearnByTests\Domain\Command\ToggleSkipQuestionHandler:
+    class: LearnByTests\Domain\Command\ToggleSkipQuestionHandler
+    arguments:
+      - '@LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionPersister'
+      - '@LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\ToggleSkipQuestion, bus: command }

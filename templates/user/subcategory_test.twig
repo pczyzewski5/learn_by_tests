@@ -2,11 +2,12 @@
 {% block body %}
     {{ include('admin/common/question.html.twig') }}
 
-    {% if is_granted('ROLE_ADMIN') %}
-        <div class="d-flex justify-content-end edit-buttons">
+    <div class="d-flex justify-content-end edit-buttons">
+        <a class="btn btn-success btn-sm" href="{{ path('skip_question', {'questionId': question.getId()}) }}">pomijaj</a>
+        {% if is_granted('ROLE_ADMIN') %}
             <a class="btn btn-primary btn-sm" target="_blank" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">szczegóły</a>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 
     {% set params = { } %}
 

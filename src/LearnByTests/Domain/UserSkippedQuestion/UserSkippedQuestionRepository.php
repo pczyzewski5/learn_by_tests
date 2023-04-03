@@ -12,4 +12,11 @@ interface UserSkippedQuestionRepository
      * @throws UserQuestionAnswerNotFoundException
      */
     public function findOne(string $userId, string $questionId): ?UserSkippedQuestion;
+
+    /**
+     * @return string[]
+     */
+    public function findAllQuestionIds(string $userId): array;
+
+    public function isSkipped(string $userId, string $questionId): bool;
 }

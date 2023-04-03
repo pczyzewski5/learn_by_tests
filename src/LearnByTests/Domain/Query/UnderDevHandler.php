@@ -19,10 +19,12 @@ class UnderDevHandler
 
     public function __invoke(UnderDev $query): array
     {
-        $sql = 'SELECT q.id, q.question, q.category, q.subcategory, a.is_correct FROM questions q
+        $sql = 'SELECT q.id, q.question, q.category, q.subcategory, a.is_correct, (usq.question_id IS NOT NULL) as is_skipped FROM questions q
                     LEFT JOIN user_question_answers uqa ON q.id = uqa.question_id
                     LEFT JOIN answers a ON a.id = uqa.answer_id
+                    LEFT JOIN user_skipped_questions usq ON usq.question_id = q.id
                 WHERE (uqa.user_id = :userId OR uqa.user_id IS NULL)
+                    AND (usq.user_id = :userId OR usq.user_id IS NULL)
                     AND q.category = :category
                     AND q.subcategory LIKE :subcategory;';
 
@@ -46,6 +48,8 @@ class UnderDevHandler
             if (null !== $item['is_correct']) {
                 $item['is_correct'] = (int)$item['is_correct'];
             }
+
+            $item['is_skipped'] = (int)$item['is_skipped'];
 
             $result[] = $item;
         };

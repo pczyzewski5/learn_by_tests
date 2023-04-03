@@ -80,7 +80,10 @@ class AdminController extends BaseController
         );
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
+            new GetQuestionWithAnswers(
+                $request->get('questionId'),
+                $this->getUser()->getId()
+            )
         );
 
         return $this->renderForm('admin/question_details.twig', [
@@ -140,7 +143,10 @@ class AdminController extends BaseController
         $questionId = $request->get('questionId');
         /** @var QuestionWithAnswersDTO $questionWithAnswersDTO */
         $questionWithAnswersDTO = $this->queryBus->handle(
-            new GetQuestionWithAnswers($questionId)
+            new GetQuestionWithAnswers(
+                $questionId,
+                $this->getUser()->getId()
+            )
         );
         $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
         if ($hasAllAnswers) {
@@ -178,7 +184,10 @@ class AdminController extends BaseController
         $questionId = $request->get('questionId');
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($questionId)
+            new GetQuestionWithAnswers(
+                $questionId,
+                $this->getUser()->getId()
+            )
         );
         $form = $this->createForm(
             SelectAnswerForm::class,
@@ -216,7 +225,10 @@ class AdminController extends BaseController
         );
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
+            new GetQuestionWithAnswers(
+                $request->get('questionId'),
+                $this->getUser()->getId()
+            )
         );
         $question = $dto->getQuestion();
 
@@ -260,7 +272,10 @@ class AdminController extends BaseController
         );
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
+            new GetQuestionWithAnswers(
+                $request->get('questionId'),
+                $this->getUser()->getId()
+            )
         );
         $question = $dto->getQuestion();
 
@@ -301,7 +316,10 @@ class AdminController extends BaseController
         );
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
+            new GetQuestionWithAnswers(
+                $request->get('questionId'),
+                $this->getUser()->getId()
+            )
         );
         $question = $dto->getQuestion();
 
@@ -354,7 +372,10 @@ class AdminController extends BaseController
         );
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
+            new GetQuestionWithAnswers(
+                $request->get('questionId'),
+                $this->getUser()->getId()
+            )
         );
         $question = $dto->getQuestion();
         $answer = $dto->findAnswer(
@@ -400,7 +421,10 @@ class AdminController extends BaseController
         $questionId = $request->get('questionId');
         /** @var QuestionWithAnswersDTO $questionWithAnswersDTO */
         $questionWithAnswersDTO = $this->queryBus->handle(
-            new GetQuestionWithAnswers($questionId)
+            new GetQuestionWithAnswers(
+                $questionId,
+                $this->getUser()->getId()
+            )
         );
         $hasAllAnswers = \count($questionWithAnswersDTO->getAnswers()) === 4;
         if ($hasAllAnswers) {

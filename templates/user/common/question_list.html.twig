@@ -10,14 +10,18 @@
                 </a>
             </div>
             <div class="d-flex align-items-center">
-                {% if question['is_correct'] is same as 1 %}
-                    <span class="success-dot"></span>
-                {% endif %}
-                {% if question['is_correct'] is same as 0 %}
-                    <span class="failure-dot"></span>
-                {% endif %}
-                {% if question['is_correct'] is null %}
-                    <span class="dot"></span>
+                {% if question['is_skipped'] is same as 1 %}
+                    <span class="double-success-dot"></span>
+                {% else %}
+                    {% if question['is_correct'] is same as 1 %}
+                        <span class="success-dot"></span>
+                    {% endif %}
+                    {% if question['is_correct'] is same as 0 %}
+                        <span class="failure-dot"></span>
+                    {% endif %}
+                    {% if question['is_correct'] is null %}
+                        <span class="dot"></span>
+                    {% endif %}
                 {% endif %}
             </div>
         </li>

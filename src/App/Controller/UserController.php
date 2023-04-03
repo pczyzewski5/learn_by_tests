@@ -10,7 +10,9 @@ use App\Form\Question\SelectAnswerForm;
 use App\QueryBus\QueryBus;
 use LearnByTests\Domain\Category\CategoryEnum;
 use LearnByTests\Domain\Command\CreateUserQuestionAnswer;
+use LearnByTests\Domain\Command\ToggleSkipQuestion;
 use LearnByTests\Domain\Command\DeleteUserQuestionAnswers;
+use LearnByTests\Domain\Command\UnskipQuestion;
 use LearnByTests\Domain\Query\FindQuestionForTest;
 use LearnByTests\Domain\Query\GetCategories;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
@@ -87,14 +89,18 @@ class UserController extends BaseController
         $noAnswersCount = 0;
 
         foreach ($questions as $question) {
-            if (1 === $question['is_correct']) {
+            if (1 === $question['is_skipped']) {
                 $correctAnswersCount++;
-            }
-            if (0 === $question['is_correct']) {
-                $invalidAnswersCount++;
-            }
-            if (null === $question['is_correct']) {
-                $noAnswersCount++;
+            } else {
+                if (1 === $question['is_correct']) {
+                    $correctAnswersCount++;
+                }
+                if (0 === $question['is_correct']) {
+                    $invalidAnswersCount++;
+                }
+                if (null === $question['is_correct']) {
+                    $noAnswersCount++;
+                }
             }
         }
 
@@ -103,8 +109,8 @@ class UserController extends BaseController
         }
 
         return [
-          'correct_answers' => 0 === $itemsCount ? 0 : (int)\round(($correctAnswersCount / $itemsCount) * 100),
-          'invalid_answers' => 0 === $itemsCount ? 0 : (int)\round(($invalidAnswersCount / $itemsCount) * 100),
+            'correct_answers' => 0 === $itemsCount ? 0 : (int)\round(($correctAnswersCount / $itemsCount) * 100),
+            'invalid_answers' => 0 === $itemsCount ? 0 : (int)\round(($invalidAnswersCount / $itemsCount) * 100),
         ];
     }
 
@@ -156,13 +162,17 @@ class UserController extends BaseController
         );
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
-            new GetQuestionWithAnswers($request->get('questionId'))
+            new GetQuestionWithAnswers(
+                $request->get('questionId'),
+                $this->getUser()->getId()
+            )
         );
 
         return $this->renderForm('user/question_details.twig', [
             'question' => $dto->getQuestion(),
             'answers' => $dto->getAnswers(),
-            'category' => $category
+            'category' => $category,
+            'is_question_skipped' => $dto->isQuestionSkipped()
         ]);
     }
 
@@ -194,11 +204,26 @@ class UserController extends BaseController
         $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
-        $question = $this->queryBus->handle(
-            new GetQuestionWithAnswers(
-                $request->get('questionId')
+        $nextQuestion = $this->queryBus->handle(
+            new FindQuestionForTest(
+                $user->getId(),
+                $category
             )
         );
+        /** @var QuestionWithAnswersDTO $question */
+        $question = $this->queryBus->handle(
+            new GetQuestionWithAnswers(
+                $request->get('questionId'),
+                $this->getUser()->getId()
+            )
+        );
+        if ($question->isQuestionSkipped()) {
+            return $this->redirectToRoute(
+                'all_categories_test',
+                ['category' => $category->getLowerKey(), 'questionId' => $nextQuestion->getId()]
+            );
+        }
+
         $answers = $question->getAnswers();
         \shuffle($answers);
 
@@ -216,13 +241,6 @@ class UserController extends BaseController
                     $user->getId(),
                     $question->getQuestion()->getId(),
                     $data[SelectAnswerForm::SELECTED_ANSWER_FIELD]
-                )
-            );
-
-            $nextQuestion = $this->queryBus->handle(
-                new FindQuestionForTest(
-                    $user->getId(),
-                    $category
                 )
             );
 
@@ -271,11 +289,30 @@ class UserController extends BaseController
         $subcategory = CategoryEnum::fromLowerKey(
             $request->get('subcategory')
         );
-        $question = $this->queryBus->handle(
-            new GetQuestionWithAnswers(
-                $request->get('questionId')
+        $nextQuestion = $this->queryBus->handle(
+            new FindQuestionForTest(
+                $user->getId(),
+                $category,
+                $subcategory
             )
         );
+        $question = $this->queryBus->handle(
+            new GetQuestionWithAnswers(
+                $request->get('questionId'),
+                $this->getUser()->getId()
+            )
+        );
+        if ($question->isQuestionSkipped()) {
+            return $this->redirectToRoute(
+                'category_test',
+                [
+                    'category' => $category->getLowerKey(),
+                    'subcategory' => $subcategory->getLowerKey(),
+                    'questionId' => $nextQuestion->getId()
+                ]
+            );
+        }
+
         $answers = $question->getAnswers();
         \shuffle($answers);
 
@@ -293,14 +330,6 @@ class UserController extends BaseController
                     $user->getId(),
                     $question->getQuestion()->getId(),
                     $data[SelectAnswerForm::SELECTED_ANSWER_FIELD]
-                )
-            );
-
-            $nextQuestion = $this->queryBus->handle(
-                new FindQuestionForTest(
-                    $user->getId(),
-                    $category,
-                    $subcategory
                 )
             );
 
@@ -343,5 +372,19 @@ class UserController extends BaseController
             'category' => $category,
             'answers' => $answers,
         ]);
+    }
+
+    public function toggleSkipQuestion(Request $request): Response
+    {
+        $this->commandBus->handle(
+            new ToggleSkipQuestion(
+                $this->getUser()->getId(),
+                $request->get('questionId')
+            )
+        );
+
+        return $this->redirect(
+            $request->headers->get('referer')
+        );
     }
 }

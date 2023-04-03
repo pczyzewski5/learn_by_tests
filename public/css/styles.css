@@ -48,6 +48,14 @@ textarea {
     border-radius: 50%;
     display: inline-block;
 }
+.double-success-dot {
+    height: 23px;
+    width: 23px;
+    background-color: lawngreen;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid green;
+}
 .failure-dot {
     height: 24px;
     width: 24px;
