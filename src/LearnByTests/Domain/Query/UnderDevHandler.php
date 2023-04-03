@@ -48,8 +48,9 @@ class UnderDevHandler
             if (null !== $item['is_correct']) {
                 $item['is_correct'] = (int)$item['is_correct'];
             }
-
-            $item['is_skipped'] = (int)$item['is_skipped'];
+            if (null !== $item['is_skipped']) {
+                $item['is_skipped'] = (int)$item['is_skipped'];
+            }
 
             $result[] = $item;
         };
