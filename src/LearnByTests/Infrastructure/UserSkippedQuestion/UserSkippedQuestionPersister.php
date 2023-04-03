@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LearnByTests\Infrastructure\UserSkippedQuestion;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionPersister as DomainPersister;
 use LearnByTests\Domain\Exception\PersisterException;
@@ -35,6 +36,14 @@ class UserSkippedQuestionPersister implements DomainPersister
 
     public function deleteAllByQuestionId(string $questionId): void
     {
-
+        try {
+            $this->entityManager->getConnection()->executeQuery(
+                'DELETE FROM user_skipped_questions WHERE question_id = ?',
+                [$questionId],
+                [Types::STRING]
+            );
+        } catch (\Throwable $exception) {
+            throw PersisterException::fromThrowable($exception);
+        }
     }
 }

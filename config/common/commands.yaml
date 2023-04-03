@@ -28,6 +28,7 @@ services:
       - '@LearnByTests\Domain\Question\QuestionPersister'
       - '@LearnByTests\Domain\Answer\AnswerPersister'
       - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister'
+      - '@LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteQuestion, bus: command }
 
