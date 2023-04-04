@@ -304,6 +304,12 @@ class UserController extends BaseController
                 $this->getUser()->getId()
             )
         );
+        if (null === $nextQuestion) {
+            return $this->redirectToRoute('user_question_category_list', [
+                'category' => $category->getLowerKey(),
+                'subcategory' => $subcategory->getLowerKey()
+            ]);
+        }
         if ($question->isQuestionSkipped()) {
             return $this->redirectToRoute(
                 'category_test',
