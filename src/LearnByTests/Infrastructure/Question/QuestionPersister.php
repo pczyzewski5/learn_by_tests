@@ -41,7 +41,8 @@ class QuestionPersister implements DomainPersister
                   SET question = :question,
                       author_id = :authorId,
                       category = :category,
-                      subcategory = :subcategory
+                      subcategory = :subcategory,
+                      toReview = :toReview
                   WHERE id = :id;';
 
             $this->entityManager->getConnection()->executeQuery(
@@ -52,6 +53,7 @@ class QuestionPersister implements DomainPersister
                     'authorId' => $question->getAuthorId(),
                     'category' => $question->getCategory()->getLowerKey(),
                     'subcategory' => $question->getSubcategory()->getLowerKey(),
+                    'toReview' => $question->toReview(),
                 ],
                 [
                     'id' => Types::STRING,
@@ -59,6 +61,7 @@ class QuestionPersister implements DomainPersister
                     'authorId' => Types::STRING,
                     'category' => Types::STRING,
                     'subcategory' => Types::STRING,
+                    'toReview' => Types::BOOLEAN,
                 ]
             );
         } catch (\Throwable $exception) {

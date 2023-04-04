@@ -13,7 +13,8 @@ class QuestionFactory
         string $question,
         string $authorId,
         CategoryEnum $category,
-        CategoryEnum $subcategory
+        CategoryEnum $subcategory,
+        bool $toReview = false
     ): Question {
         $dto = new QuestionDTO();
         $dto->id = Uuid::v1()->toRfc4122();
@@ -21,6 +22,7 @@ class QuestionFactory
         $dto->authorId = $authorId;
         $dto->category = $category;
         $dto->subcategory = $subcategory;
+        $dto->toReview = $toReview;
         $dto->createdAt = new \DateTimeImmutable();
 
         return new Question($dto);

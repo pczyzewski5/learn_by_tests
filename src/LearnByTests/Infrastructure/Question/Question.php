@@ -11,5 +11,6 @@ class Question
     public ?string $authorId;
     public ?string $category;
     public ?string $subcategory;
+    public ?bool $toReview;
     public ?\DateTime $createdAt;
 }

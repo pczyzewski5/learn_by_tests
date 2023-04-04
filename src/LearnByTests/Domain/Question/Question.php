@@ -18,6 +18,7 @@ class Question
     private string $authorId;
     private CategoryEnum $category;
     private CategoryEnum $subcategory;
+    private bool $toReview;
     private \DateTimeImmutable $createdAt;
 
     public function __construct(QuestionDTO $dto)
@@ -53,6 +54,10 @@ class Question
             throw AnswerValidationException::missingProperty('subcategory');
         }
 
+        if (!isset($this->toReview)) {
+            throw AnswerValidationException::missingProperty('to_review');
+        }
+
         if (!isset($this->createdAt)) {
             throw AnswerValidationException::missingProperty('createdAt');
         }
@@ -81,6 +86,11 @@ class Question
     public function getSubcategory(): CategoryEnum
     {
         return $this->subcategory;
+    }
+
+    public function toReview(): bool
+    {
+        return $this->toReview;
     }
 
     public function getCreatedAt(): \DateTimeImmutable

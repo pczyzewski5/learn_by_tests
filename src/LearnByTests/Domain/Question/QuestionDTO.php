@@ -13,5 +13,6 @@ class QuestionDTO
     public ?string $authorId = null;
     public ?CategoryEnum $category = null;
     public ?CategoryEnum $subcategory = null;
+    public ?bool $toReview = null;
     public ?\DateTimeImmutable $createdAt = null;
 }
