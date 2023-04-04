@@ -14,5 +14,5 @@ interface CategoryRepository
     /**
      * @return CategoryEnum[]
      */
-    public function getSubCategoriesForCategory(CategoryEnum $category): array;
+    public function getSubcategoriesForCategory(CategoryEnum $category): array;
 }

@@ -23,7 +23,7 @@ use LearnByTests\Domain\Query\GetCategories;
 use LearnByTests\Domain\Query\FindQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
 use LearnByTests\Domain\Category\CategoryEnum;
-use LearnByTests\Domain\Query\GetSubCategories;
+use LearnByTests\Domain\Query\GetSubcategories;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -54,7 +54,7 @@ class AdminController extends BaseController
             $request->get('category')
         );
         $subcategories = $this->queryBus->handle(
-            new GetSubCategories($category)
+            new GetSubcategories($category)
         );
         $questions = $this->queryBus->handle(
             new FindQuestions(
@@ -221,7 +221,7 @@ class AdminController extends BaseController
             $request->get('category')
         );
         $subcategories = $this->queryBus->handle(
-            new GetSubCategories($category)
+            new GetSubcategories($category)
         );
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(
@@ -268,7 +268,7 @@ class AdminController extends BaseController
             $request->get('category')
         );
         $subcategories = $this->queryBus->handle(
-            new GetSubCategories($category)
+            new GetSubcategories($category)
         );
         /** @var QuestionWithAnswersDTO $dto */
         $dto = $this->queryBus->handle(

@@ -7,7 +7,7 @@ namespace LearnByTests\Domain\Query;
 use LearnByTests\Domain\Category\CategoryEnum;
 use LearnByTests\Domain\Category\CategoryRepository;
 
-class GetSubCategoriesHandler
+class GetSubcategoriesHandler
 {
     private CategoryRepository $categoryRepository;
 
@@ -19,9 +19,9 @@ class GetSubCategoriesHandler
     /**
      * @return CategoryEnum[]
      */
-    public function __invoke(GetSubCategories $query): array
+    public function __invoke(GetSubcategories $query): array
     {
-        return $this->categoryRepository->getSubCategoriesForCategory(
+        return $this->categoryRepository->getSubcategoriesForCategory(
             $query->getCategory()
         );
     }

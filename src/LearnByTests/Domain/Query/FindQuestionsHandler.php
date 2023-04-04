@@ -20,11 +20,11 @@ class FindQuestionsHandler
     {
         return null === $query->getSubcategory()
             ? $this->questionRepository->findAllByCategory(
-                $query->getCategory()->getValue()
+                $query->getCategory()->getLowerKey()
             )
             : $this->questionRepository->findAllByCategoryAndSubcategory(
-                $query->getCategory()->getValue(),
-                $query->getSubcategory()->getValue()
+                $query->getCategory()->getLowerKey(),
+                $query->getSubcategory()->getLowerKey()
             );
     }
 }

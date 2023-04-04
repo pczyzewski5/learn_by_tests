@@ -16,7 +16,7 @@ use LearnByTests\Domain\Command\UnskipQuestion;
 use LearnByTests\Domain\Query\FindQuestionForTest;
 use LearnByTests\Domain\Query\GetCategories;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
-use LearnByTests\Domain\Query\GetSubCategories;
+use LearnByTests\Domain\Query\GetSubcategories;
 use LearnByTests\Domain\Query\UnderDev;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,7 +67,7 @@ class UserController extends BaseController
             )
         );
         $subcategories = $this->queryBus->handle(
-            new GetSubCategories($category)
+            new GetSubcategories($category)
         );
 
         $stats = $this->calcStats($questions);
@@ -140,7 +140,7 @@ class UserController extends BaseController
             )
         );
         $subcategories = $this->queryBus->handle(
-            new GetSubCategories($category)
+            new GetSubcategories($category)
         );
 
         $stats = $this->calcStats($questions);

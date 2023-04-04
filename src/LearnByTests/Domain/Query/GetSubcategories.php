@@ -6,7 +6,7 @@ namespace LearnByTests\Domain\Query;
 
 use LearnByTests\Domain\Category\CategoryEnum;
 
-class GetSubCategories
+class GetSubcategories
 {
     private CategoryEnum $category;
 

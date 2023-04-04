@@ -16,6 +16,8 @@ class GetAnswerCountForQuestionHandler
 
     public function __invoke(GetAnswerCountForQuestion $query): int
     {
-        return $this->answerRepository->getAnswerCountForQuestion($query->getQuestionId());
+        return $this->answerRepository->getAnswerCountForQuestion(
+            $query->getQuestionId()
+        );
     }
 }

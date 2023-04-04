@@ -28,12 +28,17 @@ class UnderDevHandler
                     AND q.category = :category
                     AND q.subcategory LIKE :subcategory;';
 
+        $subcategory = '%';
+        if (null !== $query->getSubcategory()) {
+            $subcategory = $query->getSubcategory()->getLowerKey();
+        }
+
         $stmt = $this->entityManager->getConnection()->executeQuery(
             $sql,
             [
                 'userId' => $query->getUserId(),
-                'category' => $query->getCategory(),
-                'subcategory' => $query->getSubcategory() ?? '%',
+                'category' => $query->getCategory()->getLowerKey(),
+                'subcategory' => $subcategory,
             ],
             [
                 'userId' => Types::STRING,

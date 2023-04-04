@@ -29,12 +29,12 @@ services:
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetCategories, bus: query }
 
-  LearnByTests\Domain\Query\GetSubCategoriesHandler:
-    class: LearnByTests\Domain\Query\GetSubCategoriesHandler
+  LearnByTests\Domain\Query\GetSubcategoriesHandler:
+    class: LearnByTests\Domain\Query\GetSubcategoriesHandler
     arguments:
       - '@LearnByTests\Domain\Category\CategoryRepository'
     tags:
-      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetSubCategories, bus: query }
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetSubcategories, bus: query }
 
   LearnByTests\Domain\Query\GetUsersHandler:
     class: LearnByTests\Domain\Query\GetUsersHandler

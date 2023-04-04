@@ -20,7 +20,7 @@ class CategoryRepository implements DomainRepository
         ];
     }
 
-    public function getSubCategoriesForCategory(CategoryEnum $category): array
+    public function getSubcategoriesForCategory(CategoryEnum $category): array
     {
         $data = [
             CategoryEnum::JSM => [

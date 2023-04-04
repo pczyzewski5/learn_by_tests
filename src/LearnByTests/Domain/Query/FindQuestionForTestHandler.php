@@ -29,11 +29,11 @@ class FindQuestionForTestHandler
     {
         $questions = null === $query->getSubcategory()
             ? $this->questionRepository->findAllByCategory(
-                $query->getCategory()->getValue()
+                $query->getCategory()->getLowerKey()
             )
             : $this->questionRepository->findAllByCategoryAndSubcategory(
-                $query->getCategory()->getValue(),
-                $query->getSubcategory()->getValue()
+                $query->getCategory()->getLowerKey(),
+                $query->getSubcategory()->getLowerKey()
             );
 
         $questionIdsToAvoid = \array_merge(
@@ -42,6 +42,7 @@ class FindQuestionForTestHandler
         );
 
         \shuffle($questions);
+
         foreach ($questions as $question) {
             $questionId = $question->getId();
 
