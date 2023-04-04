@@ -50,8 +50,8 @@ class QuestionPersister implements DomainPersister
                     'id' => $question->getId(),
                     'question' => $question->getQuestion(),
                     'authorId' => $question->getAuthorId(),
-                    'category' => $question->getCategory(),
-                    'subcategory' => $question->getSubcategory(),
+                    'category' => $question->getCategory()->getLowerKey(),
+                    'subcategory' => $question->getSubcategory()->getLowerKey(),
                 ],
                 [
                     'id' => Types::STRING,
