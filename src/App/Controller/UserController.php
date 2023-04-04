@@ -268,7 +268,8 @@ class UserController extends BaseController
                 'answers' => $sortedAnswers,
                 'show_answer_id' => false,
                 'category' => $category,
-                'is_question_skipped' => $question->isQuestionSkipped()
+                'is_question_skipped' => $question->isQuestionSkipped(),
+                'is_submitted' => true
             ]);
         }
 
@@ -369,7 +370,8 @@ class UserController extends BaseController
                 'answers' => $sortedAnswers,
                 'show_answer_id' => false,
                 'category' => $category,
-                'is_question_skipped' => $question->isQuestionSkipped()
+                'is_question_skipped' => $question->isQuestionSkipped(),
+                'is_submitted' => true
             ]);
         }
 
