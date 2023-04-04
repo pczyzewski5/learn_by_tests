@@ -73,3 +73,6 @@ textarea {
 .answer-letter {
     border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
+.bg-double-success {
+    background-color: rgba(124, 252, 0, 1)!important;
+}

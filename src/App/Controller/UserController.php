@@ -85,12 +85,13 @@ class UserController extends BaseController
     {
         $itemsCount = \count($questions);
         $correctAnswersCount = 0;
+        $skippedAnswersCount = 0;
         $invalidAnswersCount = 0;
         $noAnswersCount = 0;
 
         foreach ($questions as $question) {
             if (1 === $question['is_skipped']) {
-                $correctAnswersCount++;
+                $skippedAnswersCount++;
             } else {
                 if (1 === $question['is_correct']) {
                     $correctAnswersCount++;
@@ -109,6 +110,7 @@ class UserController extends BaseController
         }
 
         return [
+            'skipped_answers' => 0 === $itemsCount ? 0 : (int)\round(($skippedAnswersCount / $itemsCount) * 100),
             'correct_answers' => 0 === $itemsCount ? 0 : (int)\round(($correctAnswersCount / $itemsCount) * 100),
             'invalid_answers' => 0 === $itemsCount ? 0 : (int)\round(($invalidAnswersCount / $itemsCount) * 100),
         ];
