@@ -17,6 +17,7 @@ use LearnByTests\Domain\Command\DeleteAnswer;
 use LearnByTests\Domain\Command\DeleteQuestion;
 use LearnByTests\Domain\Command\DuplicateQuestion;
 use LearnByTests\Domain\Command\SetAnswerAsCorrect;
+use LearnByTests\Domain\Command\ToggleQuestionReview;
 use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
 use LearnByTests\Domain\Query\GetCategories;
@@ -479,6 +480,17 @@ class AdminController extends BaseController
 
         return $this->redirectToRoute('question_details', ['category' => $category->getLowerKey(), 'questionId' => $questionId]);
     }
+
+    public function toggleQuestionReview(Request $request): Response
+    {
+        $this->commandBus->handle(
+            new ToggleQuestionReview(
+                $request->get('questionId')
+            )
+        );
+
+        return $this->redirect(
+            $request->headers->get('referer')
+        );
+    }
 }
-
-

@@ -83,6 +83,11 @@ duplicate_question:
     path: /admin/{category}/question/{questionId}/duplicate
     controller: App\Controller\AdminController::duplicateQuestion
     methods: [ GET ]
+
+toggle_question_review:
+    path: /admin/question/{questionId}/to_review
+    controller: App\Controller\AdminController::toggleQuestionReview
+    methods: [ GET ]
 # end of AdminController
 
 # SuperAdminController

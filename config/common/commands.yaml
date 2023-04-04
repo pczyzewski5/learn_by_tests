@@ -120,3 +120,11 @@ services:
       - '@LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\ToggleSkipQuestion, bus: command }
+
+  LearnByTests\Domain\Command\ToggleQuestionReviewHandler:
+    class: LearnByTests\Domain\Command\ToggleQuestionReviewHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionPersister'
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\ToggleQuestionReview, bus: command }

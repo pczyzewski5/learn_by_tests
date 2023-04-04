@@ -42,7 +42,7 @@ class QuestionPersister implements DomainPersister
                       author_id = :authorId,
                       category = :category,
                       subcategory = :subcategory,
-                      toReview = :toReview
+                      to_review = :toReview
                   WHERE id = :id;';
 
             $this->entityManager->getConnection()->executeQuery(

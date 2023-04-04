@@ -268,6 +268,7 @@ class UserController extends BaseController
                 'answers' => $sortedAnswers,
                 'show_answer_id' => false,
                 'category' => $category,
+                'is_question_skipped' => $question->isQuestionSkipped()
             ]);
         }
 
@@ -279,6 +280,7 @@ class UserController extends BaseController
             'show_answer_id' => true,
             'category' => $category,
             'answers' => $answers,
+            'is_question_skipped' => $question->isQuestionSkipped()
         ]);
     }
 
@@ -367,6 +369,7 @@ class UserController extends BaseController
                 'answers' => $sortedAnswers,
                 'show_answer_id' => false,
                 'category' => $category,
+                'is_question_skipped' => $question->isQuestionSkipped()
             ]);
         }
 
@@ -379,6 +382,7 @@ class UserController extends BaseController
             'show_answer_id' => true,
             'category' => $category,
             'answers' => $answers,
+            'is_question_skipped' => $question->isQuestionSkipped()
         ]);
     }
 
