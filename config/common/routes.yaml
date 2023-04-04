@@ -88,6 +88,11 @@ toggle_question_review:
     path: /admin/question/{questionId}/to_review
     controller: App\Controller\AdminController::toggleQuestionReview
     methods: [ GET ]
+
+to_review_question_list:
+    path: /admin/{category}/question/to_review_list
+    controller: App\Controller\AdminController::toReviewQuestionList
+    methods: [ GET ]
 # end of AdminController
 
 # SuperAdminController

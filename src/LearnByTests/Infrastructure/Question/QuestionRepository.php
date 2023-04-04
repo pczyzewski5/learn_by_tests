@@ -69,4 +69,14 @@ class QuestionRepository implements DomainRepository
             )
         );
     }
+
+    public function findAllToReview(): array
+    {
+        return QuestionMapper::mapArrayToDomain(
+            $this->entityManager->getRepository(Question::class)->findBy(
+                ['toReview' => true],
+                ['createdAt' => 'DESC']
+            )
+        );
+    }
 }

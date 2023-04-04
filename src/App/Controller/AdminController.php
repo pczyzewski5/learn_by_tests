@@ -20,6 +20,7 @@ use LearnByTests\Domain\Command\SetAnswerAsCorrect;
 use LearnByTests\Domain\Command\ToggleQuestionReview;
 use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
+use LearnByTests\Domain\Query\FindQuestionsToReview;
 use LearnByTests\Domain\Query\GetCategories;
 use LearnByTests\Domain\Query\FindQuestions;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
@@ -492,5 +493,27 @@ class AdminController extends BaseController
         return $this->redirect(
             $request->headers->get('referer')
         );
+    }
+
+    public function toReviewQuestionList(Request $request): Response
+    {
+        $subcategory = $request->get('subcategory');
+        $category = CategoryEnum::fromLowerKey(
+            $request->get('category')
+        );
+        $subcategories = $this->queryBus->handle(
+            new GetSubcategories($category)
+        );
+        $questions = $this->queryBus->handle(
+            new FindQuestionsToReview()
+        );
+
+        return $this->renderForm('admin/question_list.html.twig', [
+            'category' => $category,
+            'subcategories' => $subcategories,
+            'active_subcategory' => $subcategory,
+            'questions' => $questions,
+            'question_review_page' => true
+        ]);
     }
 }

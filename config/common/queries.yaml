@@ -15,6 +15,13 @@ services:
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\FindQuestions, bus: query }
 
+  LearnByTests\Domain\Query\FindQuestionsToReviewHandler:
+    class: LearnByTests\Domain\Query\FindQuestionsToReviewHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\FindQuestionsToReview, bus: query }
+
   LearnByTests\Domain\Query\GetAnswerCountForQuestionHandler:
     class: LearnByTests\Domain\Query\GetAnswerCountForQuestionHandler
     arguments:

@@ -2,9 +2,12 @@
 {% block title %}Pytania{% endblock %}
 {% block body %}
     <div class="d-flex flex-wrap">
-        {% set isSelected = (null == active_subcategory) %}
+        {% set isSelected = (null == active_subcategory) and question_review_page is not defined %}
         <a href="{{ path('question_list', {'category': category.getLowerKey()}) }}" class="text-decoration-none">
             {{ include('admin/common/question_subcategory.html.twig', {'subcategory': 'wszystkie', 'isSelected': isSelected}) }}
+        </a>
+        <a href="{{ path('to_review_question_list', {'category': category.getLowerKey()}) }}" class="text-decoration-none">
+            {{ include('admin/common/question_subcategory.html.twig', {'subcategory': 'zaznaczone', 'isSelected': question_review_page is defined}) }}
         </a>
         {% for subcategory in subcategories %}
             {% set isSelected = (subcategory.getLowerKey() == active_subcategory) %}

@@ -27,4 +27,6 @@ interface QuestionRepository
      * @return Question[]
      */
     public function findAllByCategoryAndSubcategory(string $category, string $subcategory): array;
+
+    public function findAllToReview(): array;
 }

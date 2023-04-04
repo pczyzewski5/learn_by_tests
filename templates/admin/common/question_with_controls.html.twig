@@ -2,6 +2,11 @@
 <div class="d-flex justify-content-end edit-buttons">
     <a class="btn btn-outline-secondary btn-sm" target="_blank" href="{{ path('duplicate_question', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">duplikuj</a>
     <a class="btn btn-outline-primary btn-sm" href="{{ path('update_question_category', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">zmień kategorię</a>
+    {% if question.toReview() %}
+        <a class="btn btn-outline-secondary btn-sm" href="{{ path('toggle_question_review', {'questionId': question.getId()}) }}">odznacz</a>
+    {% else %}
+        <a class="btn btn-outline-secondary btn-sm" href="{{ path('toggle_question_review', {'questionId': question.getId()}) }}">zaznacz</a>
+    {% endif %}
     <a class="btn btn-outline-warning btn-sm" href="{{ path('update_question', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">edytuj</a>
     <a class="btn btn-outline-danger btn-sm" href="{{ path('delete_question', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">usuń</a>
 </div>
