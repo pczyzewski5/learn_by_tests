@@ -23,8 +23,8 @@ class DeleteUserQuestionAnswersHandler
     {
         $this->persister->deleteAllByCategoryAndSubcategory(
             $command->getUserId(),
-            $command->getCategory()->getValue(),
-            $command->getSubcategory() === null ? null : $command->getSubcategory()->getValue()
+            $command->getCategory()->getLowerKey(),
+            $command->getSubcategory() === null ? null : $command->getSubcategory()->getLowerKey()
         );
     }
 }
