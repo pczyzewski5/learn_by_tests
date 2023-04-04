@@ -105,7 +105,7 @@ class UserController extends BaseController
             }
         }
 
-        if ($itemsCount !== ($correctAnswersCount + $invalidAnswersCount + $noAnswersCount)) {
+        if ($itemsCount !== ($skippedAnswersCount + $correctAnswersCount + $invalidAnswersCount + $noAnswersCount)) {
             throw new \Exception('Given answers count does not match items count.');
         }
 
