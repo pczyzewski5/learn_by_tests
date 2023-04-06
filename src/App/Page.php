@@ -6,7 +6,7 @@ namespace App;
 
 class Page
 {
-    public const MAX_ITEMS_PER_PAGE = 2;
+    public const MAX_ITEMS_PER_PAGE = 20;
 
     private int $currentPage;
     private int $totalItemsCount;
