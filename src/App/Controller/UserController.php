@@ -12,12 +12,11 @@ use LearnByTests\Domain\Category\CategoryEnum;
 use LearnByTests\Domain\Command\CreateUserQuestionAnswer;
 use LearnByTests\Domain\Command\ToggleSkipQuestion;
 use LearnByTests\Domain\Command\DeleteUserQuestionAnswers;
-use LearnByTests\Domain\Command\UnskipQuestion;
 use LearnByTests\Domain\Query\FindQuestionForTest;
 use LearnByTests\Domain\Query\GetCategories;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
 use LearnByTests\Domain\Query\GetSubcategories;
-use LearnByTests\Domain\Query\UnderDev;
+use LearnByTests\Domain\Query\GetTestQuestionPage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -43,6 +42,7 @@ class UserController extends BaseController
 
     public function questionList(Request $request): Response
     {
+        $page = (int)$request->get('page');
         $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
@@ -52,8 +52,9 @@ class UserController extends BaseController
 
         $user = $this->getUser();
 
-        $questions = $this->queryBus->handle(
-            new UnderDev(
+        $testQuestionPage = $this->queryBus->handle(
+            new GetTestQuestionPage(
+                $page,
                 $user->getId(),
                 $category,
                 $subcategory
@@ -70,36 +71,36 @@ class UserController extends BaseController
             new GetSubcategories($category)
         );
 
-        $stats = $this->calcStats($questions);
+        $stats = $this->calcStats($testQuestionPage->getItems());
 
         return $this->renderForm('user/question_list.html.twig', [
             'category' => $category,
             'subcategories' => $subcategories,
-            'questions' => $questions,
+            'test_question_page' => $testQuestionPage,
             'next_question' => $nextQuestion,
             'stats' => $stats
         ]);
     }
 
-    private function calcStats(array $questions)
+    private function calcStats(array $data)
     {
-        $itemsCount = \count($questions);
+        $itemsCount = \count($data);
         $correctAnswersCount = 0;
         $skippedAnswersCount = 0;
         $invalidAnswersCount = 0;
         $noAnswersCount = 0;
 
-        foreach ($questions as $question) {
-            if (1 === $question['is_skipped']) {
+        foreach ($data as $datum) {
+            if (1 === $datum['is_skipped']) {
                 $skippedAnswersCount++;
             } else {
-                if (1 === $question['is_correct']) {
+                if (1 === $datum['is_correct']) {
                     $correctAnswersCount++;
                 }
-                if (0 === $question['is_correct']) {
+                if (0 === $datum['is_correct']) {
                     $invalidAnswersCount++;
                 }
-                if (null === $question['is_correct']) {
+                if (null === $datum['is_correct']) {
                     $noAnswersCount++;
                 }
             }
@@ -118,6 +119,7 @@ class UserController extends BaseController
 
     public function questionCategoryList(Request $request): Response
     {
+        $page = (int)$request->get('page');
         $category = CategoryEnum::fromLowerKey(
             $request->get('category')
         );
@@ -127,8 +129,9 @@ class UserController extends BaseController
 
         $user = $this->getUser();
 
-        $questions = $this->queryBus->handle(
-            new UnderDev(
+        $testQuestionPage = $this->queryBus->handle(
+            new GetTestQuestionPage(
+                $page,
                 $user->getId(),
                 $category,
                 $subcategory
@@ -145,14 +148,14 @@ class UserController extends BaseController
             new GetSubcategories($category)
         );
 
-        $stats = $this->calcStats($questions);
+        $stats = $this->calcStats($testQuestionPage->getItems());
 
         return $this->renderForm('user/question_category_list.html.twig', [
             'active_subcategory' => $subcategory->getLowerKey(),
             'subcategories' => $subcategories,
             'next_question' => $nextQuestion,
             'category' => $category,
-            'questions' => $questions,
+            'test_question_page' => $testQuestionPage,
             'stats' => $stats
         ]);
     }

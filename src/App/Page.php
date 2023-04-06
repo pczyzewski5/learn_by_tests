@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace LearnByTests\Domain\Question;
+namespace App;
 
-class QuestionsPage
+class Page
 {
-    public const MAX_ITEMS_PER_PAGE = 20;
+    public const MAX_ITEMS_PER_PAGE = 2;
 
     private int $currentPage;
-    private int $totalQuestionsCount;
-    private array $questions;
+    private int $totalItemsCount;
+    private array $items;
 
     public function __construct(
         int $currentPage,
-        int $totalQuestionsCount,
-        array $questions,
+        int $totalItemsCount,
+        array $items,
     ) {
         $this->currentPage = $currentPage;
-        $this->totalQuestionsCount = $totalQuestionsCount;
-        $this->questions = $questions;
+        $this->totalItemsCount = $totalItemsCount;
+        $this->items = $items;
     }
 
     public function getCurrentPage(): int
@@ -48,17 +48,14 @@ class QuestionsPage
     public function getPages(): array
     {
         $pagesCount = (int)\ceil(
-            $this->totalQuestionsCount / self::MAX_ITEMS_PER_PAGE
+            $this->totalItemsCount / self::MAX_ITEMS_PER_PAGE
         );
 
         return \range(1, $pagesCount === 0 ? 1 : $pagesCount);
     }
 
-    /**
-     * @return Question[]
-     */
     public function getItems(): array
     {
-        return $this->questions;
+        return $this->items;
     }
 }

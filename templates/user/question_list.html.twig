@@ -27,4 +27,22 @@
 
     {{ include('user/common/question_list.html.twig') }}
 
+    <div class="d-flex justify-content-center mt-1">
+        <nav aria-label="...">
+            <ul class="pagination pagination-sm">
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('user_question_list', {'category': category.getLowerKey(), 'page': test_question_page.getPreviousPage()}) }}">Poprzednia</a>
+                </li>
+                {% for page in test_question_page.getPages() %}
+                    {% set is_active = test_question_page.getCurrentPage() == page %}
+                    <li class="page-item {{ is_active ? 'active' }}" {{ is_active ? 'aria-current="page"' }}>
+                        <a class="page-link" href="{{ path('user_question_list', {'category': category.getLowerKey(), 'page': page}) }}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('user_question_list', {'category': category.getLowerKey(), 'page': test_question_page.getNextPage()}) }}">Następna</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 {% endblock %}

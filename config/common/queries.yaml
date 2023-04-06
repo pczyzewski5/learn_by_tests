@@ -50,12 +50,13 @@ services:
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetUsers, bus: query }
 
-  LearnByTests\Domain\Query\UnderDevHandler:
-    class: LearnByTests\Domain\Query\UnderDevHandler
+  LearnByTests\Domain\Query\GetTestQuestionPageHandler:
+    class: LearnByTests\Domain\Query\GetTestQuestionPageHandler
     arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
       - '@doctrine.orm.entity_manager'
     tags:
-      - { name: tactician.handler, command: LearnByTests\Domain\Query\UnderDev, bus: query }
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetTestQuestionPage, bus: query }
 
   LearnByTests\Domain\Query\FindQuestionForTestHandler:
     class: LearnByTests\Domain\Query\FindQuestionForTestHandler

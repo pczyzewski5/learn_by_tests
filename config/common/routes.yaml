@@ -128,13 +128,17 @@ user_category_list:
     methods: [ GET ]
 
 user_question_list:
-    path: /user/{category}/question/list
+    path: /user/{category}/question/list/{page}
     controller: App\Controller\UserController::questionList
+    defaults:
+        page: 1
     methods: [ GET ]
 
 user_question_category_list:
-    path: /user/{category}/question/category/{subcategory}/list
+    path: /user/{category}/question/category/{subcategory}/list/{page}
     controller: App\Controller\UserController::questionCategoryList
+    defaults:
+        page: 1
     methods: [ GET ]
 
 user_question_details:
