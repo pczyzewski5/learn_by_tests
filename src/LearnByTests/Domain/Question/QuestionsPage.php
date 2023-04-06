@@ -47,7 +47,7 @@ class QuestionsPage
 
     public function getPages(): array
     {
-        $pagesCount = (int)\round(
+        $pagesCount = (int)\ceil(
             $this->totalQuestionsCount / self::MAX_ITEMS_PER_PAGE
         );
 
