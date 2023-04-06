@@ -24,8 +24,8 @@ interface QuestionRepository
      */
     public function findAllByCategory(
         string $category,
-        ?int $limit,
-        ?int $offset,
+        ?int $limit = null,
+        ?int $offset = null,
     ): array;
 
     /**
@@ -34,8 +34,8 @@ interface QuestionRepository
     public function findAllByCategoryAndSubcategory(
         string $category,
         string $subcategory,
-        ?int $limit,
-        ?int $offset,
+        ?int $limit = null,
+        ?int $offset = null,
     ): array;
 
     public function findAllToReview(): array;

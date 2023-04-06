@@ -45,8 +45,8 @@ class QuestionRepository implements DomainRepository
      */
     public function findAllByCategory(
         string $category,
-        ?int $limit,
-        ?int $offset,
+        ?int $limit = null,
+        ?int $offset = null,
     ): array {
         return QuestionMapper::mapArrayToDomain(
             $this->entityManager->getRepository(Question::class)->findBy(
@@ -64,8 +64,8 @@ class QuestionRepository implements DomainRepository
     public function findAllByCategoryAndSubcategory(
         string $category,
         string $subcategory,
-        ?int $limit,
-        ?int $offset,
+        ?int $limit = null,
+        ?int $offset = null,
     ): array {
         return QuestionMapper::mapArrayToDomain(
             $this->entityManager->getRepository(Question::class)->findBy(
