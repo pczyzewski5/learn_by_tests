@@ -8,12 +8,12 @@ services:
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetQuestionWithAnswers, bus: query }
 
-  LearnByTests\Domain\Query\FindQuestionsHandler:
-    class: LearnByTests\Domain\Query\FindQuestionsHandler
+  LearnByTests\Domain\Query\GetQuestionsPageHandler:
+    class: LearnByTests\Domain\Query\GetQuestionsPageHandler
     arguments:
       - '@LearnByTests\Domain\Question\QuestionRepository'
     tags:
-      - { name: tactician.handler, command: LearnByTests\Domain\Query\FindQuestions, bus: query }
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetQuestionsPage, bus: query }
 
   LearnByTests\Domain\Query\FindQuestionsToReviewHandler:
     class: LearnByTests\Domain\Query\FindQuestionsToReviewHandler

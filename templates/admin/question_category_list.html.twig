@@ -36,16 +36,16 @@
         <nav aria-label="...">
             <ul class="pagination pagination-sm">
                 <li class="page-item">
-                    <a class="page-link" href="{{ path('question_list', {'category': category.getLowerKey(), 'page': questions_page.getPreviousPage()}) }}">Poprzednia</a>
+                    <a class="page-link" href="{{ path('question_category_list', {'category': category.getLowerKey(), 'subcategory': active_subcategory, 'page': questions_page.getPreviousPage()}) }}">Poprzednia</a>
                 </li>
                 {% for page in questions_page.getPages() %}
                     {% set is_active = questions_page.getCurrentPage() == page %}
                     <li class="page-item {{ is_active ? 'active' }}" {{ is_active ? 'aria-current="page"' }}>
-                        <a class="page-link" href="{{ path('question_list', {'category': category.getLowerKey(), 'page': page}) }}">{{ page }}</a>
+                        <a class="page-link" href="{{ path('question_category_list', {'category': category.getLowerKey(), 'subcategory': active_subcategory, 'page': page}) }}">{{ page }}</a>
                     </li>
                 {% endfor %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ path('question_list', {'category': category.getLowerKey(), 'page': questions_page.getNextPage()}) }}">Następna</a>
+                    <a class="page-link" href="{{ path('question_category_list', {'category': category.getLowerKey(), 'subcategory': active_subcategory, 'page': questions_page.getNextPage()}) }}">Następna</a>
                 </li>
             </ul>
         </nav>

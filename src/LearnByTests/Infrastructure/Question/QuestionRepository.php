@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LearnByTests\Infrastructure\Question;
 
 use Doctrine\ORM\EntityManagerInterface;
+use LearnByTests\Domain\Category\CategoryEnum;
 use LearnByTests\Domain\Question\Exception\QuestionNotFoundException;
 use LearnByTests\Domain\Question\Question as DomainQuestion;
 use LearnByTests\Domain\Question\QuestionRepository as DomainRepository;
@@ -42,12 +43,17 @@ class QuestionRepository implements DomainRepository
     /**
      * @return DomainQuestion[]
      */
-    public function findAllByCategory(string $category): array
-    {
+    public function findAllByCategory(
+        string $category,
+        ?int $limit,
+        ?int $offset,
+    ): array {
         return QuestionMapper::mapArrayToDomain(
             $this->entityManager->getRepository(Question::class)->findBy(
                 ['category' => $category],
-                ['createdAt' => 'DESC']
+                ['createdAt' => 'DESC'],
+                $limit,
+                $offset
             )
         );
     }
@@ -55,17 +61,18 @@ class QuestionRepository implements DomainRepository
     /**
      * @return DomainQuestion[]
      */
-    public function findAllByCategoryAndSubcategory(string $category, string $subcategory): array
-    {
+    public function findAllByCategoryAndSubcategory(
+        string $category,
+        string $subcategory,
+        ?int $limit,
+        ?int $offset,
+    ): array {
         return QuestionMapper::mapArrayToDomain(
             $this->entityManager->getRepository(Question::class)->findBy(
-                [
-                    'category' => $category,
-                    'subcategory' => $subcategory
-                ],
-                [
-                    'createdAt' => 'DESC'
-                ]
+                ['category' => $category, 'subcategory' => $subcategory],
+                ['createdAt' => 'DESC'],
+                $limit,
+                $offset
             )
         );
     }
@@ -78,5 +85,19 @@ class QuestionRepository implements DomainRepository
                 ['createdAt' => 'DESC']
             )
         );
+    }
+
+    public function countAll(?CategoryEnum $category, ?CategoryEnum $subcategory): int
+    {
+        $criteria = [];
+
+        if (null !== $category) {
+            $criteria = \array_merge($criteria, ['category' => $category->getLowerKey()]);
+        }
+        if (null !== $subcategory) {
+            $criteria = \array_merge($criteria, ['subcategory' => $subcategory->getLowerKey()]);
+        }
+
+        return $this->entityManager->getRepository(Question::class)->count($criteria);
     }
 }

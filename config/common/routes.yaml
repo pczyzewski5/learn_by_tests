@@ -10,13 +10,17 @@ category_list:
     methods: [ GET ]
 
 question_list:
-    path: /admin/{category}/question/list
+    path: /admin/{category}/question/list/{page}
     controller: App\Controller\AdminController::questionList
+    defaults:
+        page: 1
     methods: [ GET ]
 
 question_category_list:
-    path: /admin/{category}/category/{subcategory}/question/list
-    controller: App\Controller\AdminController::questionList
+    path: /admin/{category}/category/{subcategory}/question/list/{page}
+    controller: App\Controller\AdminController::questionCategoryList
+    defaults:
+        page: 1
     methods: [ GET ]
 
 question_details:

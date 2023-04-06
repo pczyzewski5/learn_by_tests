@@ -2,23 +2,21 @@
 {% block title %}Pytania{% endblock %}
 {% block body %}
     <div class="d-flex flex-wrap">
-        {% set isSelected = (null == active_subcategory) and question_review_page is not defined %}
         <a href="{{ path('question_list', {'category': category.getLowerKey()}) }}" class="text-decoration-none">
-            {{ include('admin/common/question_subcategory.html.twig', {'subcategory': 'wszystkie', 'isSelected': isSelected}) }}
+            {{ include('admin/common/question_subcategory.html.twig', {'subcategory': 'wszystkie'}) }}
         </a>
         <a href="{{ path('to_review_question_list', {'category': category.getLowerKey()}) }}" class="text-decoration-none">
             {{ include('admin/common/question_subcategory.html.twig', {'subcategory': 'zaznaczone', 'isSelected': question_review_page is defined}) }}
         </a>
         {% for subcategory in subcategories %}
-            {% set isSelected = (subcategory.getLowerKey() == active_subcategory) %}
             <a href="{{ path('question_category_list', {'category': category.getLowerKey(), 'subcategory': subcategory.getLowerKey()}) }}" class="text-decoration-none">
-                {{ include('admin/common/question_subcategory.html.twig', {'isSelected': isSelected}) }}
+                {{ include('admin/common/question_subcategory.html.twig') }}
             </a>
         {% endfor %}
     </div>
 
     <ul class="list-group">
-        {% for question in questions_page.getItems() %}
+        {% for question in questions %}
             <li class="list-group-item d-flex question list-group-item-action" question-id="{{ question.getId() }}" style="padding: 0.5rem 1rem 0.5rem 1rem;">
                 <div class="d-flex align-items-center" style="width: 100%;">
                     <a class="flex-grow-1 d-flex align-items-center question-content" style="text-decoration: none; color: rgb(33, 37, 41);" href="{{ path('question_details', {'category': category.getLowerKey(), 'questionId': question.getId()}) }}">
@@ -31,23 +29,4 @@
             </li>
         {% endfor %}
     </ul>
-
-    <div class="d-flex justify-content-center mt-1">
-        <nav aria-label="...">
-            <ul class="pagination pagination-sm">
-                <li class="page-item">
-                    <a class="page-link" href="{{ path('question_list', {'category': category.getLowerKey(), 'page': questions_page.getPreviousPage()}) }}">Poprzednia</a>
-                </li>
-                {% for page in questions_page.getPages() %}
-                    {% set is_active = questions_page.getCurrentPage() == page %}
-                    <li class="page-item {{ is_active ? 'active' }}" {{ is_active ? 'aria-current="page"' }}>
-                        <a class="page-link" href="{{ path('question_list', {'category': category.getLowerKey(), 'page': page}) }}">{{ page }}</a>
-                    </li>
-                {% endfor %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ path('question_list', {'category': category.getLowerKey(), 'page': questions_page.getNextPage()}) }}">Następna</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
 {% endblock %}

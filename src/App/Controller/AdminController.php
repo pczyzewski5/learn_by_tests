@@ -22,7 +22,7 @@ use LearnByTests\Domain\Command\UpdateAnswer;
 use LearnByTests\Domain\Command\UpdateQuestion;
 use LearnByTests\Domain\Query\FindQuestionsToReview;
 use LearnByTests\Domain\Query\GetCategories;
-use LearnByTests\Domain\Query\FindQuestions;
+use LearnByTests\Domain\Query\GetQuestionsPage;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
 use LearnByTests\Domain\Category\CategoryEnum;
 use LearnByTests\Domain\Query\GetSubcategories;
@@ -51,6 +51,7 @@ class AdminController extends BaseController
 
     public function questionList(Request $request): Response
     {
+        $page = (int)$request->get('page');
         $subcategory = $request->get('subcategory');
         $category = CategoryEnum::fromLowerKey(
             $request->get('category')
@@ -58,8 +59,9 @@ class AdminController extends BaseController
         $subcategories = $this->queryBus->handle(
             new GetSubcategories($category)
         );
-        $questions = $this->queryBus->handle(
-            new FindQuestions(
+        $questionsPage = $this->queryBus->handle(
+            new GetQuestionsPage(
+                $page,
                 $category,
                 null === $subcategory
                     ? null
@@ -71,7 +73,35 @@ class AdminController extends BaseController
             'category' => $category,
             'subcategories' => $subcategories,
             'active_subcategory' => $subcategory,
-            'questions' => $questions,
+            'questions_page' => $questionsPage,
+        ]);
+    }
+
+    public function questionCategoryList(Request $request): Response
+    {
+        $page = (int)$request->get('page');
+        $subcategory = $request->get('subcategory');
+        $category = CategoryEnum::fromLowerKey(
+            $request->get('category')
+        );
+        $subcategories = $this->queryBus->handle(
+            new GetSubcategories($category)
+        );
+        $questionsPage = $this->queryBus->handle(
+            new GetQuestionsPage(
+                $page,
+                $category,
+                null === $subcategory
+                    ? null
+                    : CategoryEnum::fromLowerKey($subcategory)
+            )
+        );
+
+        return $this->renderForm('admin/question_category_list.html.twig', [
+            'category' => $category,
+            'subcategories' => $subcategories,
+            'active_subcategory' => $subcategory,
+            'questions_page' => $questionsPage,
         ]);
     }
 
@@ -508,7 +538,7 @@ class AdminController extends BaseController
             new FindQuestionsToReview()
         );
 
-        return $this->renderForm('admin/question_list.html.twig', [
+        return $this->renderForm('admin/to_review_question_list.html.twig', [
             'category' => $category,
             'subcategories' => $subcategories,
             'active_subcategory' => $subcategory,
