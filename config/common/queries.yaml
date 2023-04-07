@@ -65,3 +65,10 @@ services:
       - '@LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\FindQuestionForTest, bus: query }
+
+  LearnByTests\Domain\Query\CalculateTestStatsHandler:
+    class: LearnByTests\Domain\Query\CalculateTestStatsHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\CalculateTestStats, bus: query }

@@ -1,0 +1,26 @@
+<div class="progress mb-1">
+    <div class="progress-bar progress-bar-stripped progress-bar-animated bg-double-success"
+         role="progressbar"
+         style="width: {{ stats.getSkippedAnswersCount() }}%"
+         aria-valuenow="{{ stats.getSkippedAnswersCount() }}"
+         aria-valuemin="0"
+         aria-valuemax="100">
+        {{ stats.getSkippedAnswersCount() }}%
+    </div>
+    <div class="progress-bar progress-bar-stripped progress-bar-animated bg-success"
+         role="progressbar"
+         style="width: {{ stats.getCorrectAnswersCount() }}%"
+         aria-valuenow="{{ stats.getCorrectAnswersCount() }}"
+         aria-valuemin="0"
+         aria-valuemax="100">
+        {{ stats.getCorrectAnswersCount() }}%
+    </div>
+    <div class="progress-bar progress-bar-stripped progress-bar-animated bg-danger"
+         role="progressbar"
+         style="width: {{ stats.getInvalidAnswersCount() }}%"
+         aria-valuenow="{{ stats.getInvalidAnswersCount() }}"
+         aria-valuemin="0"
+         aria-valuemax="100">
+        {{ stats.getInvalidAnswersCount() }}%
+    </div>
+</div>

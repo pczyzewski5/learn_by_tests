@@ -21,10 +21,7 @@
         <a href="{{ path('category_test', { 'category': category.getLowerKey(), 'subcategory': active_subcategory, 'questionId': next_question.getId() }) }}" class="mb-1 btn btn-primary btn-sm w-100">Przejdź do testów w wybranej kategorii</a>
     {% endif %}
 
-    <div class="progress mb-1">
-        <div class="progress-bar progress-bar-stripped progress-bar-animated bg-success" role="progressbar" style="width: {{ stats['correct_answers'] }}%" aria-valuenow="{{ stats['correct_answers'] }}" aria-valuemin="0" aria-valuemax="100">{{ stats['correct_answers'] }}%</div>
-        <div class="progress-bar progress-bar-stripped progress-bar-animated bg-danger" role="progressbar" style="width: {{ stats['invalid_answers'] }}%" aria-valuenow="{{ stats['invalid_answers'] }}" aria-valuemin="0" aria-valuemax="100">{{ stats['invalid_answers'] }}%</div>
-    </div>
+    {{ include('user/common/progress_bar.html.twig', {'stats': stats}, with_context = false) }}
 
     {{ include('user/common/question_list.html.twig') }}
 

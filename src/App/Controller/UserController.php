@@ -12,6 +12,7 @@ use LearnByTests\Domain\Category\CategoryEnum;
 use LearnByTests\Domain\Command\CreateUserQuestionAnswer;
 use LearnByTests\Domain\Command\ToggleSkipQuestion;
 use LearnByTests\Domain\Command\DeleteUserQuestionAnswers;
+use LearnByTests\Domain\Query\CalculateTestStats;
 use LearnByTests\Domain\Query\FindQuestionForTest;
 use LearnByTests\Domain\Query\GetCategories;
 use LearnByTests\Domain\Query\GetQuestionWithAnswers;
@@ -71,7 +72,13 @@ class UserController extends BaseController
             new GetSubcategories($category)
         );
 
-        $stats = $this->calcStats($testQuestionPage->getItems());
+        $stats = $this->queryBus->handle(
+            new CalculateTestStats(
+                $user->getId(),
+                $category,
+                $subcategory
+            )
+        );
 
         return $this->renderForm('user/question_list.html.twig', [
             'category' => $category,
@@ -80,41 +87,6 @@ class UserController extends BaseController
             'next_question' => $nextQuestion,
             'stats' => $stats
         ]);
-    }
-
-    private function calcStats(array $data)
-    {
-        $itemsCount = \count($data);
-        $correctAnswersCount = 0;
-        $skippedAnswersCount = 0;
-        $invalidAnswersCount = 0;
-        $noAnswersCount = 0;
-
-        foreach ($data as $datum) {
-            if (1 === $datum['is_skipped']) {
-                $skippedAnswersCount++;
-            } else {
-                if (1 === $datum['is_correct']) {
-                    $correctAnswersCount++;
-                }
-                if (0 === $datum['is_correct']) {
-                    $invalidAnswersCount++;
-                }
-                if (null === $datum['is_correct']) {
-                    $noAnswersCount++;
-                }
-            }
-        }
-
-        if ($itemsCount !== ($skippedAnswersCount + $correctAnswersCount + $invalidAnswersCount + $noAnswersCount)) {
-            throw new \Exception('Given answers count does not match items count.');
-        }
-
-        return [
-            'skipped_answers' => 0 === $itemsCount ? 0 : (int)\round(($skippedAnswersCount / $itemsCount) * 100),
-            'correct_answers' => 0 === $itemsCount ? 0 : (int)\round(($correctAnswersCount / $itemsCount) * 100),
-            'invalid_answers' => 0 === $itemsCount ? 0 : (int)\round(($invalidAnswersCount / $itemsCount) * 100),
-        ];
     }
 
     public function questionCategoryList(Request $request): Response
@@ -148,7 +120,13 @@ class UserController extends BaseController
             new GetSubcategories($category)
         );
 
-        $stats = $this->calcStats($testQuestionPage->getItems());
+        $stats = $this->queryBus->handle(
+            new CalculateTestStats(
+                $user->getId(),
+                $category,
+                $subcategory
+            )
+        );
 
         return $this->renderForm('user/question_category_list.html.twig', [
             'active_subcategory' => $subcategory->getLowerKey(),
