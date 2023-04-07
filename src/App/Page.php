@@ -22,6 +22,13 @@ class Page
         $this->items = $items;
     }
 
+    public static function calculateOffset(int $currentPage): ?int
+    {
+        $offset = ($currentPage * self::MAX_ITEMS_PER_PAGE) - self::MAX_ITEMS_PER_PAGE;
+
+        return 0 >= $offset ? null : $offset;
+    }
+
     public function getCurrentPage(): int
     {
         return $this->currentPage;

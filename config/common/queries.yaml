@@ -54,7 +54,6 @@ services:
     class: LearnByTests\Domain\Query\GetTestQuestionPageHandler
     arguments:
       - '@LearnByTests\Domain\Question\QuestionRepository'
-      - '@doctrine.orm.entity_manager'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\GetTestQuestionPage, bus: query }
 

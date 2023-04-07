@@ -41,4 +41,12 @@ interface QuestionRepository
     public function findAllToReview(): array;
 
     public function countAll(?CategoryEnum $category, ?CategoryEnum $subcategory): int;
+
+    public function getQuestionsWithUserRelatedData(
+        string $userId,
+        CategoryEnum $category,
+        ?CategoryEnum $subcategory = null,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): array;
 }

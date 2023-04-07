@@ -19,21 +19,17 @@ class GetQuestionsPageHandler
 
     public function __invoke(GetQuestionsPage $query): Page
     {
-        $limit = Page::MAX_ITEMS_PER_PAGE;
-        $offset = ($query->getPage() * $limit) - $limit;
-        $offset = 0 >= $offset ? null : $offset;
-
         $questions = null === $query->getSubcategory()
             ? $this->questionRepository->findAllByCategory(
                 $query->getCategory()->getLowerKey(),
-                $limit,
-                $offset,
+                Page::MAX_ITEMS_PER_PAGE,
+                Page::calculateOffset($query->getPage()),
             )
             : $this->questionRepository->findAllByCategoryAndSubcategory(
                 $query->getCategory()->getLowerKey(),
                 $query->getSubcategory()->getLowerKey(),
-                $limit,
-                $offset,
+                Page::MAX_ITEMS_PER_PAGE,
+                Page::calculateOffset($query->getPage()),
             );
 
         $totalQuestionsCount = $this->questionRepository->countAll(
@@ -42,9 +38,9 @@ class GetQuestionsPageHandler
         );
 
         return new Page(
-          $query->getPage(),
-          $totalQuestionsCount,
-          $questions
+            $query->getPage(),
+            $totalQuestionsCount,
+            $questions
         );
     }
 }
