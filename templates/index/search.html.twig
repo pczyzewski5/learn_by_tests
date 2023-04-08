@@ -2,7 +2,9 @@
 {% block title %}Wyniki wyszukiwania{% endblock %}
 {% block body %}
     {% if items is empty %}
-        <h3>Nie znaleziono wyników dla zapytania: "{{ search }}".</h3>
+        <div class="d-flex justify-content-center mt-5">
+            <h3>Nie znaleziono wyników dla zapytania: "{{ search }}".</h3>
+        </div>
     {% else %}
         <ul class="list-group">
             {% for question in items %}
