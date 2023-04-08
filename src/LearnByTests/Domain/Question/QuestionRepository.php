@@ -46,6 +46,7 @@ interface QuestionRepository
         string $userId,
         CategoryEnum $category,
         ?CategoryEnum $subcategory = null,
+        ?string $search = null,
         ?int $limit = null,
         ?int $offset = null,
     ): array;

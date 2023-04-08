@@ -72,3 +72,11 @@ services:
       - '@LearnByTests\Domain\Question\QuestionRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Query\CalculateTestStats, bus: query }
+
+  LearnByTests\Domain\Query\GetQuestionSearchPageHandler:
+    class: LearnByTests\Domain\Query\GetQuestionSearchPageHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionRepository'
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Query\GetQuestionSearchPage, bus: query }
+

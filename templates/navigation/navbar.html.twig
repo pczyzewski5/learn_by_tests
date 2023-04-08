@@ -16,10 +16,12 @@
                         <a class="nav-link" href="{{ path('logout') }}">Wyloguj</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Szukaj</button>
-                </form>
+                {% if app.request.get('category') is not null %}
+                    <form class="d-flex" method="post" action="{{ path('search', {'category': app.request.get('category')}) }}">
+                        <input class="form-control me-2" name="search" type="search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Szukaj</button>
+                    </form>
+                {% endif %}
             {% else %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">

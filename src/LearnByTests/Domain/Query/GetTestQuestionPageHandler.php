@@ -28,6 +28,7 @@ class GetTestQuestionPageHandler
             $query->getUserId(),
             $query->getCategory(),
             $query->getSubcategory(),
+            null,
             Page::MAX_ITEMS_PER_PAGE,
             Page::calculateOffset($query->getPage()),
         );

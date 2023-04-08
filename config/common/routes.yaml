@@ -177,6 +177,13 @@ unskip_question:
     methods: [ GET ]
 # end of UserController
 
+# IndexController
+search:
+    path: /{category}/search
+    controller: App\Controller\IndexController::search
+    methods: [ GET, POST ]
+# end of IndexController
+
 login:
     path: /login
     controller: App\Controller\LoginController::login

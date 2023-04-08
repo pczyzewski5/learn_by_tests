@@ -106,6 +106,7 @@ class QuestionRepository implements DomainRepository
         string $userId,
         CategoryEnum $category,
         ?CategoryEnum $subcategory = null,
+        ?string $search = null,
         ?int $limit = null,
         ?int $offset = null,
     ): array {
@@ -114,34 +115,42 @@ class QuestionRepository implements DomainRepository
                     LEFT JOIN user_question_answers uqa ON q.id = uqa.question_id AND (uqa.user_id = :userId OR uqa.user_id IS NULL)
                     LEFT JOIN answers a ON a.id = uqa.answer_id
                     LEFT JOIN user_skipped_questions usq ON usq.question_id = q.id AND (usq.user_id = :userId OR usq.user_id IS NULL)
-                WHERE q.category = :category
-                    AND q.subcategory LIKE :subcategory
-                ORDER BY q.created_at DESC';
+                    WHERE q.category = :category';
+
+        if (null !== $subcategory) {
+            $sql .= ' AND q.subcategory = :subcategory';
+        }
+
+        if (null !== $search) {
+            $sql .= ' AND MATCH(q.question) AGAINST (:search IN NATURAL LANGUAGE MODE)';
+        }
+
+        $sql .= ' ORDER BY q.created_at DESC';
 
         if (null !== $limit) {
-            $sql .= PHP_EOL . 'LIMIT ' . $limit;
+            $sql .= ' LIMIT :limit';
         }
         if (null !== $offset) {
-            $sql .= PHP_EOL . 'OFFSET ' . $offset;
+            $sql .= ' OFFSET :offset';
         }
-
-        $subcategory = null === $subcategory
-            ? '%'
-            : $subcategory->getLowerKey();
 
         $stmt = $this->entityManager->getConnection()->executeQuery(
             $sql,
             [
                 'userId' => $userId,
                 'category' => $category->getLowerKey(),
-                'subcategory' => $subcategory,
-                'limit' => $limit
+                'subcategory' => null === $subcategory ?: $subcategory->getLowerKey(),
+                'search' => $search,
+                'limit' => $limit,
+                'offset' => $offset,
             ],
             [
                 'userId' => Types::STRING,
                 'category' => Types::STRING,
                 'subcategory' => Types::STRING,
-                'limit' => Types::INTEGER
+                'search' => Types::STRING,
+                'limit' => Types::INTEGER,
+                'offset' => Types::INTEGER
             ]
         );
 
