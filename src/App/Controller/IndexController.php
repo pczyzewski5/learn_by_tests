@@ -41,7 +41,8 @@ class IndexController extends BaseController
 
         return $this->render('index/search.html.twig', [
             'items' => $items,
-            'category' => $category
+            'category' => $category,
+            'search' => $search
         ]);
     }
 }
