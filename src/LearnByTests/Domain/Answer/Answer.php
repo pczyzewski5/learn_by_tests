@@ -109,7 +109,9 @@ class Answer
             $this->answer = $dto->answer;
         }
 
-        $this->comment = $dto->comment;
+        if (null !== $dto->comment) {
+            $this->comment = $dto->comment;
+        }
 
         if (null !== $dto->authorId) {
             $this->authorId = $dto->authorId;

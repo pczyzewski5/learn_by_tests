@@ -27,6 +27,17 @@ class SetAnswerAsCorrectHandler
         $this->setAnswerAsCorrect($command->getAnswerId());
     }
 
+    public function setAnswerAsCorrect(string $answerId): void
+    {
+        $dto = new AnswerDTO();
+        $dto->isCorrect = true;
+
+        $answer = $this->answerRepository->getOneById($answerId);
+        $answer->update($dto);
+
+        $this->answerPersister->update($answer);
+    }
+
     private function setAllAnswersAsIncorrect(string $questionId): void
     {
         $answers = $this->answerRepository->findForQuestion($questionId);
@@ -39,16 +50,5 @@ class SetAnswerAsCorrectHandler
 
             $this->answerPersister->update($answer);
         }
-    }
-
-    public function setAnswerAsCorrect(string $answerId): void
-    {
-        $dto = new AnswerDTO();
-        $dto->isCorrect = true;
-
-        $answer = $this->answerRepository->getOneById($answerId);
-        $answer->update($dto);
-
-        $this->answerPersister->update($answer);
     }
 }

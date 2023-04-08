@@ -28,17 +28,17 @@ class AnswerMapper
     }
 
     public static function fromDomain(
-        DomainAnswer $character
+        DomainAnswer $domainEntity
     ): Answer {
         $entity = new Answer();
-        $entity->id = $character->getId();
-        $entity->questionId = $character->getQuestionId();
-        $entity->answer = $character->getAnswer();
-        $entity->comment = $character->getComment();
-        $entity->authorId = $character->getAuthorId();
-        $entity->isCorrect = $character->isCorrect();
+        $entity->id = $domainEntity->getId();
+        $entity->questionId = $domainEntity->getQuestionId();
+        $entity->answer = $domainEntity->getAnswer();
+        $entity->comment = $domainEntity->getComment();
+        $entity->authorId = $domainEntity->getAuthorId();
+        $entity->isCorrect = $domainEntity->isCorrect();
         $entity->createdAt = DateTime::createFromImmutable(
-            $character->getCreatedAt()
+            $domainEntity->getCreatedAt()
         );
 
         return $entity;
