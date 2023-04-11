@@ -39,6 +39,7 @@ class CategoryRepository implements DomainRepository
                 CategoryEnum::BEAUFORT_SCALE(),
                 CategoryEnum::SOUND_SIGNALS(),
                 CategoryEnum::SIGNS(),
+                CategoryEnum::RADIO(),
             ]
         ];
 

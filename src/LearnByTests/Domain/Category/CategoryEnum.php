@@ -24,5 +24,6 @@ class CategoryEnum extends BaseEnum
     const BEAUFORT_SCALE = 'skala Beauforta';
     const SOUND_SIGNALS = 'sygnały dźwiękowe';
     const SIGNS = 'znaki';
+    const RADIO = 'radio';
 }
 
