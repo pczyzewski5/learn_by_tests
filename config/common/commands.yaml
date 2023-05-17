@@ -95,6 +95,8 @@ services:
     arguments:
       - '@LearnByTests\Domain\User\UserRepository'
       - '@LearnByTests\Domain\User\UserPersister'
+      - '@LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister'
+      - '@LearnByTests\Domain\UserSkippedQuestion\UserSkippedQuestionPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\DeleteUser, bus: command }
 
