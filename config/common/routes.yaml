@@ -182,6 +182,16 @@ search:
     path: /{category}/search
     controller: App\Controller\IndexController::search
     methods: [ GET, POST ]
+
+mock_exam:
+    path: /mock_exam
+    controller: App\Controller\IndexController::mockExam
+    methods: [ GET ]
+
+navigation_task:
+    path: /navigation_task
+    controller: App\Controller\IndexController::navigationTask
+    methods: [ GET ]
 # end of IndexController
 
 login:

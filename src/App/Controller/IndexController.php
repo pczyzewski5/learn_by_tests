@@ -45,4 +45,14 @@ class IndexController extends BaseController
             'search' => $search
         ]);
     }
+
+    public function mockExam(): Response
+    {
+        return $this->renderForm('index/mock_exam.twig');
+    }
+
+    public function navigationTask(): Response
+    {
+        return $this->renderForm('index/navigation_task.twig');
+    }
 }
