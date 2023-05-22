@@ -40,6 +40,11 @@ class CategoryRepository implements DomainRepository
                 CategoryEnum::SOUND_SIGNALS(),
                 CategoryEnum::SIGNS(),
                 CategoryEnum::RADIO(),
+            ],
+            CategoryEnum::SRC => [
+                CategoryEnum::SRC_REGULATIONS(),
+                CategoryEnum::SRC_COMMON_WISDOM(),
+                CategoryEnum::SRC_RADIO_HANDLING()
             ]
         ];
 
