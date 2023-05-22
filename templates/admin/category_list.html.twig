@@ -2,92 +2,40 @@
 {% block title %}Wybierz kurs{% endblock %}
 {% block body %}
     <div class="card mb-2">
-        <h5 class="card-header">PYTANIA DO SRC</h5>
+        <h6 class="card-header">Testy do radiooperatora SRC</h6>
         <div class="card-body">
             Wkrótce pojawią się testy do SRC.
         </div>
     </div>
     <div class="card mb-2">
-        <h5 class="card-header">ZADANIE NAWIGACYJNE NA JSM - JUNGA</h5>
-        Wkrótce wrzucę zadanie nawigacyjne, które miałem na egzaminie JSM w jundze.
+        <h6 class="card-header">Zadanie nawigacyjne na stopień JSM - Junga.</h6>
+        <div class="card-body">
+            Szkic zadania nawigacyjnego na patent JSM, które miałem na egzaminie w Jundze.
+            <a href="{{ path('navigation_task') }}" class=" mb-2 btn btn-outline-secondary btn-sm w-100 mt-2">Przejdź</a>
+        </div>
     </div>
     <div class="card mb-2">
-        <h6 class="card-header">Żeglarz jachtowy</h6>
+        <h6 class="card-header">Egzamin próbny na JSM - Junga.</h6>
         <div class="card-body">
-            <a href="{{ path('question_list', {'category': 'zj'}) }}" class=" mb-2 btn btn-outline-secondary btn-sm w-100">Przejdź do pytań</a>
-            <small>
-                <span>Wymagania, pogrubionym pojęciom zostanie poświęcone najwięcej uwagi:</span>
-                <ol>
-                    <li>
-                        przepisy
-                        <ul class="card-text mt-1">
-                            <li class="fw-bold">* prawo drogi na wodach śródlądowych</li>
-                            <li class="fw-bold">* sygnały wzywania pomocy</li>
-                            <li class="fw-bold">* znaki i sygnały stosowane na wodach śródlądowych</li>
-                            <li class="fw-bold">* (książka "Bezpieczeństwo na jachtach żaglowych") zasady postępowania w razie wypadku i awarii</li>
-                            <li class="fw-bold">* zasady zachowania się na jachcie</li>
-                            <li>* podstawowe zasady ochrony środowiska</li>
-                        </ul>
-                    </li>
-                    <li>
-                        budowa jachtów
-                        <ul class="card-text mt-1">
-                            <li class="fw-bold">* podstawowe nazewnictwo części składowych typowego jachtu śródlądowego</li>
-                            <li class="fw-bold">* zasady bezpiecznego posługiwania się instalacjami jachtowymi</li>
-                            <li>* (zrobię szkolenie na jachcie + obejrzyj sobie youtube) podstawowe elementy i obsługa współczesnego jachtowego silnika przyczepnego</li>
-                        </ul>
-                    </li>
-                    <li>
-                        teoria żaglowania
-                        <ul class="card-text mt-1">
-                            <li class="fw-bold">* kursy względem wiatru, wiatr rzeczywisty i pozorny, zawietrzność i nawietrzność, praca żagli, działanie steru</li>
-                            <li class="fw-bold">* zapobieganie wywrotkom – stateczność</li>
-                        </ul>
-                    </li>
-                    <li>
-                        locja
-                        <ul class="card-text mt-1">
-                            <li class="fw-bold">* oznakowanie nawigacyjne na wodach śródlądowych</li>
-                            <li class="fw-bold">* (śluza - wiesz jak działa, elo zrobione) informacje o budowlach hydrotechnicznych</li>
-                            <li class="fw-bold">* (mielizny wraki i wszystko, w co możesz przypierdolić - tu trzeba wiedzieć jak wygląda znak, który pokazuje wrak pod wodą oraz co to są kardynałki - wrzuciłem) zagrożenia i przeszkody żeglugowe</li>
-                        </ul>
-                    </li>
-                    <li>
-                        meteorologia
-                        <ul class="card-text mt-1">
-                            <li class="fw-bold">(Janek 4 you, zrób z tego testy) skala Beauforte’a z opisem</li>
-                            <li class="fw-bold">(Dla Janka) typowe zjawiska meteorologiczne, bryzy, odbicia, szkwały itp. Zjawiska niebezpieczne i ich oznaki</li>
-                            <li class="fw-bold">(Dla Janka) komunikaty meteorologiczne, internetowe serwisy meteo</li>
-                        </ul>
-                    </li>
-                    <li>
-                        ratownictwo
-                        <ul class="card-text mt-1">
-                            <li class="fw-bold">* (książka "Bezpieczeństwo na jachtach żaglowych") środki bezpieczeństwa i sposoby posługiwania się nimi</li>
-                            <li class="fw-bold">(mail z pytaniem wysłany do jungi) wywrotka jachtu – zachowanie załogi i ratowanie wywróconego jachtu</li>
-                            <li class="fw-bold">* człowiek w wodzie – niebezpieczeństwa</li>
-                            <li class="fw-bold">* (kuchenka gazowa, butla, zwarcie w starej instalacji, rozgrzana patelnia z olejem, papierosy, akumulatory, przegrany silnik) zagrożenia pożarowe</li>
-                        </ul>
-                    </li>
-                    <li>
-                        prace bosmańskie
-                        <ul class="card-text mt-1">
-                            <li class="fw-bold">* podstawowe węzły żeglarskie i mocowanie lin do osprzętu</li>
-                        </ul>
-                    </li>
-                    <li>
-                        manewrowanie jachtem
-                        <ul class="card-text mt-1">
-                            <li class="fw-bold">* (zegrze i 2 dni w Gdyni) klar do wypłynięcia i portowy</li>
-                            <li class="fw-bold">* (zegrze i 2 dni w Gdyni) podstawy cumowania i kotwiczenia</li>
-                            <li class="fw-bold">* (zegrze i 2 dni w Gdyni) obsługa żagli i osprzętu</li>
-                            <li class="fw-bold">* (zegrze i 2 dni w Gdyni) manewrowanie jachtem pod żaglami</li>
-                            <li class="fw-bold">* (zegrze i 2 dni w Gdyni) manewrowanie jachtem żaglowym pod silnikiem — manewry portowe</li>
-                            <li class="fw-bold">* (zegrze i 2 dni w Gdyni) manewr "człowiek za burtą"</li>
-                        </ul>
-                    </li>
-                </ol>
-            </small>
+            Znajdują się tu zdjęcia egzaminu próbnego na JSM, który pisałem w Jundze, na egzaminie docelowym pytania zgadzały się w 80%, mam przeczucie, że nie zmieniają pytań od lat.
+            <a href="{{ path('mock_exam') }}" class=" mb-2 btn btn-outline-secondary btn-sm w-100 mt-2">Przejdź</a>
+        </div>
+    </div>
+    <div class="card mb-2">
+        <h6 class="card-header">Jachtowy Sternik Morski</h6>
+        <div class="card-body">
+            Znajdują się tu testy oraz trochę teorii, aby zdać egzamin jachtowego sternika morskiego.
+            <div style="text-align: center;">
+                <b>Nie ma tu testów do nawigacji!</b>
+            </div>
+            Polecam przeczytać książkę pt. <i>"Jachtowy Sternik Morski - To jest łatwe!"</i> Piotra Lewandowskiego, dostępna w sklepie szkoły żeglarstwa Morka jako książka papierowa lub ebook - <a href="https://morka.pl/product-pol-28-Jachtowy-Sternik-Morski-To-jest-latwe.html">link.</a>
+            <a href="{{ path('question_list', {'category': 'zj'}) }}" class=" mb-2 btn btn-outline-secondary btn-sm w-100 mt-2">Przejdź do pytań</a>
+        </div>
+    </div>
+    <div class="card mb-2">
+        <h6 class="card-header">Kontakt do mnie</h6>
+        <div class="card-body">
+            Email: nocny88@gmail.com.
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}Zadanie nawigacyjne - Junga{% endblock %}
+{% block body %}
+    <p>Uwaga, są dwie wersje zadania nawigacyjnego, oba mają tą samą mapkę, niestety nie wiem czym się docelowo różnią.
+        Na mapce na egzaminie są po bokach również oznaczenia stopni długości oraz szerokości geograficznej, aby móc określić położenie.</p>
+    <div class="mt-1">
+        <img class="img-fluid" src="{{ asset('images/zadanie_nawigacyjne.jpg') }}"/>
+        <p>Płyniesz z portu A do portu B (w drugiej grupie jest chyba na odwrót), jednocześnie pobrałeś namiary kompasowe na
+            obie latarnie. Namiar kompasowy na latarnie 1 to 265 stopni, na latarnie 2 to 355 stopni.</p>
+        <ul>
+            <li>Podaj KDD,</li>
+            <li>oblicz jaki kurs kompasowy musisz podać sternikowi, aby dopłynąć do portu B (dewiacje należy wziąć z tabeli, a poprawki na wiatr, prąd oraz deklinacje są opisane w zadaniu, niestety nie pamiętam wartości),</li>
+            <li>zaznacz swoją pozycję na mapie na podstawie namiarów na latarnie,</li>
+            <li>podaj SOG,</li>
+            <li>podaj SOW,</li>
+            <li>1 września chcesz wejść do portu B, korzystając z tabeli pływów podaj najkorzystniejszą godzinę wejścia do portu (odpowiedzią była chyba 21.45),</li>
+            <li>były jeszcze jakieś 2 rzeczy do podania, ale nie pamiętam jakie.</li>
+        </ul>
+        <p>Dodatkowo było miejsce na opisanie elementów na mapie, tyczyło się to kardynałek, kamieni (x na mapie), oraz izobat. (Po prostu strzałka wskazująca na kardynałke i musiałeś pod nią napisać "to jest kardynałka północna, należy ją mijać od północy".)</p>
+    </div>
+    <h5>Chciałbym poprosić osobę, która będzie zdawać egzamin JSM o zrobienie zdjęcia zadania nawigacyjengo, za pomocą smartfona. Będzie na to czas i miejsce, ponieważ egzaminator często wychodzi z sali.</h5>
+{% endblock %}
