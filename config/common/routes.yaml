@@ -212,3 +212,8 @@ register_info:
     path: /register/info
     controller: App\Controller\RegistrationController::registerInfo
     methods: [ GET ]
+
+parse_src_pdf:
+    path: /parse_src_pdf
+    controller: App\Controller\IndexController::parseSrcPdf
+    methods: [ GET ]

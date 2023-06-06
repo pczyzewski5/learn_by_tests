@@ -130,3 +130,8 @@ services:
       - '@LearnByTests\Domain\Question\QuestionRepository'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\ToggleQuestionReview, bus: command }
+
+  LearnByTests\Domain\Command\ParseSrcPdfHandler:
+    class: LearnByTests\Domain\Command\ParseSrcPdfHandler
+    tags:
+      - { name: tactician.handler, command: LearnByTests\Domain\Command\ParseSrcPdf, bus: command }

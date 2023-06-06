@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\CommandBus\CommandBus;
 use App\QueryBus\QueryBus;
 use LearnByTests\Domain\Category\CategoryEnum;
+use LearnByTests\Domain\Command\ParseSrcPdf;
 use LearnByTests\Domain\Query\GetQuestionSearchPage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,5 +55,14 @@ class IndexController extends BaseController
     public function navigationTask(): Response
     {
         return $this->renderForm('index/navigation_task.twig');
+    }
+
+    public function parseSrcPdf(): Response
+    {
+        $this->commandBus->handle(
+            new ParseSrcPdf('src.pdf')
+        );
+
+        return new Response();
     }
 }
