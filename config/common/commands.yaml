@@ -133,5 +133,8 @@ services:
 
   LearnByTests\Domain\Command\ParseSrcPdfHandler:
     class: LearnByTests\Domain\Command\ParseSrcPdfHandler
+    arguments:
+      - '@LearnByTests\Domain\Question\QuestionPersister'
+      - '@LearnByTests\Domain\Answer\AnswerPersister'
     tags:
       - { name: tactician.handler, command: LearnByTests\Domain\Command\ParseSrcPdf, bus: command }

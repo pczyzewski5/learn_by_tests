@@ -36,7 +36,10 @@ class SrcPdfParser
 
             $nextQuestionExists = \strpos($text, $questionNumber . '. ');
             if (!$nextQuestionExists) {
-                $result[] = \array_map('trim', [$question, $answerA, $answerB, $text]);
+                $result[] = [
+                    'question' => $question,
+                    'answers' => [$answerA, $answerB, $text]
+                ];
 
                 break;
             }
@@ -44,7 +47,10 @@ class SrcPdfParser
             $answerC = \substr($text, 0, \strpos($text, $questionNumber . '. '));
             $text = \substr($text, \strlen($answerC));
 
-            $result[] = \array_map('trim', [$question, $answerA, $answerB, $answerC]);
+            $result[] = [
+                'question' => $question,
+                'answers' => [$answerA, $answerB, $answerC]
+            ];
 
             $questionNumber++;
         }
