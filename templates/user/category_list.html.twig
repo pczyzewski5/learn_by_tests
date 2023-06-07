@@ -1,9 +1,43 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="card mb-2">
-        <h6 class="card-header">Żeglarz jachtowy</h6>
+        <h6 class="card-header">Testy na egzamin radiooperatora SRC</h6>
         <div class="card-body">
-            <a href="{{ path('user_question_list', {'category': 'zj'}) }}" class=" mb-2 btn btn-primary btn-sm w-100">Przejdź do pytań</a>
+            (W trakcie uzupełniania). Znajdują się tu testy do państwowego egzaminu radiooperatora SRC. Są to testy i odpowiedzi,
+            które otrzymałem mailem od Academia Nautica, zaraz po ich weekendowym kursie na SRC. Oni sami te testy
+            pobrali z oficjalnej strony Urzędu Komunikacji Elektronicznej.
+            <a href="{{ path('question_list', {'category': 'src'}) }}" class=" mb-2 btn btn-outline-secondary btn-sm w-100 mt-2">Przejdź do pytań</a>
+        </div>
+    </div>
+    <div class="card mb-2">
+        <h6 class="card-header">Zadanie nawigacyjne na stopień JSM - Junga.</h6>
+        <div class="card-body">
+            Szkic zadania nawigacyjnego na patent JSM, które miałem na egzaminie w Jundze.
+            <a href="{{ path('navigation_task') }}" class=" mb-2 btn btn-outline-secondary btn-sm w-100 mt-2">Przejdź</a>
+        </div>
+    </div>
+    <div class="card mb-2">
+        <h6 class="card-header">Egzamin próbny na JSM - Junga.</h6>
+        <div class="card-body">
+            Znajdują się tu zdjęcia egzaminu próbnego na JSM, który pisałem w Jundze, na egzaminie docelowym pytania zgadzały się w 80%, mam przeczucie, że nie zmieniają pytań od lat.
+            <a href="{{ path('mock_exam') }}" class=" mb-2 btn btn-outline-secondary btn-sm w-100 mt-2">Przejdź</a>
+        </div>
+    </div>
+    <div class="card mb-2">
+        <h6 class="card-header">Jachtowy Sternik Morski</h6>
+        <div class="card-body">
+            Znajdują się tu testy oraz trochę teorii, aby zdać egzamin jachtowego sternika morskiego.
+            <div style="text-align: center;">
+                <b>Nie ma tu testów do nawigacji!</b>
+            </div>
+            Polecam przeczytać książkę pt. <i>"Jachtowy Sternik Morski - To jest łatwe!"</i> Piotra Lewandowskiego, dostępna w sklepie szkoły żeglarstwa Morka jako książka papierowa lub ebook - <a href="https://morka.pl/product-pol-28-Jachtowy-Sternik-Morski-To-jest-latwe.html">link.</a>
+            <a href="{{ path('question_list', {'category': 'zj'}) }}" class=" mb-2 btn btn-outline-secondary btn-sm w-100 mt-2">Przejdź do pytań</a>
+        </div>
+    </div>
+    <div class="card mb-2">
+        <h6 class="card-header">Kontakt do mnie</h6>
+        <div class="card-body">
+            Email: nocny88@gmail.com.
         </div>
     </div>
 {% endblock %}
