@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LearnByTests\Infrastructure\User;
 
 use Doctrine\ORM\EntityManagerInterface;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LearnByTests\Domain\Answer;
 
 use LearnByTests\Domain\Exception\PersisterException;
