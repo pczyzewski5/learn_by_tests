@@ -6,7 +6,6 @@ namespace LearnByTests\Infrastructure\UserQuestionAnswer;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
-use LearnByTests\Domain\Category\CategoryEnum;
 use LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister as DomainPersister;
 use LearnByTests\Domain\Exception\PersisterException;
 use LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswer;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace LearnByTests\Domain\Answer;
 
 use LearnByTests\Domain\Answer\Exception\AnswerValidationException;
-use LearnByTests\Domain\MergerTrait;
 use Symfony\Component\Uid\UuidV1;
 
 class Answer

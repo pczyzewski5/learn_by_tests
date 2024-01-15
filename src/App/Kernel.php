@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App;
 
 use App\CompilerPass\ControllerCompilerPass;
-use App\CompilerPass\RequestValidatorCompilerPass;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Config\Loader\LoaderInterface;

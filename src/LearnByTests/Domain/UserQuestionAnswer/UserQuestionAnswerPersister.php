@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace LearnByTests\Domain\UserQuestionAnswer;
 
-use LearnByTests\Domain\Category\CategoryEnum;
 use LearnByTests\Domain\Exception\PersisterException;
 
 interface UserQuestionAnswerPersister

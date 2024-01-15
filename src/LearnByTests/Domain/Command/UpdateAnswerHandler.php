@@ -7,7 +7,6 @@ namespace LearnByTests\Domain\Command;
 use LearnByTests\Domain\Answer\AnswerDTO;
 use LearnByTests\Domain\Answer\AnswerPersister;
 use LearnByTests\Domain\Answer\AnswerRepository;
-use LearnByTests\Domain\Question\QuestionDTO;
 
 class UpdateAnswerHandler
 {

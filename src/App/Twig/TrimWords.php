@@ -6,8 +6,6 @@ namespace App\Twig;
 
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
-use nadar\quill\Lexer;
-use Twig\Markup;
 use Twig\TwigFilter;
 
 class TrimWords extends AbstractExtension

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace LearnByTests\Domain\UserQuestionAnswer;
 
-use LearnByTests\Domain\Category\CategoryEnum;
-use Symfony\Component\Uid\Uuid;
-
 class UserQuestionAnswerFactory
 {
     public static function create(

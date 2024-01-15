@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace LearnByTests\Domain\Command;
 
-use LearnByTests\Domain\User\UserDTO;
-use LearnByTests\Domain\User\UserPersister;
-use LearnByTests\Domain\User\UserRepository;
 use LearnByTests\Domain\UserQuestionAnswer\UserQuestionAnswerPersister;
 
 class DeleteUserQuestionAnswersHandler
