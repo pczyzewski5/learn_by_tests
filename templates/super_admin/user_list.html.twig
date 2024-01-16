@@ -11,7 +11,7 @@
                     {{ user.getEmail() }}
                 </div>
                 <div>
-                    {% if user.getEmail() != 'nocny88@gmail.com' %}
+                    {% if user.getEmail() != 'p.czyzewski5@gmail.com' %}
                         {% if user.isActive() == false %}
                             <a class="btn btn-outline-primary" href="{{ path('activate_user', {'userId': user.getId()}) }}">aktywuj</a>
                         {% else %}
