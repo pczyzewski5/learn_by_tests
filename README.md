@@ -8,10 +8,7 @@ The application can be found at https://learnbytests.vxm.pl, after registration,
 Console, docker, docker-compose, make, internet.
 
 ## How to launch on the local environment
-1. navigate to project dir in console
-2. execute `make start`
-3. answer `yes` on migration prompt<br/>![migration prompt](public/images/migration_prompt.jpg)
-4. when console is ready execute `docker-compose ps`
-5. locate port near nginx container (e.g: 8080)<br/>![docker-compose ps](public/images/docker_compose_ps.jpg "San Juan Mountains")
-6. navigate to localhost with found port e.g `localhost:8080`
-7. login with login `example@test.com` and password `Pass123@`
+1. navigate to project dir in console and execute `make start`
+2. answer `yes` on migration prompt<br/>![migration prompt](public/images/migration_prompt.jpg)
+3. when console is ready execute `docker-compose ps` and locate port near nginx container e.g `8080`<br/>![docker-compose ps](public/images/docker_compose_ps.jpg "San Juan Mountains")
+4. navigate to localhost with found port e.g `localhost:8080` and login with `example@test.com` and `Pass123@`
