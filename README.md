@@ -1,6 +1,6 @@
 # Learn By Tests
 This project is the MVP version. This is a simple application that allows you to create closed tests.
-Currently, it has database with tests for the Polish Yacht Sea Helmsman exam.
+Currently, it has database with tests for the Polish Yacht Sea Helmsman exam and SRC radio operator.
 
 The application can be found at https://learnbytests.vxm.pl, after registration, please write me an e-mail at: p.czyzewski5@gmail.com to activate your account.
 
